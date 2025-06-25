@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 function Nav() {
   return (
-    <nav className="flex items-center justify-between px-6 py-4 bg-white">
+    <nav className="flex items-center justify-between px-6 md:px-20 lg:px-40 py-4 bg-white">
       <div className="flex items-center">
         <img
           src="/logoName.png"

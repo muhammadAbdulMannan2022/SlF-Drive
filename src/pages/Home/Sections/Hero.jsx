@@ -13,7 +13,7 @@ const Hero = () => {
       <div className="absolute inset-0 bg-[#010C41A1] opacity-70"></div>
 
       {/* Content */}
-      <div className="relative z-10 flex items-center h-full px-6 md:px-40 text-[#EBF3FD]">
+      <div className="relative z-10 flex items-center h-full px-6 md:px-20 lg:px-40 text-[#EBF3FD]">
         <div className="max-w-xl">
           <h1 className="text-3xl md:text-6xl font-bold mb-4 leading-tight">
             Explore the Best Rental Properties at Unbeatable Prices
