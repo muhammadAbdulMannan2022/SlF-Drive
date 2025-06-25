@@ -3,6 +3,8 @@ import Nav from "./Sections/Nav";
 import Hero from "./Sections/Hero";
 import WhyChooseUs from "./Sections/WhyUs";
 import PricingSlider from "./Sections/Pricing";
+import Faq from "./Sections/Faq";
+import Footer from "./Sections/Footer";
 
 function Landing() {
   return (
@@ -11,6 +13,8 @@ function Landing() {
       <Hero />
       <WhyChooseUs />
       <PricingSlider />
+      <Faq />
+      <Footer />
     </div>
   );
 }
