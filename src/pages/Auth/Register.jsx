@@ -2,6 +2,7 @@ import { useState } from "react";
 import { MapPin, Eye, EyeOff } from "lucide-react";
 import Input from "../../shared/Input";
 import LoginTop from "./LoginTop";
+import { Link } from "react-router";
 
 export default function Component() {
   const [formData, setFormData] = useState({
@@ -23,10 +24,10 @@ export default function Component() {
 
   return (
     <div className="h-screen bg-gradient-to-br from-purple-100 via-blue-50 to-indigo-100 flex items-center justify-center ">
-      <div className="w-full bg-white rounded-3xl shadow-2xl overflow-hidden h-full">
-        <div className="flex flex-col lg:flex-row h-full">
+      <div className="w-full bg-white shadow-2xl overflow-hidden h-full">
+        <div className="flex flex-col lg:flex-row h-full  overflow-y-scroll">
           {/* Left Side - Illustration */}
-          <div className="w-full md:w-1/2 bg-indigo-50 p-8 flex items-center justify-center">
+          <div className="w-full md:w-1/2 bg-indigo-50 p-8 items-center justify-center hidden md:flex">
             <div className="text-center">
               <img
                 src="/signup.png"
@@ -188,12 +189,12 @@ export default function Component() {
                 {/* Sign In Link */}
                 <p className="text-center text-sm text-gray-600 mt-6">
                   Have an account?{" "}
-                  <a
-                    href="#"
+                  <Link
+                    to="/login"
                     className="text-blue-600 hover:text-blue-700 font-medium"
                   >
                     Sign In
-                  </a>
+                  </Link>
                 </p>
               </form>
             </div>

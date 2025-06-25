@@ -22,9 +22,9 @@ const LoginPage = () => {
 
   return (
     <div className="flex items-center justify-center h-screen bg-gradient-to-br from-purple-100 via-blue-50 to-indigo-100">
-      <div className="flex flex-col md:flex-row bg-white shadow-lg overflow-hidden w-full h-full border">
+      <div className="flex flex-col md:flex-row bg-white shadow-lg overflow-hidden w-full h-full border  overflow-y-scroll">
         {/* Left Illustration Section */}
-        <div className="w-full md:w-1/2 bg-indigo-50 p-8 flex items-center justify-center">
+        <div className="w-full md:w-1/2 bg-indigo-50 p-8 items-center justify-center hidden md:flex">
           <div className="text-center">
             <img
               src="/login.png"
@@ -69,7 +69,7 @@ const LoginPage = () => {
                   </label>
                 </div>
                 <Link
-                  to="/"
+                  to="/forgot-password"
                   className="text-sm text-indigo-600 hover:text-indigo-800"
                 >
                   Forgot Password?
@@ -81,7 +81,11 @@ const LoginPage = () => {
               >
                 Sign In
               </button>
-              <div className="text-center text-gray-500 my-4">or</div>
+              <div className="flex items-center my-6">
+                <div className="flex-1 border-t border-gray-200"></div>
+                <span className="px-4 text-sm text-gray-500">Or</span>
+                <div className="flex-1 border-t border-gray-200"></div>
+              </div>
               <div className="flex items-center justify-center space-x-4">
                 <button className="flex items-center justify-center w-1/2 bg-white border border-gray-300 p-2 rounded-md hover:bg-gray-50 hover:cursor-pointer">
                   <img
@@ -102,9 +106,12 @@ const LoginPage = () => {
               </div>
               <p className="text-center text-sm text-gray-600 mt-4">
                 Have no account?{" "}
-                <a href="#" className="text-indigo-600 hover:text-indigo-800">
+                <Link
+                  to="/signup"
+                  className="text-indigo-600 hover:text-indigo-800"
+                >
                   Registration
-                </a>
+                </Link>
               </p>
             </form>
           </div>
