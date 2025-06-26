@@ -6,6 +6,7 @@ import ForgotPass from "../pages/Auth/ForgotPass";
 import VerifyOtp from "../pages/Auth/VerifyOtp";
 import NewPassword from "../pages/Auth/NewPassword";
 import Landing from "../pages/Home/Landing";
+import MainContent from "../pages/Main/MainContent";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Landing />,
+      },
+      {
+        path: "/dashboard",
+        element: <MainContent />,
       },
     ],
   },
