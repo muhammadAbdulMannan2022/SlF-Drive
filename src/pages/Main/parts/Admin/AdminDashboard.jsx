@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import CardDashboard from "../../../../components/CardDashboard";
 import EarningsChart from "../../../../components/DashboardChact";
+import DashboardTop from "../../../../components/DashboardTop";
+import DataTableDashboard from "../../../../components/DataTableDashboard";
 const data = [
   {
     title: "Total Earnings (Jun)",
-    value: "$24.88K",
+    value: "OMR 24.88K",
     subtext: "-10% from last month",
   },
   {
@@ -37,6 +39,7 @@ const sampleEarningsData = [
   { month: "NOV", value: 8800 },
   { month: "DEC", value: 8400 },
 ];
+const years = ["2024", "2023", "2022", "2021", "2020"];
 export default function AdminDashboard() {
   const [overView, setOverView] = useState([...data]);
   const [earningsData, setEarningsData] = useState([...sampleEarningsData]);
@@ -45,26 +48,31 @@ export default function AdminDashboard() {
     // Handle year change logic here
   };
   return (
-    <div className="">
+    <div className="bg-[#E8E9F3] h-full">
       <DashboardTop />
-      <div>
-        {overView.map((item, id) => (
-          <CardDashboard key={id} item={item} />
-        ))}
-      </div>
-      <div className="mt-6">
-        <EarningsChart
-          title="Earnings"
-          data={earningsData}
-          selectedYear="2024"
-          years={years}
-          onYearChange={handleYearChange}
-          maxValue={10000}
-          backgroundColor="#DBDEEF"
-          barColor="#0B2088"
-          textColor="#1E1E1E"
-          className="shadow-lg"
-        />
+      <div className="px-5 md:px-10 lg:px-20 py-4">
+        <div className="flex justify-between gap-4 flex-col md:flex-row items-stretch">
+          {overView.map((item, id) => (
+            <CardDashboard key={id} item={item} />
+          ))}
+        </div>
+        <div className="mt-6">
+          <EarningsChart
+            title="Earnings"
+            data={earningsData}
+            selectedYear="2024"
+            years={years}
+            onYearChange={handleYearChange}
+            maxValue={10000}
+            backgroundColor="#DBDEEF"
+            barColor="#0B2088"
+            textColor="#1E1E1E"
+            className="shadow-lg"
+          />
+        </div>
+        <div>
+          <DataTableDashboard />
+        </div>
       </div>
     </div>
   );

@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import DashboardTop from "../../../../components/DashboardTop";
 import CardDashboard from "../../../../components/CardDashboard";
 import EarningsChart from "../../../../components/DashboardChact";
+import DataTableDashboard from "../../../../components/DataTableDashboard";
 const data = [
   {
     title: "Total Earnings (Jun)",
-    value: "$24.88K",
+    value: "OMR 24.88K",
     subtext: "-10% from last month",
   },
   {
@@ -68,6 +69,9 @@ function Dashboard() {
             textColor="#1E1E1E"
             className="shadow-lg"
           />
+        </div>
+        <div>
+          <DataTableDashboard />
         </div>
       </div>
     </div>

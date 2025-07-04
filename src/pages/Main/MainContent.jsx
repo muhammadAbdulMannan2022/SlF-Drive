@@ -41,7 +41,7 @@ function MainContent() {
       )}
 
       {/* Main Content */}
-      <main className="flex-1  lg:ml-0 transition-all duration-300 pt-16 lg:pt-0">
+      <main className="flex-1  lg:ml-0 transition-all duration-300 pt-16 lg:pt-0 h-screen overflow-y-scroll bg-[#E8E9F3]">
         {userType === "admin" ? <AdminDashboard /> : <Dashboard />}
       </main>
     </div>

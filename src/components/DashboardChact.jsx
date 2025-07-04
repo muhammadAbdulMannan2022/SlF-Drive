@@ -87,7 +87,7 @@ export default function EarningsChart({
   textColor = "#1E1E1E",
   className = "",
 }) {
-  const formatYAxisLabel = (value) => `$${value / 1000}k`;
+  const formatYAxisLabel = (value) => `OMR ${value / 1000}k`;
 
   return (
     <div className={`p-6 rounded-lg ${className}`} style={{ backgroundColor }}>
@@ -121,12 +121,12 @@ export default function EarningsChart({
               dataKey="month"
               axisLine={false}
               tickLine={false}
-              tick={{ fill: textColor, fontSize: 20 }}
+              tick={{ fill: textColor, fontSize: 16 }}
             />
             <YAxis
               axisLine={false}
               tickLine={false}
-              tick={{ fill: textColor, fontSize: 18 }}
+              tick={{ fill: textColor, fontSize: 12 }}
               tickFormatter={formatYAxisLabel}
               domain={[0, maxValue]}
               ticks={[0, 2000, 4000, 6000, 8000, 10000]}

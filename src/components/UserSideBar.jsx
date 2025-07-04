@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router";
 import {
   FaTachometerAlt,
@@ -12,10 +12,13 @@ import {
 import { FiLayout } from "react-icons/fi";
 import { X } from "lucide-react";
 import { LuMessageSquareMore } from "react-icons/lu";
+import Modal from "../shared/Modal";
+import LogoutModal from "../shared/Logout";
 
 function UserSideBar({ setSidebarOpen }) {
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
+  const [isLogoutActive, setIsLogOutActive] = useState(false);
 
   return (
     <div className="h-full w-full bg-gradient-to-b from-blue-50 to-gray-100 text-gray-800 p-4 shadow-lg relative">
@@ -114,10 +117,16 @@ function UserSideBar({ setSidebarOpen }) {
           </nav>
         </div>
         <div className="mt-auto">
-          <button className="flex hover:cursor-pointer items-center p-2.5 rounded-lg w-full bg-gradient-to-r from-red-600 to-red-800 text-white hover:from-red-700 hover:to-red-900 transition-all duration-200 mt-6">
+          <button
+            onClick={() => setIsLogOutActive(true)}
+            className="flex hover:cursor-pointer items-center p-2.5 rounded-lg w-full bg-gradient-to-r from-red-600 to-red-800 text-white hover:from-red-700 hover:to-red-900 transition-all duration-200 mt-6"
+          >
             <FaSignOutAlt className="text-xl mr-3" /> Log Out
           </button>
         </div>
+        <Modal isOpen={isLogoutActive} onClose={() => setIsLogOutActive(false)}>
+          <LogoutModal setIsLogOutActive={setIsLogOutActive} />
+        </Modal>
       </div>
     </div>
   );
