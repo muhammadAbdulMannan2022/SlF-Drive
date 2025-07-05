@@ -2,7 +2,7 @@ const TransactionDetails = ({ transaction }) => {
   if (!transaction) return null;
 
   return (
-    <div className="max-w-md mx-auto rounded-lg overflow-hidden">
+    <div className="max-w-md md:w-md mx-auto rounded-lg overflow-hidden">
       <div className="text-center mb-6 text-2xl text-gray-700">
         <h1>Transaction Details</h1>
       </div>

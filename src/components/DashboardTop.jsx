@@ -55,7 +55,7 @@ export default function DashboardTop() {
   }, []);
 
   return (
-    <div className="bg-[#E8E9F3] px-5 md:px-10 lg:px-20 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative pt-16 md:pt-8">
+    <div className="bg-[#E8E9F3] px-5 md:px-10 lg:px-20 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative pt-16 md:pt-5 h-auto">
       {/* Welcome Text */}
       <div>
         <h1 className="text-xl sm:text-2xl font-semibold text-[#0B2088] mb-1">

@@ -11,6 +11,9 @@ import AdminDashboard from "../pages/Main/parts/Admin/AdminDashboard";
 import Dashboard from "../pages/Main/parts/UserParts/Dashboard";
 import Rentals from "../pages/rentals/Rentals";
 import Vehicls from "../pages/Vehicles/Vehicls";
+import BookingRequestsPage from "../pages/BookingRequest/BookingRequestsPage";
+import PaymentDashboard from "../pages/paymentInvoice/PaymentDashboard";
+import ChatPage from "../pages/Chat/Chat";
 const userType = localStorage.getItem("userType");
 
 const router = createBrowserRouter([
@@ -37,6 +40,18 @@ const router = createBrowserRouter([
           {
             path: "vehicles",
             element: <Vehicls />,
+          },
+          {
+            path: "booking-request",
+            element: <BookingRequestsPage />,
+          },
+          {
+            path: "invoice-payment",
+            element: <PaymentDashboard />,
+          },
+          {
+            path: "messages",
+            element: <ChatPage />,
           },
         ],
       },

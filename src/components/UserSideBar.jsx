@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router";
 import {
-  FaTachometerAlt,
   FaCalendarAlt,
   FaCar,
-  FaFileInvoice,
-  FaEnvelope,
   FaCog,
   FaSignOutAlt,
+  FaFileInvoiceDollar,
+  FaBell,
 } from "react-icons/fa";
-import { FiLayout } from "react-icons/fi";
 import { X } from "lucide-react";
-import { LuMessageSquareMore } from "react-icons/lu";
 import Modal from "../shared/Modal";
 import LogoutModal from "../shared/Logout";
+import { RiLayout3Fill, RiMessage2Fill } from "react-icons/ri";
+import { BsCalendar2CheckFill } from "react-icons/bs";
+import { IoIosPaper } from "react-icons/io";
 
 function UserSideBar({ setSidebarOpen }) {
   const location = useLocation();
@@ -42,7 +42,7 @@ function UserSideBar({ setSidebarOpen }) {
                   : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
               }`}
             >
-              <FiLayout className="text-xl mr-3" /> Dashboard
+              <RiLayout3Fill className="text-xl mr-3" /> Dashboard
             </Link>
             <Link
               to="/dashboard/manage-rentals"
@@ -65,34 +65,44 @@ function UserSideBar({ setSidebarOpen }) {
               <FaCar className="text-xl mr-3" /> Vehicles
             </Link>
             <Link
-              to="/booking-request"
+              to="/dashboard/booking-request"
               className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${
-                isActive("/booking-request")
+                isActive("/dashboard/booking-request")
                   ? "bg-gradient-to-r from-[#071352] to-[#0023CF] text-white"
                   : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
               }`}
             >
-              <FaCalendarAlt className="text-xl mr-3" /> Booking Request
+              <BsCalendar2CheckFill className="text-xl mr-3" /> Booking Request
             </Link>
             <Link
-              to="/invoice-payment"
+              to="/dashboard/invoice-payment"
               className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${
-                isActive("/invoice-payment")
+                isActive("/dashboard/invoice-payment")
                   ? "bg-gradient-to-r from-[#071352] to-[#0023CF] text-white"
                   : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
               }`}
             >
-              <FaFileInvoice className="text-xl mr-3" /> Invoice & Payment
+              <FaFileInvoiceDollar className="text-xl mr-3" /> Invoice & Payment
             </Link>
             <Link
-              to="/messages"
+              to="/dashboard/messages"
               className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${
-                isActive("/messages")
+                isActive("/dashboard/messages")
                   ? "bg-gradient-to-r from-[#071352] to-[#0023CF] text-white"
                   : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
               }`}
             >
-              <LuMessageSquareMore className="text-xl mr-3" /> Messages
+              <RiMessage2Fill className="text-xl mr-3" /> Messages
+            </Link>
+            <Link
+              to="/dashboard/notifications"
+              className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${
+                isActive("/dashboard/notifications")
+                  ? "bg-gradient-to-r from-[#071352] to-[#0023CF] text-white"
+                  : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
+              }`}
+            >
+              <FaBell className="text-xl mr-3" /> Notification
             </Link>
             <Link
               to="/settings"
@@ -112,14 +122,14 @@ function UserSideBar({ setSidebarOpen }) {
                   : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
               }`}
             >
-              <FaCog className="text-xl mr-3" /> Reports
+              <IoIosPaper className="text-xl mr-3" /> Reports
             </Link>
           </nav>
         </div>
         <div className="mt-auto">
           <button
             onClick={() => setIsLogOutActive(true)}
-            className="flex hover:cursor-pointer items-center p-2.5 rounded-lg w-full bg-gradient-to-r from-red-600 to-red-800 text-white hover:from-red-700 hover:to-red-900 transition-all duration-200 mt-6"
+            className="flex hover:cursor-pointer items-center p-2.5 rounded-lg w-full text-red-600 duration-200 mt-6"
           >
             <FaSignOutAlt className="text-xl mr-3" /> Log Out
           </button>

@@ -44,7 +44,7 @@ function MainContent() {
       <div className="flex flex-col w-full h-screen overflow-y-scroll">
         <DashboardTop />
         {/* Main Content */}
-        <main className="flex-1  lg:ml-0 transition-all duration-300 pt-16 lg:pt-0 bg-[#E8E9F3]">
+        <main className="flex-1  lg:ml-0 transition-all duration-300 md:pt-16 lg:pt-0 bg-[#E8E9F3]">
           <Outlet />
         </main>
       </div>

@@ -6,7 +6,7 @@ import { Star } from "lucide-react";
 
 const VehiclesDetails = ({ data }) => {
   return (
-    <div className="bg-white rounded-lg max-w-sm w-full mx-4 overflow-hidden">
+    <div className="bg-white rounded-lg w-full mx-4 overflow-hidden">
       {/* Header */}
       <div className="px-6 pt-6 pb-4">
         <div className="flex items-start justify-between mb-2">
