@@ -44,7 +44,6 @@ export default function DashboardTop() {
   const [showNotifications, setShowNotifications] = useState(false);
   const bellRef = useRef(null);
 
-  // Close on outside click
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (bellRef.current && !bellRef.current.contains(e.target)) {
@@ -56,15 +55,17 @@ export default function DashboardTop() {
   }, []);
 
   return (
-    <div className="bg-[#E8E9F3] px-5 md:px-10 lg:px-20 py-4 flex items-center justify-between relative">
+    <div className="bg-[#E8E9F3] px-5 md:px-10 lg:px-20 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative pt-16 md:pt-8">
+      {/* Welcome Text */}
       <div>
-        <h1 className="text-2xl font-semibold text-[#0B2088] mb-1">
+        <h1 className="text-xl sm:text-2xl font-semibold text-[#0B2088] mb-1">
           Welcome, Caringcompany
         </h1>
         <p className="text-[#5C5C5C] text-sm">Have a nice day!</p>
       </div>
 
-      <div className="flex items-center gap-4">
+      {/* Notification & User Info */}
+      <div className="flex items-center gap-4 w-full sm:w-auto justify-between flex-row-reverse md:flex-row sm:justify-end">
         {/* Notification Bell */}
         <div className="relative" ref={bellRef}>
           <button
@@ -79,7 +80,7 @@ export default function DashboardTop() {
 
           {/* Notification Dropdown */}
           {showNotifications && (
-            <div className="absolute right-0 mt-2 w-80 bg-white shadow-lg rounded-lg z-50">
+            <div className="absolute right-0 mt-2 w-72 sm:w-80 bg-white shadow-lg rounded-lg z-50">
               <div className="px-4 py-3 border-b">
                 <h1 className="text-lg font-semibold text-gray-900 mb-2">
                   Notifications
@@ -121,8 +122,8 @@ export default function DashboardTop() {
           <div className="bg-[#DBDEEF] p-2 rounded-full">
             <User className="w-5 h-5 text-[#0B2088]" />
           </div>
-          <div>
-            <p className="text-[#0B2088] font-medium text-sm">Caringcompany</p>
+          <div className="text-sm">
+            <p className="text-[#0B2088] font-medium">Caringcompany</p>
             <p className="text-[#5C5C5C] text-xs">Admin</p>
           </div>
         </div>

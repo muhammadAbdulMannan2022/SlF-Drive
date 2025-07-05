@@ -4,6 +4,8 @@ import { Menu, X } from "lucide-react"; // optional icons for a better look
 import UserSideBar from "../../components/UserSideBar";
 import Dashboard from "./parts/UserParts/Dashboard";
 import AdminDashboard from "./parts/Admin/AdminDashboard";
+import DashboardTop from "../../components/DashboardTop";
+import { Outlet } from "react-router";
 
 function MainContent() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -39,11 +41,13 @@ function MainContent() {
           onClick={() => setSidebarOpen(false)}
         />
       )}
-
-      {/* Main Content */}
-      <main className="flex-1  lg:ml-0 transition-all duration-300 pt-16 lg:pt-0 h-screen overflow-y-scroll bg-[#E8E9F3]">
-        {userType === "admin" ? <AdminDashboard /> : <Dashboard />}
-      </main>
+      <div className="flex flex-col w-full h-screen overflow-y-scroll">
+        <DashboardTop />
+        {/* Main Content */}
+        <main className="flex-1  lg:ml-0 transition-all duration-300 pt-16 lg:pt-0 bg-[#E8E9F3]">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 }

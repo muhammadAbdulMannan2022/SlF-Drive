@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import DashboardTop from "../../../../components/DashboardTop";
 import CardDashboard from "../../../../components/CardDashboard";
 import EarningsChart from "../../../../components/DashboardChact";
 import DataTableDashboard from "../../../../components/DataTableDashboard";
@@ -49,9 +48,8 @@ function Dashboard() {
   };
   return (
     <div className="bg-[#E8E9F3] h-full">
-      <DashboardTop />
       <div className="px-5 md:px-10 lg:px-20 py-4">
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex justify-between gap-4 flex-col md:flex-row items-stretch">
           {overView.map((item, id) => (
             <CardDashboard key={id} item={item} />
           ))}

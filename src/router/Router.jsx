@@ -7,6 +7,11 @@ import VerifyOtp from "../pages/Auth/VerifyOtp";
 import NewPassword from "../pages/Auth/NewPassword";
 import Landing from "../pages/Home/Landing";
 import MainContent from "../pages/Main/MainContent";
+import AdminDashboard from "../pages/Main/parts/Admin/AdminDashboard";
+import Dashboard from "../pages/Main/parts/UserParts/Dashboard";
+import Rentals from "../pages/rentals/Rentals";
+import Vehicls from "../pages/Vehicles/Vehicls";
+const userType = localStorage.getItem("userType");
 
 const router = createBrowserRouter([
   {
@@ -20,6 +25,20 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <MainContent />,
+        children: [
+          {
+            path: "",
+            element: userType === "admin" ? <AdminDashboard /> : <Dashboard />,
+          },
+          {
+            path: "manage-rentals",
+            element: <Rentals />,
+          },
+          {
+            path: "vehicles",
+            element: <Vehicls />,
+          },
+        ],
       },
     ],
   },

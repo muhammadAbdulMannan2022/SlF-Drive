@@ -45,9 +45,9 @@ function UserSideBar({ setSidebarOpen }) {
               <FiLayout className="text-xl mr-3" /> Dashboard
             </Link>
             <Link
-              to="/manage-rentals"
+              to="/dashboard/manage-rentals"
               className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${
-                isActive("/manage-rentals")
+                isActive("/dashboard/manage-rentals")
                   ? "bg-gradient-to-r from-[#071352] to-[#0023CF] text-white"
                   : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
               }`}
@@ -55,9 +55,9 @@ function UserSideBar({ setSidebarOpen }) {
               <FaCalendarAlt className="text-xl mr-3" /> Manage Rentals
             </Link>
             <Link
-              to="/vehicles"
+              to="/dashboard/vehicles"
               className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${
-                isActive("/vehicles")
+                isActive("/dashboard/vehicles")
                   ? "bg-gradient-to-r from-[#071352] to-[#0023CF] text-white"
                   : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
               }`}

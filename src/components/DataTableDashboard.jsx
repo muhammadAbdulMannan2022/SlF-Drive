@@ -27,6 +27,26 @@ const TransactionTable = () => {
       accountHolder: "Alice",
       email: "alice@example.com",
     },
+    {
+      trId: "87654321",
+      userName: "Alice",
+      userType: "Company",
+      amount: "$400",
+      date: "15 Jun 2025",
+      accountNumber: "**** **** **** 1876",
+      accountHolder: "Alice",
+      email: "alice@example.com",
+    },
+    {
+      trId: "87654321",
+      userName: "Alice",
+      userType: "Company",
+      amount: "$400",
+      date: "15 Jun 2025",
+      accountNumber: "**** **** **** 1876",
+      accountHolder: "Alice",
+      email: "alice@example.com",
+    },
     // Add more if needed
   ];
 

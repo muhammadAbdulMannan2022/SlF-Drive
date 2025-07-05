@@ -92,7 +92,7 @@ export default function EarningsChart({
   return (
     <div className={`p-6 rounded-lg ${className}`} style={{ backgroundColor }}>
       {/* Header */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-6 ">
         <h2 className="text-xl font-semibold" style={{ color: textColor }}>
           {title}
         </h2>
@@ -104,11 +104,11 @@ export default function EarningsChart({
       </div>
 
       {/* Chart */}
-      <div className="h-64">
+      <div className="h-64 w-full ">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={data}
-            margin={{ top: 20, right: 100, left: 20, bottom: 5 }}
+            margin={{ top: 20, bottom: 5 }}
             barCategoryGap="20%"
           >
             <CartesianGrid
