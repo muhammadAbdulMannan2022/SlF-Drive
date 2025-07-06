@@ -14,6 +14,8 @@ import Vehicls from "../pages/Vehicles/Vehicls";
 import BookingRequestsPage from "../pages/BookingRequest/BookingRequestsPage";
 import PaymentDashboard from "../pages/paymentInvoice/PaymentDashboard";
 import ChatPage from "../pages/Chat/Chat";
+import Notification from "../pages/Notifications/Notification";
+import Reports from "../pages/Reports/Reports";
 const userType = localStorage.getItem("userType");
 
 const router = createBrowserRouter([
@@ -52,6 +54,14 @@ const router = createBrowserRouter([
           {
             path: "messages",
             element: <ChatPage />,
+          },
+          {
+            path: "notifications",
+            element: <Notification />,
+          },
+          {
+            path: "reports",
+            element: <Reports />,
           },
         ],
       },

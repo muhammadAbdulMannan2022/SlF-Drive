@@ -115,9 +115,9 @@ function UserSideBar({ setSidebarOpen }) {
               <FaCog className="text-xl mr-3" /> Settings
             </Link>
             <Link
-              to="/reports"
+              to="/dashboard/reports"
               className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${
-                isActive("/reports")
+                isActive("/dashboard/reports")
                   ? "bg-gradient-to-r from-[#071352] to-[#0023CF] text-white"
                   : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
               }`}
