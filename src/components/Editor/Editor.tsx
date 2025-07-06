@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import type React from "react";
 import { useCallback, useMemo, useState } from "react";
 import {
   createEditor,
@@ -26,21 +26,12 @@ import {
   FaAlignLeft,
   FaAlignCenter,
   FaAlignRight,
-  FaListOl,
-  FaListUl,
-  FaLink,
   FaChevronDown,
 } from "react-icons/fa";
-import TurndownService from "turndown";
 
 // Types
 type CustomElement = {
-  type:
-    | "paragraph"
-    | "heading"
-    | "numbered-list"
-    | "bulleted-list"
-    | "list-item";
+  type: "paragraph";
   align?: "left" | "center" | "right";
   children: CustomText[];
 };
@@ -64,7 +55,6 @@ declare module "slate" {
 }
 
 // Helper functions
-const LIST_TYPES = ["numbered-list", "bulleted-list"];
 const TEXT_ALIGN_TYPES = ["left", "center", "right"];
 
 const isBlockActive = (editor: Editor, format: string, blockType = "type") => {
@@ -90,47 +80,16 @@ const isMarkActive = (editor: Editor, format: keyof CustomText) => {
 };
 
 const toggleBlock = (editor: Editor, format: string) => {
-  const isActive = isBlockActive(
-    editor,
-    format,
-    TEXT_ALIGN_TYPES.includes(format) ? "align" : "type"
-  );
-
-  const isList = LIST_TYPES.includes(format);
-
-  Transforms.unwrapNodes(editor, {
-    match: (n) =>
-      !Editor.isEditor(n) &&
-      SlateElement.isElement(n) &&
-      LIST_TYPES.includes(n.type) &&
-      !TEXT_ALIGN_TYPES.includes(format),
-    split: true,
-  });
+  const isActive = isBlockActive(editor, format, "align");
 
   let newProperties: Partial<CustomElement>;
   if (TEXT_ALIGN_TYPES.includes(format)) {
     newProperties = {
       align: isActive ? undefined : (format as "left" | "center" | "right"),
     };
-  } else {
-    newProperties = {
-      type: isActive
-        ? "paragraph"
-        : isList
-        ? "list-item"
-        : (format as CustomElement["type"]),
-    };
   }
 
   Transforms.setNodes<CustomElement>(editor, newProperties);
-
-  if (!isActive && isList) {
-    const block: CustomElement = {
-      type: format as "numbered-list" | "bulleted-list",
-      children: [],
-    };
-    Transforms.wrapNodes(editor, block);
-  }
 };
 
 const toggleMark = (editor: Editor, format: keyof CustomText) => {
@@ -147,32 +106,11 @@ const toggleMark = (editor: Editor, format: keyof CustomText) => {
 const Element = ({ attributes, children, element }: any) => {
   const style: React.CSSProperties = { textAlign: element.align };
 
-  switch (element.type) {
-    case "numbered-list":
-      return (
-        <ol style={style} {...attributes}>
-          {children}
-        </ol>
-      );
-    case "bulleted-list":
-      return (
-        <ul style={style} {...attributes}>
-          {children}
-        </ul>
-      );
-    case "list-item":
-      return (
-        <li style={style} {...attributes}>
-          {children}
-        </li>
-      );
-    default:
-      return (
-        <p style={style} {...attributes}>
-          {children}
-        </p>
-      );
-  }
+  return (
+    <p style={style} {...attributes}>
+      {children}
+    </p>
+  );
 };
 
 const Leaf = ({ attributes, children, leaf }: any) => {
@@ -220,11 +158,7 @@ const BlockButton = ({
   return (
     <button
       className={`p-2 rounded hover:bg-blue-700 transition-colors ${
-        isBlockActive(
-          editor,
-          format,
-          TEXT_ALIGN_TYPES.includes(format) ? "align" : "type"
-        )
+        isBlockActive(editor, format, "align")
           ? "bg-blue-700 text-white"
           : "text-blue-100"
       }`}
@@ -323,41 +257,9 @@ const ColorPicker = () => {
   );
 };
 
-const LinkButton = () => {
-  const editor = useSlate();
-
-  const insertLink = () => {
-    const url = window.prompt("Enter the URL:");
-    if (url) {
-      const { selection } = editor;
-      const isCollapsed = selection && Editor.isCollapsed(editor, selection);
-
-      if (isCollapsed) {
-        Transforms.insertText(editor, `[${url}](${url})`);
-      } else {
-        const selectedText = Editor.string(editor, selection!);
-        Transforms.delete(editor);
-        Transforms.insertText(editor, `[${selectedText}](${url})`);
-      }
-    }
-  };
-
-  return (
-    <button
-      className="p-2 rounded hover:bg-blue-700 transition-colors text-blue-100"
-      onMouseDown={(event) => {
-        event.preventDefault();
-        insertLink();
-      }}
-    >
-      <FaLink className="w-4 h-4" />
-    </button>
-  );
-};
-
 const Toolbar = () => {
   return (
-    <div className="flex items-center gap-1 p-3 bg-blue-800 border-b border-blue-700">
+    <div className="flex items-center flex-wrap gap-1 p-3 bg-blue-800 border-b border-blue-700">
       <FontSizeSelector />
       <div className="w-px h-6 bg-blue-600 mx-2" />
       <ColorPicker />
@@ -401,47 +303,71 @@ const RichTextEditor = ({
     setValue(newValue);
 
     if (onChange) {
-      // Convert to HTML first, then to markdown
-      const htmlContent = serializeToHtml(newValue);
-      const turndownService = new TurndownService();
-      const markdown = turndownService.turndown(htmlContent);
+      // Convert directly to markdown
+      const markdown = serializeToMarkdown(newValue);
       onChange(markdown);
     }
   };
 
-  const serializeToHtml = (nodes: Descendant[]): string => {
+  // Handle keyboard shortcuts including Enter for line breaks
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+
+      // Insert a new paragraph
+      Transforms.insertNodes(editor, {
+        type: "paragraph",
+        children: [{ text: "" }],
+      });
+    }
+  };
+
+  // Convert to markdown with proper line breaks
+  const serializeToMarkdown = (nodes: Descendant[]): string => {
     return nodes
       .map((node) => {
         if (Text.isText(node)) {
           let text = node.text;
-          if (node.bold) text = `<strong>${text}</strong>`;
-          if (node.italic) text = `<em>${text}</em>`;
-          if (node.underline) text = `<u>${text}</u>`;
-          if (node.strikethrough) text = `<s>${text}</s>`;
-          if (node.fontSize && node.fontSize !== 16) {
-            text = `<span style="font-size: ${node.fontSize}px">${text}</span>`;
+
+          // Apply markdown formatting
+          if (node.bold) text = `**${text}**`;
+          if (node.italic) text = `*${text}*`;
+          if (node.strikethrough) text = `~~${text}~~`;
+
+          // For underline, color, and fontSize, we'll use HTML since markdown doesn't support them
+          if (
+            node.underline ||
+            node.color ||
+            (node.fontSize && node.fontSize !== 16)
+          ) {
+            let htmlStyle = "";
+            const styles = [];
+
+            if (node.underline) styles.push("text-decoration: underline");
+            if (node.color) styles.push(`color: ${node.color}`);
+            if (node.fontSize && node.fontSize !== 16)
+              styles.push(`font-size: ${node.fontSize}px`);
+
+            if (styles.length > 0) {
+              htmlStyle = ` style="${styles.join("; ")}"`;
+              text = `<span${htmlStyle}>${text}</span>`;
+            }
           }
-          if (node.color) {
-            text = `<span style="color: ${node.color}">${text}</span>`;
-          }
+
           return text;
         }
 
-        const children = serializeToHtml(node.children);
-        const style = node.align ? ` style="text-align: ${node.align}"` : "";
+        const children = serializeToMarkdown(node.children);
 
-        switch (node.type) {
-          case "numbered-list":
-            return `<ol${style}>${children}</ol>`;
-          case "bulleted-list":
-            return `<ul${style}>${children}</ul>`;
-          case "list-item":
-            return `<li${style}>${children}</li>`;
-          default:
-            return `<p${style}>${children}</p>`;
+        // Handle alignment with HTML div tags
+        if (node.align && node.align !== "left") {
+          return `<div style="text-align: ${node.align}">${children}</div>`;
         }
+
+        return children;
       })
-      .join("");
+      .join("\n\n") // Add double line breaks between paragraphs for proper markdown formatting
+      .trim();
   };
 
   return (
@@ -456,6 +382,7 @@ const RichTextEditor = ({
             className="outline-none min-h-[350px] max-h-[500px] leading-relaxed overflow-y-auto"
             spellCheck
             autoFocus
+            onKeyDown={handleKeyDown}
           />
         </div>
       </Slate>

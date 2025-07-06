@@ -1,18 +1,51 @@
-// In page.jsx
-import React, { useState } from "react";
+"use client";
+
+import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
-import EditorDemo from "./Editor";
 import { FaArrowLeft } from "react-icons/fa";
+import EditorDemo from "./Editor";
+
+// Custom components for ReactMarkdown to handle styling
+const MarkdownComponents = {
+  p: ({ children, ...props }: any) => (
+    <p className="mb-4 leading-relaxed" {...props}>
+      {children}
+    </p>
+  ),
+  strong: ({ children, ...props }: any) => (
+    <strong className="font-bold" {...props}>
+      {children}
+    </strong>
+  ),
+  em: ({ children, ...props }: any) => (
+    <em className="italic" {...props}>
+      {children}
+    </em>
+  ),
+  div: ({ children, style, ...props }: any) => (
+    <div style={style} className="mb-4" {...props}>
+      {children}
+    </div>
+  ),
+  span: ({ children, style, ...props }: any) => (
+    <span style={style} {...props}>
+      {children}
+    </span>
+  ),
+};
 
 function TermsCondition() {
   const [markdown, setMarkdown] = useState("");
-  const [isEditing, setIsEditing] = useState(true);
+  const [isEditing, setIsEditing] = useState(false);
 
   return (
     <div className="h-full px-6">
       <div className="h-[90%] overflow-y-auto">
-        <div className="flex items-center justify-start gap-4 mt-8 text-2xl text-gray-600">
+        <div
+          onClick={() => setIsEditing((prev) => !prev)}
+          className="flex items-center justify-start gap-4 mt-8 text-2xl text-gray-600 hover:cursor-pointer"
+        >
           <h1>
             <FaArrowLeft />
           </h1>
@@ -25,9 +58,12 @@ function TermsCondition() {
         {isEditing ? (
           <EditorDemo markdown={markdown} setMarkdown={setMarkdown} />
         ) : (
-          <div className="border-gray-300 rounded-lg p-4 mt-5">
-            <ReactMarkdown rehypePlugins={[rehypeRaw]}>
-              {markdown}
+          <div className=" p-6 mt-5 ">
+            <ReactMarkdown
+              rehypePlugins={[rehypeRaw]}
+              components={MarkdownComponents}
+            >
+              {markdown || "No content yet. Click Edit to add content."}
             </ReactMarkdown>
           </div>
         )}

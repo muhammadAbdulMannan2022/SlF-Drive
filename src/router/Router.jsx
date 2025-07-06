@@ -20,6 +20,8 @@ import SettingsLayout from "../pages/Settings/SettingsLayout";
 import AccountPage from "../pages/Settings/pages/AccountPage";
 import SecurityPage from "../pages/Settings/pages/Security";
 import TermsCondition from "../pages/Settings/pages/TermsCondition";
+import Policy from "../pages/Settings/pages/Policy";
+import Collaborations from "../pages/Settings/pages/Collaborations";
 const userType = localStorage.getItem("userType");
 
 const router = createBrowserRouter([
@@ -82,6 +84,14 @@ const router = createBrowserRouter([
               {
                 path: "terms",
                 element: <TermsCondition />,
+              },
+              {
+                path: "privacy",
+                element: <Policy />,
+              },
+              {
+                path: "collaborations",
+                element: <Collaborations />,
               },
             ],
           },
