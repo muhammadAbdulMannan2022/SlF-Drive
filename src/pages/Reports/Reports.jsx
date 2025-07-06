@@ -258,7 +258,7 @@ const Reports = () => {
                 {filteredData.map((report, index) => (
                   <tr key={report.id} className={`transition-colors`}>
                     <td className="py-4 px-6 text-gray-900 text-sm whitespace-nowrap">
-                      1
+                      {report.id}
                     </td>
                     <td className="py-4 px-6 text-gray-900 text-sm whitespace-nowrap">
                       {report.username}
