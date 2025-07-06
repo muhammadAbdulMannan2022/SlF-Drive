@@ -227,23 +227,23 @@ export default function RentalData() {
       <div className="flex flex-col sm:flex-row sm:justify-end gap-4 mb-6">
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="relative">
-            <Calendar className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            {/* <Calendar className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" /> */}
             <input
               type="date"
               name="startDate"
               value={dateFilter.startDate}
               onChange={handleDateFilter}
-              className="pl-10 w-full sm:w-48 border border-gray-300 px-3 py-2 rounded"
+              className=" w-full sm:w-48 border border-gray-300 px-3 py-2 rounded"
             />
           </div>
           <div className="relative">
-            <Calendar className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            {/* <Calendar className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" /> */}
             <input
               type="date"
               name="endDate"
               value={dateFilter.endDate}
               onChange={handleDateFilter}
-              className="pl-10 w-full sm:w-48 border border-gray-300 px-3 py-2 rounded"
+              className=" w-full sm:w-48 border border-gray-300 px-3 py-2 rounded"
             />
           </div>
         </div>

@@ -105,9 +105,9 @@ function UserSideBar({ setSidebarOpen }) {
               <FaBell className="text-xl mr-3" /> Notification
             </Link>
             <Link
-              to="/settings"
+              to="/dashboard/settings"
               className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${
-                isActive("/settings")
+                isActive("/dashboard/settings")
                   ? "bg-gradient-to-r from-[#071352] to-[#0023CF] text-white"
                   : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
               }`}
