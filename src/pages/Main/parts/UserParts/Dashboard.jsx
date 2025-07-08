@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import CardDashboard from "../../../../components/CardDashboard";
 import EarningsChart from "../../../../components/DashboardChact";
 import DataTableDashboard from "../../../../components/DataTableDashboard";
+import { useTranslation } from "react-i18next";
 const data = [
   {
     title: "Total Earnings (Jun)",
@@ -42,6 +43,7 @@ const years = ["2024", "2023", "2022", "2021", "2020"];
 function Dashboard() {
   const [overView, setOverView] = useState([...data]);
   const [earningsData, setEarningsData] = useState([...sampleEarningsData]);
+  const { t } = useTranslation();
   const handleYearChange = (year) => {
     console.log("Year changed to:", year);
     // Handle year change logic here
@@ -56,7 +58,7 @@ function Dashboard() {
         </div>
         <div className="mt-6">
           <EarningsChart
-            title="Earnings"
+            title={t("chart.title")}
             data={earningsData}
             selectedYear="2024"
             years={years}

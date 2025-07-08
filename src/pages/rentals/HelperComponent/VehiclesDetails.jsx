@@ -1,10 +1,12 @@
 "use client";
 
 import React from "react";
-
+import { useTranslation } from "react-i18next";
 import { Star } from "lucide-react";
 
 const VehiclesDetails = ({ data }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="bg-white rounded-lg w-full mx-4 overflow-hidden">
       {/* Header */}
@@ -20,7 +22,7 @@ const VehiclesDetails = ({ data }) => {
                 {data.rating}
               </span>
               <span className="text-sm text-gray-500">
-                - ({data.totalTrips} Trips)
+                - ({t("vehiclesDetails.trips", { count: data.totalTrips })})
               </span>
             </div>
           </div>
@@ -35,13 +37,13 @@ const VehiclesDetails = ({ data }) => {
       {/* Trip Details */}
       <div className="px-6 pb-6">
         <h3 className="text-base font-semibold text-gray-900 mb-4">
-          Trip Details:
+          {t("vehiclesDetails.tripDetails")}
         </h3>
 
         <div className="space-y-3">
           <div className="flex">
             <span className="flex-1/2 text-sm font-medium text-gray-700">
-              Trip Location :
+              {t("vehiclesDetails.tripLocation")}
             </span>
             <span className="text-sm flex-1/2 text-gray-900">
               {data.tripLocation}
@@ -50,7 +52,7 @@ const VehiclesDetails = ({ data }) => {
 
           <div className="flex">
             <span className="flex-1/2 text-sm font-medium text-gray-700">
-              Drop Off Location:
+              {t("vehiclesDetails.dropOffLocation")}
             </span>
             <span className="text-sm flex-1/2 text-gray-900">
               {data.dropOffLocation}
@@ -59,7 +61,7 @@ const VehiclesDetails = ({ data }) => {
 
           <div className="flex">
             <span className="flex-1/2 text-sm font-medium text-gray-700">
-              Vehicles Type :
+              {t("vehiclesDetails.vehicleType")}
             </span>
             <span className="text-sm flex-1/2 text-gray-900">
               {data.vehicleType}
@@ -68,7 +70,7 @@ const VehiclesDetails = ({ data }) => {
 
           <div className="flex">
             <span className="flex-1/2 text-sm font-medium text-gray-700">
-              Person :
+              {t("vehiclesDetails.persons")}
             </span>
             <span className="text-sm flex-1/2 text-gray-900">
               {data.persons}
@@ -77,7 +79,7 @@ const VehiclesDetails = ({ data }) => {
 
           <div className="flex">
             <span className="flex-1/2 text-sm font-medium text-gray-700">
-              Email :
+              {t("vehiclesDetails.email")}
             </span>
             <span className="text-sm flex-1/2 text-gray-900">
               {data.customer.email}
@@ -86,7 +88,7 @@ const VehiclesDetails = ({ data }) => {
 
           <div className="flex">
             <span className="flex-1/2 text-sm font-medium text-gray-700">
-              Phone Number :
+              {t("vehiclesDetails.phoneNumber")}
             </span>
             <span className="text-sm flex-1/2 text-gray-900">
               {data.phoneNumber}
@@ -95,7 +97,7 @@ const VehiclesDetails = ({ data }) => {
 
           <div className="flex">
             <span className="flex-1/2 text-sm font-medium text-gray-700">
-              Booking Date :
+              {t("vehiclesDetails.bookingDate")}
             </span>
             <span className="text-sm flex-1/2 text-gray-900">
               {data.dates.start.split(",")[0]}
@@ -104,7 +106,7 @@ const VehiclesDetails = ({ data }) => {
 
           <div className="flex">
             <span className="flex-1/2 text-sm font-medium text-gray-700">
-              Booking Time :
+              {t("vehiclesDetails.bookingTime")}
             </span>
             <span className="text-sm flex-1/2 text-gray-900">
               {data.dates.start.split(",")[1]?.trim()}
@@ -113,7 +115,7 @@ const VehiclesDetails = ({ data }) => {
 
           <div className="flex">
             <span className="flex-1/2 text-sm font-medium text-gray-700">
-              Trip Amount :
+              {t("vehiclesDetails.tripAmount")}
             </span>
             <span className="text-sm flex-1/2 text-gray-900">
               $ {data.amount}
@@ -122,7 +124,7 @@ const VehiclesDetails = ({ data }) => {
 
           <div className="flex">
             <span className="flex-1/2 text-sm font-medium text-gray-700">
-              Payment Type:
+              {t("vehiclesDetails.paymentType")}
             </span>
             <span className="text-sm flex-1/2 text-gray-900">
               {data.paymentType}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router";
 import {
   FaCalendarAlt,
@@ -14,10 +14,22 @@ import LogoutModal from "../shared/Logout";
 import { RiLayout3Fill, RiMessage2Fill } from "react-icons/ri";
 import { BsCalendar2CheckFill } from "react-icons/bs";
 import { IoIosPaper } from "react-icons/io";
+import { useTranslation } from "react-i18next";
+import i18n from "../i18n";
 
 function UserSideBar({ setSidebarOpen }) {
+  const { t } = useTranslation();
   const location = useLocation();
-  const isActive = (path) => location.pathname === path;
+
+  const isActive = (path) => {
+    if (path === "/dashboard/settings") {
+      return location.pathname.startsWith("/dashboard/settings/");
+    }
+    return location.pathname === path;
+  };
+  useEffect(() => {
+    document.dir = i18n.language === "ar" ? "rtl" : "ltr";
+  }, [i18n.language]);
   const [isLogoutActive, setIsLogOutActive] = useState(false);
 
   return (
@@ -42,7 +54,8 @@ function UserSideBar({ setSidebarOpen }) {
                   : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
               }`}
             >
-              <RiLayout3Fill className="text-xl mr-3" /> Dashboard
+              <RiLayout3Fill className="text-xl mx-3 " />{" "}
+              {t("sidebar.dashboard")}
             </Link>
             <Link
               to="/dashboard/manage-rentals"
@@ -52,7 +65,8 @@ function UserSideBar({ setSidebarOpen }) {
                   : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
               }`}
             >
-              <FaCalendarAlt className="text-xl mr-3" /> Manage Rentals
+              <FaCalendarAlt className="text-xl mx-3" />{" "}
+              {t("sidebar.manageRentals")}
             </Link>
             <Link
               to="/dashboard/vehicles"
@@ -62,7 +76,7 @@ function UserSideBar({ setSidebarOpen }) {
                   : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
               }`}
             >
-              <FaCar className="text-xl mr-3" /> Vehicles
+              <FaCar className="text-xl mx-3" /> {t("sidebar.vehicles")}
             </Link>
             <Link
               to="/dashboard/booking-request"
@@ -72,7 +86,8 @@ function UserSideBar({ setSidebarOpen }) {
                   : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
               }`}
             >
-              <BsCalendar2CheckFill className="text-xl mr-3" /> Booking Request
+              <BsCalendar2CheckFill className="text-xl mx-3" />{" "}
+              {t("sidebar.bookingRequest")}
             </Link>
             <Link
               to="/dashboard/invoice-payment"
@@ -82,7 +97,8 @@ function UserSideBar({ setSidebarOpen }) {
                   : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
               }`}
             >
-              <FaFileInvoiceDollar className="text-xl mr-3" /> Invoice & Payment
+              <FaFileInvoiceDollar className="text-xl mx-3" />{" "}
+              {t("sidebar.invoicePayment")}
             </Link>
             <Link
               to="/dashboard/messages"
@@ -92,7 +108,8 @@ function UserSideBar({ setSidebarOpen }) {
                   : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
               }`}
             >
-              <RiMessage2Fill className="text-xl mr-3" /> Messages
+              <RiMessage2Fill className="text-xl mx-3" />{" "}
+              {t("sidebar.messages")}
             </Link>
             <Link
               to="/dashboard/notifications"
@@ -102,17 +119,17 @@ function UserSideBar({ setSidebarOpen }) {
                   : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
               }`}
             >
-              <FaBell className="text-xl mr-3" /> Notification
+              <FaBell className="text-xl mx-3" /> {t("sidebar.notifications")}
             </Link>
             <Link
-              to="/dashboard/settings"
+              to="/dashboard/settings/account"
               className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${
                 isActive("/dashboard/settings")
                   ? "bg-gradient-to-r from-[#071352] to-[#0023CF] text-white"
                   : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
               }`}
             >
-              <FaCog className="text-xl mr-3" /> Settings
+              <FaCog className="text-xl mx-3" /> {t("sidebar.settings")}
             </Link>
             <Link
               to="/dashboard/reports"
@@ -122,7 +139,7 @@ function UserSideBar({ setSidebarOpen }) {
                   : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
               }`}
             >
-              <IoIosPaper className="text-xl mr-3" /> Reports
+              <IoIosPaper className="text-xl mx-3" /> {t("sidebar.reports")}
             </Link>
           </nav>
         </div>
@@ -131,7 +148,7 @@ function UserSideBar({ setSidebarOpen }) {
             onClick={() => setIsLogOutActive(true)}
             className="flex hover:cursor-pointer items-center p-2.5 rounded-lg w-full text-red-600 duration-200 mt-6"
           >
-            <FaSignOutAlt className="text-xl mr-3" /> Log Out
+            <FaSignOutAlt className="text-xl mx-3" /> {t("sidebar.logout")}
           </button>
         </div>
         <Modal isOpen={isLogoutActive} onClose={() => setIsLogOutActive(false)}>

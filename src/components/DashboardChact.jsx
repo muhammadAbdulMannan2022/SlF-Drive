@@ -10,21 +10,24 @@ import {
   Cell,
   Tooltip,
 } from "recharts";
-import { Bold, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
+// Custom Tooltip with i18n currency
 const CustomTooltip = ({ active, payload }) => {
+  const { t } = useTranslation();
   if (active && payload && payload.length) {
     const data = payload[0].payload;
     return (
       <div className="bg-[#0B2088] text-white px-2 py-1 rounded text-sm font-medium">
-        {data.percentageChange || `$${(payload[0].value / 1000).toFixed(0)}k`}
+        {data.percentageChange ||
+          `${t("chart.currency")} ${(payload[0].value / 1000).toFixed(0)}k`}
       </div>
     );
   }
   return null;
 };
 
-// ✅ Pure React + Tailwind dropdown component
 function Dropdown({ options, selected, onSelect }) {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -62,7 +65,7 @@ function Dropdown({ options, selected, onSelect }) {
                 onSelect(opt);
                 setOpen(false);
               }}
-              className={`block w-full text-left px-3 py-2 text-sm hover:bg-gray-100 hover:cursor-pointer ${
+              className={`block w-full text-left px-3 py-2 text-sm hover:bg-gray-100 ${
                 opt === selected ? "bg-gray-100 font-medium" : ""
               }`}
             >
@@ -76,7 +79,7 @@ function Dropdown({ options, selected, onSelect }) {
 }
 
 export default function EarningsChart({
-  title = "Earnings",
+  title,
   data,
   selectedYear = "2024",
   years = ["2024", "2023", "2022", "2021"],
@@ -87,14 +90,16 @@ export default function EarningsChart({
   textColor = "#1E1E1E",
   className = "",
 }) {
-  const formatYAxisLabel = (value) => `OMR ${value / 1000}k`;
+  const { t } = useTranslation();
+
+  const formatYAxisLabel = (value) => `${t("chart.currency")} ${value / 1000}k`;
 
   return (
     <div className={`p-6 rounded-lg ${className}`} style={{ backgroundColor }}>
       {/* Header */}
-      <div className="flex justify-between items-center mb-6 ">
+      <div className="flex justify-between items-center mb-6">
         <h2 className="text-xl font-semibold" style={{ color: textColor }}>
-          {title}
+          {title || t("chart.title")}
         </h2>
         <Dropdown
           options={years}
@@ -104,7 +109,7 @@ export default function EarningsChart({
       </div>
 
       {/* Chart */}
-      <div className="h-64 w-full ">
+      <div className="h-64 w-full">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={data}

@@ -1,8 +1,11 @@
 "use client";
 
 import { FaMapMarkerAlt, FaMap } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const ReportDetails = ({ data }) => {
+  const { t } = useTranslation();
+
   if (!data) return null;
 
   const handleMapClick = () => {
@@ -14,17 +17,23 @@ const ReportDetails = ({ data }) => {
     <div className="bg-white rounded-lg w-full max-w-2xl md:w-xl p-6 space-y-6 mx-auto">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-gray-200 pb-4">
-        <h2 className="text-xl font-bold text-gray-900">Report Details</h2>
+        <h2 className="text-xl font-bold text-gray-900">
+          {t("reportDetails.title")}
+        </h2>
       </div>
 
       {/* Report Info */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
         <div>
-          <span className="font-semibold text-gray-700">Reported by:</span>
+          <span className="font-semibold text-gray-700">
+            {t("reportDetails.reportedBy")}
+          </span>
           <span className="ml-2 text-gray-900">{data.username}</span>
         </div>
         <div>
-          <span className="font-semibold text-gray-700">Date:</span>
+          <span className="font-semibold text-gray-700">
+            {t("reportDetails.date")}
+          </span>
           <span className="ml-2 text-gray-900">{data.dateOfOccurrence}</span>
         </div>
       </div>
@@ -32,7 +41,7 @@ const ReportDetails = ({ data }) => {
       {/* Description Section */}
       <div>
         <h3 className="text-lg font-semibold text-gray-900 mb-3">
-          Description
+          {t("reportDetails.description")}
         </h3>
         <p className="text-gray-700 leading-relaxed">{data.description}</p>
       </div>
@@ -40,7 +49,9 @@ const ReportDetails = ({ data }) => {
       {/* Pictures Section */}
       {data.images && data.images.length > 0 && (
         <div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-3">Pictures</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-3">
+            {t("reportDetails.pictures")}
+          </h3>
           <div className="flex gap-4">
             {data.images.slice(0, 2).map((image, index) => (
               <div
@@ -59,9 +70,10 @@ const ReportDetails = ({ data }) => {
       )}
 
       {/* Location Section */}
-
       <div>
-        <h3 className="text-lg font-semibold text-gray-900 mb-3">Location</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-3">
+          {t("reportDetails.location")}
+        </h3>
         <div className="flex items-center gap-3">
           <div className="flex-1">
             <div className="relative">
@@ -78,33 +90,16 @@ const ReportDetails = ({ data }) => {
           <button
             onClick={handleMapClick}
             className="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-lg transition-colors flex-shrink-0"
-            title="Open in Maps"
+            title={t("reportDetails.openInMaps")}
           >
             <FaMap className="w-5 h-5" />
           </button>
         </div>
 
         <p className="text-xs text-gray-500 mt-2">
-          Coordinates: {data.location.latitude}, {data.location.longitude}
+          {t("reportDetails.coordinates")}: {data.location.latitude},{" "}
+          {data.location.longitude}
         </p>
-
-        {/* Embedded Map */}
-        {/* <div className="mt-4">
-          <iframe
-            title="Location Map"
-            width="100%"
-            height="300"
-            style={{ border: 0 }}
-            src={`https://www.openstreetmap.org/export/embed.html?bbox=${
-              data.location.longitude - 0.002
-            }%2C${data.location.latitude - 0.002}%2C${
-              data.location.longitude + 0.002
-            }%2C${data.location.latitude + 0.002}&marker=${
-              data.location.latitude
-            }%2C${data.location.longitude}`}
-            allowFullScreen
-          ></iframe>
-        </div> */}
       </div>
     </div>
   );

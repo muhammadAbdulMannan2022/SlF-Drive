@@ -1,12 +1,13 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import ReusableBookingTable from "./BookingTable";
 import { FaSearch } from "react-icons/fa";
 
 const BookingRequestsPage = () => {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("Company");
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Sample data - replace with your actual data
   const allBookings = [
     {
       id: 1,
@@ -60,7 +61,6 @@ const BookingRequestsPage = () => {
     },
   ];
 
-  // Filter data based on active tab and search term
   const filteredData = allBookings.filter((booking) => {
     const matchesTab = booking.type === activeTab.toLowerCase();
     const matchesSearch =
@@ -76,21 +76,19 @@ const BookingRequestsPage = () => {
 
   const handleApprove = (booking) => {
     console.log("Approve booking:", booking);
-    // Add your approve logic here
   };
 
   const handleDeny = (booking) => {
     console.log("Deny booking:", booking);
-    // Add your deny logic here
   };
 
   return (
-    <div className="min-h-screen  ">
+    <div className="min-h-screen">
       <div className="mx-auto px-5 md:px-20">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-bold text-gray-900">
-            All Booking Requests
+            {t("bookingRequests.title")}
           </h1>
         </div>
 
@@ -105,7 +103,7 @@ const BookingRequestsPage = () => {
                   : "text-gray-500 border-transparent hover:text-gray-700"
               }`}
             >
-              Company
+              {t("bookingRequests.tabs.company")}
             </button>
             <button
               onClick={() => setActiveTab("User")}
@@ -115,7 +113,7 @@ const BookingRequestsPage = () => {
                   : "text-gray-500 border-transparent hover:text-gray-700"
               }`}
             >
-              User
+              {t("bookingRequests.tabs.user")}
             </button>
           </div>
 
@@ -124,7 +122,7 @@ const BookingRequestsPage = () => {
             <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input
               type="text"
-              placeholder="Type to search"
+              placeholder={t("bookingRequests.searchPlaceholder")}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-10 pr-4 py-2 w-full border-3 border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -132,7 +130,7 @@ const BookingRequestsPage = () => {
           </div>
         </div>
 
-        {/* Reusable Table */}
+        {/* Booking Table */}
         <ReusableBookingTable
           data={filteredData}
           onApprove={handleApprove}

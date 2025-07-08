@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   FaUser,
   FaShieldAlt,
@@ -14,45 +15,52 @@ import {
 import { Outlet, useLocation, useNavigate } from "react-router";
 
 const SettingsLayout = () => {
+  const { t, i18n } = useTranslation();
   const [activeSection, setActiveSection] = useState("Account");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Set text direction based on language (LTR or RTL)
+  useEffect(() => {
+    document.dir = i18n.language === "ar" ? "rtl" : "ltr";
+  }, [i18n.language]);
+
+  // Define translated navigation items
   const navigationItems = [
     {
       id: "Account",
-      label: "Account",
+      label: t("account"),
       icon: FaUser,
       path: "account",
     },
     {
       id: "Security",
-      label: "Security",
+      label: t("security"),
       icon: FaShieldAlt,
       path: "security",
     },
     {
       id: "Language",
-      label: "Language",
+      label: t("language"),
       icon: FaLanguage,
       path: "language",
     },
     {
       id: "Terms",
-      label: "Terms & Condition",
+      label: t("terms"),
       icon: FaFileContract,
       path: "terms",
     },
     {
       id: "Privacy",
-      label: "Privacy Policy",
+      label: t("privacy"),
       icon: FaUserShield,
       path: "privacy",
     },
     {
       id: "Collaborations",
-      label: "Collaborations",
+      label: t("collaborations"),
       icon: FaHandshake,
       path: "collaborations",
     },
@@ -69,7 +77,7 @@ const SettingsLayout = () => {
       {/* Mobile Menu Overlay */}
       {isSidebarOpen && (
         <div
-          className="fixed inset-0  z-40 lg:hidden"
+          className="fixed inset-0 z-40 lg:hidden"
           onClick={() => setIsSidebarOpen(false)}
         />
       )}
@@ -127,7 +135,9 @@ const SettingsLayout = () => {
           >
             <FaBars className="w-6 h-6" />
           </button>
-          <h1 className="font-semibold text-gray-900">{activeSection}</h1>
+          <h1 className="font-semibold text-gray-900">
+            {t(activeSection.toLowerCase())}
+          </h1>
           <div className="w-6"></div> {/* Spacer for centering */}
         </div>
 

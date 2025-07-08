@@ -1,9 +1,11 @@
 "use client";
 
 import { useReducer, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { formReducer, initialState } from "./formReducer";
 
 const AddNewCarForm = ({ setIsModalOpen, id }) => {
+  const { t } = useTranslation();
   const [state, dispatch] = useReducer(formReducer, initialState);
   const fileInputRef = useRef(null);
 
@@ -14,8 +16,6 @@ const AddNewCarForm = ({ setIsModalOpen, id }) => {
     });
   };
 
-  //   look at the formReducer.js file to understand this part of code
-
   const handleCheckboxChange = (section, field) => {
     dispatch({
       type: "TOGGLE_CHECKBOX",
@@ -23,6 +23,7 @@ const AddNewCarForm = ({ setIsModalOpen, id }) => {
     });
   };
 
+  // ... other handlers remain the same
   const handleDragOver = (e) => {
     e.preventDefault();
     dispatch({ type: "SET_DRAG_OVER", payload: true });
@@ -78,22 +79,20 @@ const AddNewCarForm = ({ setIsModalOpen, id }) => {
           {/* Header */}
           <div className="mb-4">
             <h1 className="text-xl font-bold text-gray-900 mb-1">
-              Add New Car
+              {t("addNewCar.title")}
             </h1>
-            <p className="text-gray-600 text-sm">
-              Fill In The Details To Add A New Car To Your Rental Fleet
-            </p>
+            <p className="text-gray-600 text-sm">{t("addNewCar.subtitle")}</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Car Model */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Car Model
+                {t("addNewCar.carModel")}
               </label>
               <input
                 type="text"
-                placeholder="ex.., Toyota Camry 2024"
+                placeholder={t("addNewCar.carModelPlaceholder")}
                 value={state.formData.carModel}
                 onChange={(e) =>
                   handleInputChange(null, "carModel", e.target.value)
@@ -106,17 +105,23 @@ const AddNewCarForm = ({ setIsModalOpen, id }) => {
               {/* Car Features */}
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Car Features
+                  {t("addNewCar.carFeatures")}
                 </label>
                 <div className="space-y-2">
                   {[
-                    { key: "airConditioning", label: "Air Conditioning" },
+                    {
+                      key: "airConditioning",
+                      label: t("addNewCar.features.airConditioning"),
+                    },
                     {
                       key: "automaticTransmission",
-                      label: "Automatic Transmission",
+                      label: t("addNewCar.features.automaticTransmission"),
                     },
-                    { key: "petrol", label: "Petrol" },
-                    { key: "withDriver", label: "With Driver" },
+                    { key: "petrol", label: t("addNewCar.features.petrol") },
+                    {
+                      key: "withDriver",
+                      label: t("addNewCar.features.withDriver"),
+                    },
                   ].map((feature) => (
                     <label
                       key={feature.key}
@@ -130,7 +135,7 @@ const AddNewCarForm = ({ setIsModalOpen, id }) => {
                         }
                         className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
                       />
-                      <span className="ml-2 text-gray-700 text-sm">
+                      <span className="mx-2 text-gray-700 text-sm">
                         {feature.label}
                       </span>
                     </label>
@@ -141,7 +146,7 @@ const AddNewCarForm = ({ setIsModalOpen, id }) => {
               {/* Upload Car Picture */}
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Upload Car Picture
+                  {t("addNewCar.uploadCarPicture")}
                 </label>
                 <div
                   className={`border-2 border-dashed rounded-lg p-4 text-center cursor-pointer transition-colors ${
@@ -160,11 +165,11 @@ const AddNewCarForm = ({ setIsModalOpen, id }) => {
                     <div className="space-y-1">
                       <img
                         src={state.uploadedImage || "/placeholder.svg"}
-                        alt="Uploaded car"
+                        alt={t("addNewCar.uploadCarPicture")}
                         className="w-16 h-16 object-cover rounded-lg mx-auto"
                       />
                       <p className="text-xs text-green-600 font-medium">
-                        Image uploaded successfully!
+                        {t("addNewCar.imageUploadedSuccess")}
                       </p>
                     </div>
                   ) : (
@@ -184,7 +189,9 @@ const AddNewCarForm = ({ setIsModalOpen, id }) => {
                           />
                         </svg>
                       </div>
-                      <p className="text-xs text-gray-500">upload your photo</p>
+                      <p className="text-xs text-gray-500">
+                        {t("addNewCar.uploadPhoto")}
+                      </p>
                     </div>
                   )}
                   <input
@@ -201,12 +208,12 @@ const AddNewCarForm = ({ setIsModalOpen, id }) => {
             {/* Capacity */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Capacity
+                {t("addNewCar.capacity")}
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
                   <label className="block text-xs text-gray-600 mb-1">
-                    Passengers
+                    {t("addNewCar.passengers")}
                   </label>
                   <input
                     type="number"
@@ -225,7 +232,7 @@ const AddNewCarForm = ({ setIsModalOpen, id }) => {
                 </div>
                 <div>
                   <label className="block text-xs text-gray-600 mb-1">
-                    Suitcases
+                    {t("addNewCar.suitcases")}
                   </label>
                   <input
                     type="number"
@@ -240,7 +247,7 @@ const AddNewCarForm = ({ setIsModalOpen, id }) => {
                 </div>
                 <div>
                   <label className="block text-xs text-gray-600 mb-1">
-                    Mileage Limit
+                    {t("addNewCar.mileageLimit")}
                   </label>
                   <div className="relative">
                     <input
@@ -256,7 +263,7 @@ const AddNewCarForm = ({ setIsModalOpen, id }) => {
                       className="w-full px-3 py-2 pr-10 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 text-sm"
                     />
                     <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-xs">
-                      KM
+                      {t("addNewCar.km")}
                     </span>
                   </div>
                 </div>
@@ -266,16 +273,16 @@ const AddNewCarForm = ({ setIsModalOpen, id }) => {
             {/* Pricing */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Pricing
+                {t("addNewCar.pricing")}
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs text-gray-600 mb-1">
-                    Price Per Day
+                    {t("addNewCar.pricePerDay")}
                   </label>
                   <div className="relative">
-                    <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">
-                      $
+                    <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-xs">
+                      OMR
                     </span>
                     <input
                       type="number"
@@ -294,11 +301,11 @@ const AddNewCarForm = ({ setIsModalOpen, id }) => {
                 </div>
                 <div>
                   <label className="block text-xs text-gray-600 mb-1">
-                    Discount Price (If Applicable)
+                    {t("addNewCar.discountPrice")}
                   </label>
                   <div className="relative">
-                    <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">
-                      $
+                    <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-xs">
+                      OMR
                     </span>
                     <input
                       type="number"
@@ -321,18 +328,30 @@ const AddNewCarForm = ({ setIsModalOpen, id }) => {
             {/* This Deal Include */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                This Deal Include
+                {t("addNewCar.dealInclude")}
               </label>
-              <div classlems="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
                 {[
-                  { key: "freeCancellation", label: "Free Cancellation" },
-                  { key: "theftProtection", label: "Theft Protection" },
-                  { key: "fairFuelPolicy", label: "Fair Fuel Policy" },
+                  {
+                    key: "freeCancellation",
+                    label: t("addNewCar.deals.freeCancellation"),
+                  },
+                  {
+                    key: "theftProtection",
+                    label: t("addNewCar.deals.theftProtection"),
+                  },
+                  {
+                    key: "fairFuelPolicy",
+                    label: t("addNewCar.deals.fairFuelPolicy"),
+                  },
                   {
                     key: "freeCollisionWaiver",
-                    label: "Free Collision Waiver",
+                    label: t("addNewCar.deals.freeCollisionWaiver"),
                   },
-                  { key: "unlimitedMileage", label: "Unlimited Mileage" },
+                  {
+                    key: "unlimitedMileage",
+                    label: t("addNewCar.deals.unlimitedMileage"),
+                  },
                 ].map((deal) => (
                   <label
                     key={deal.key}
@@ -346,7 +365,7 @@ const AddNewCarForm = ({ setIsModalOpen, id }) => {
                       }
                       className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
                     />
-                    <span className="ml-2 text-gray-700 text-sm">
+                    <span className="mx-2 text-gray-700 text-sm">
                       {deal.label}
                     </span>
                   </label>
@@ -361,13 +380,13 @@ const AddNewCarForm = ({ setIsModalOpen, id }) => {
                 onClick={handleCancel}
                 className="w-full sm:w-auto px-6 py-2 border-2 border-blue-600 text-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition-colors text-sm hover:cursor-pointer"
               >
-                Cancel
+                {t("addNewCar.buttons.cancel")}
               </button>
               <button
                 type="submit"
                 className="w-full sm:w-auto px-6 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors text-sm hover:cursor-pointer"
               >
-                Add Car Rental
+                {t("addNewCar.buttons.addCarRental")}
               </button>
             </div>
           </form>

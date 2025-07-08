@@ -16,22 +16,19 @@ import {
   FiSend,
   FiTrash2,
 } from "react-icons/fi";
+import { useTranslation } from "react-i18next";
 import EmojiPicker from "emoji-picker-react";
 
-// Server Action for sending messages
 async function sendMessageAction(prevState, formData) {
   const message = formData.get("message");
-  const image = formData.get("image"); // Now a base64 string
+  const image = formData.get("image");
 
   if (!message && !image) {
-    return { error: "Message or image cannot be empty", success: false };
+    return { error: "chat.messageOrImageError", success: false };
   }
 
-  // Simulate API call delay
   await new Promise((resolve) => setTimeout(resolve, 1000));
-
-  // Simulate random success/failure for demo
-  const success = Math.random() > 0.1; // 90% success rate
+  const success = Math.random() > 0.1;
 
   if (success) {
     const messageData = {
@@ -47,14 +44,14 @@ async function sendMessageAction(prevState, formData) {
     if (image) {
       return {
         success: true,
-        message: "Image sent successfully",
-        data: { ...messageData, type: "image", content: image }, // Image is already base64
+        message: "chat.imageSent",
+        data: { ...messageData, type: "image", content: image },
       };
     }
 
     return {
       success: true,
-      message: "Message sent successfully",
+      message: "chat.messageSent",
       data: {
         ...messageData,
         type: message.includes(":") ? "emoji" : "text",
@@ -63,21 +60,21 @@ async function sendMessageAction(prevState, formData) {
     };
   } else {
     return {
-      error: "Failed to send message. Please try again.",
+      error: "chat.messageSendFailed",
       success: false,
     };
   }
 }
 
 const ChatPage = () => {
+  const { t } = useTranslation();
   const [selectedChat, setSelectedChat] = useState("jubayer-ahmad");
   const [searchTerm, setSearchTerm] = useState("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [previewImage, setPreviewImage] = useState(null);
-  const [messages, setMessages] = useState([]); // Empty initial messages
+  const [messages, setMessages] = useState([]);
 
-  // Refs
   const messagesEndRef = useRef(null);
   const messagesContainerRef = useRef(null);
   const inputFormRef = useRef(null);
@@ -85,110 +82,77 @@ const ChatPage = () => {
   const emojiPickerRef = useRef(null);
   const emojiButtonRef = useRef(null);
 
-  // Auto-scroll to bottom
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  // Form handling with useActionState
   const [state, formAction, isPending] = useActionState(sendMessageAction, {
     success: false,
   });
 
-  // Optimistic updates
   const [optimisticMessages, addOptimisticMessage] = useOptimistic(
     messages,
     (state, newMessage) => [...state, newMessage]
   );
 
-  // Auto-scroll effects
   useEffect(() => {
-    scrollToBottom();
-  }, [optimisticMessages]);
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [optimisticMessages, isPending]);
 
-  useEffect(() => {
-    if (isPending) {
-      scrollToBottom();
-    }
-  }, [isPending]);
-
-  // Handle successful message send
   useEffect(() => {
     if (state.success && state.data) {
       if (!messages.find((msg) => msg.id === state.data.id)) {
         setMessages((prev) => [...prev, state.data]);
-        setPreviewImage(null); // Clear preview after sending
+        setPreviewImage(null);
       }
     }
   }, [state]);
 
-  // Reset messages when changing user
   useEffect(() => {
-    setMessages([]); // Clear messages on user change
-    setPreviewImage(null); // Clear image preview
-    setShowEmojiPicker(false); // Close emoji picker
+    setMessages([]);
+    setPreviewImage(null);
+    setShowEmojiPicker(false);
   }, [selectedChat]);
 
-  // Handle emoji selection
   const handleEmojiClick = (emojiObject) => {
     const input = inputFormRef.current?.querySelector("input[name=message]");
-    if (input) {
-      input.value += emojiObject.emoji;
-    }
-    setShowEmojiPicker(false); // Close picker after selecting emoji
+    if (input) input.value += emojiObject.emoji;
+    setShowEmojiPicker(false);
   };
 
-  // Handle click outside to close emoji picker
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
         showEmojiPicker &&
         emojiPickerRef.current &&
         !emojiPickerRef.current.contains(event.target) &&
-        emojiButtonRef.current &&
         !emojiButtonRef.current.contains(event.target)
       ) {
         setShowEmojiPicker(false);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [showEmojiPicker]);
 
-  // Handle image upload
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = () => {
-        const base64Image = reader.result;
-        setPreviewImage(base64Image); // Show preview
-      };
+      reader.onload = () => setPreviewImage(reader.result);
       reader.readAsDataURL(file);
     }
   };
 
-  // Clear image preview
   const clearImagePreview = () => {
     setPreviewImage(null);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = null; // Reset file input
-    }
+    if (fileInputRef.current) fileInputRef.current.value = null;
   };
 
-  // Form submission
   const handleFormSubmit = async (formData) => {
     const message = formData.get("message");
-
     if (!message || message.trim() === "") {
       if (previewImage) {
         const formDataWithImage = new FormData();
         formDataWithImage.append("image", previewImage);
-        const optimisticMessage = {
-          id: Date.now() + Math.random(),
+        addOptimisticMessage({
+          id: Date.now(),
           sender: "You",
           content: previewImage,
           time: new Date().toLocaleTimeString([], {
@@ -198,16 +162,15 @@ const ChatPage = () => {
           isOwn: true,
           type: "image",
           isPending: true,
-        };
-        addOptimisticMessage(optimisticMessage);
+        });
         formAction(formDataWithImage);
         return;
       }
       return;
     }
 
-    const optimisticMessage = {
-      id: Date.now() + Math.random(),
+    addOptimisticMessage({
+      id: Date.now(),
       sender: "You",
       content: message.trim(),
       time: new Date().toLocaleTimeString([], {
@@ -217,9 +180,7 @@ const ChatPage = () => {
       isOwn: true,
       type: message.includes(":") ? "emoji" : "text",
       isPending: true,
-    };
-
-    addOptimisticMessage(optimisticMessage);
+    });
 
     const form = document.getElementById("message-form");
     if (form) form.reset();
@@ -263,17 +224,22 @@ const ChatPage = () => {
       )}
 
       {/* Sidebar */}
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 z-40 lg:hidden"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
       <div
         className={`${
           isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
         } fixed lg:relative lg:translate-x-0 transition-transform duration-300 ease-in-out z-50 lg:z-0 w-80 bg-white border-r border-gray-200 flex flex-col h-full`}
       >
-        {/* Sidebar Header */}
         <div className="p-4 border-b border-gray-200">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <h2 className="text-lg font-semibold text-gray-900">
-                Active Conversations
+                {t("chat.activeConversations")}
               </h2>
               <span className="bg-blue-600 text-white text-xs px-2 py-1 rounded-full">
                 {conversations.length}
@@ -286,12 +252,10 @@ const ChatPage = () => {
               <FiX className="w-5 h-5" />
             </button>
           </div>
-
-          {/* Search */}
           <div className="relative">
             <input
               type="text"
-              placeholder="Search..."
+              placeholder={t("chat.search")}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full pl-4 pr-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
@@ -299,8 +263,6 @@ const ChatPage = () => {
             <FiSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
           </div>
         </div>
-
-        {/* Conversations List */}
         <div className="flex-1 overflow-y-auto">
           {filteredConversations.map((conversation) => (
             <div
@@ -309,22 +271,17 @@ const ChatPage = () => {
                 setSelectedChat(conversation.id);
                 setIsMobileMenuOpen(false);
               }}
-              className={`flex items-center gap-3 p-4  cursor-pointer border-b border-gray-100 ${
+              className={`flex items-center gap-3 p-4 cursor-pointer border-b border-gray-100 ${
                 selectedChat === conversation.id
                   ? "bg-[#0C2397]"
                   : "hover:bg-gray-50"
               }`}
             >
-              <div className="relative">
-                <img
-                  src={conversation.avatar || "/placeholder.svg"}
-                  alt={conversation.name}
-                  className="w-10 h-10 rounded-full object-cover"
-                />
-                {conversation.isActive && (
-                  <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></div>
-                )}
-              </div>
+              <img
+                src={conversation.avatar || "/placeholder.svg"}
+                alt={conversation.name}
+                className="w-10 h-10 rounded-full object-cover"
+              />
               <div className="flex-1 min-w-0">
                 <h3
                   className={`font-medium text-sm truncate ${
@@ -336,7 +293,7 @@ const ChatPage = () => {
                   {conversation.name}
                 </h3>
                 <p
-                  className={` text-xs truncate ${
+                  className={`text-xs truncate ${
                     selectedChat === conversation.id
                       ? "text-gray-100"
                       : "text-gray-600"
@@ -371,8 +328,8 @@ const ChatPage = () => {
             </h3>
             <p className="text-sm text-gray-500">
               {isPending
-                ? "Sending message..."
-                : `Message to ${selectedUser?.name || "user"}`}
+                ? t("chat.sendingMessage")
+                : t("chat.messageTo", { name: selectedUser?.name || "user" })}
             </p>
           </div>
         </div>
@@ -480,7 +437,9 @@ const ChatPage = () => {
               <input
                 type="text"
                 name="message"
-                placeholder={`Message to ${selectedUser?.name || "user"}`}
+                placeholder={t("chat.messageTo", {
+                  name: selectedUser?.name || "user",
+                })}
                 className="w-full pl-4 pr-24 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm disabled:opacity-50 disabled:cursor-not-allowed"
               />
               <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center gap-2">

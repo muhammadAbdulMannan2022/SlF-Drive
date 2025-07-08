@@ -1,16 +1,17 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import Collaborator from "./AddCollaborator";
 import { FaPlus } from "react-icons/fa";
 
 const Collaborations = () => {
+  const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
   const dropdownRef = useRef(null);
   const [isAddCollaborator, setIsAddCollaborator] = useState(false);
 
-  // Sample data - replace with your actual data
   const reportsData = [
     {
       id: 1,
@@ -32,43 +33,31 @@ const Collaborations = () => {
     },
   ];
 
-  // Filter data based on search term
   const filteredData = reportsData.filter((report) =>
     report.username.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleSearch = () => {
-    console.log("Search clicked for:", searchTerm);
-  };
+  const handleSearch = () => console.log("Search clicked for:", searchTerm);
+  const handleKeyPress = (e) => e.key === "Enter" && handleSearch();
 
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
-  };
-
-  // Toggle dropdown for a specific row
-  const toggleDropdown = (index) => {
+  const toggleDropdown = (index) =>
     setOpenDropdownIndex(openDropdownIndex === index ? null : index);
-  };
 
-  // Handle actions
   const handleEdit = (report) => {
     console.log("Edit clicked for:", report);
-    setOpenDropdownIndex(null); // Close dropdown
+    setOpenDropdownIndex(null);
   };
 
   const handleDelete = (report) => {
     console.log("Delete clicked for:", report);
-    setOpenDropdownIndex(null); // Close dropdown
+    setOpenDropdownIndex(null);
   };
 
   const handleHold = (report) => {
     console.log("Hold clicked for:", report);
-    setOpenDropdownIndex(null); // Close dropdown
+    setOpenDropdownIndex(null);
   };
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -76,9 +65,7 @@ const Collaborations = () => {
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
@@ -90,31 +77,33 @@ const Collaborations = () => {
           {/* Header */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
             <h1 className="text-2xl font-bold text-gray-900">
-              List Of Reports
+              {t("collaborationsPage.title")}
             </h1>
 
-            {/* Search Bar */}
+            {/* Search and Add */}
             <div className="flex items-center gap-2 w-full sm:w-auto">
               <button
                 onClick={() => setIsAddCollaborator(true)}
-                className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#071352] to-[#0023CF] text-white hover:cursor-pointer py-1.5 px-6 rounded-lg font-semibold transition-colors"
+                className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#071352] to-[#0023CF] text-white py-1.5 px-6 rounded-lg font-semibold transition-colors"
               >
                 <FaPlus />
-                <span>Add</span>
+                <span>{t("collaborationsPage.addButton")}</span>
               </button>
+
               <div className="relative flex-1 sm:flex-none">
                 <input
                   type="text"
-                  placeholder="User Name"
+                  placeholder={t("collaborationsPage.searchPlaceholder")}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   onKeyPress={handleKeyPress}
                   className="w-full sm:w-64 px-4 py-2 border bg-white border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                 />
               </div>
+
               <button
                 onClick={handleSearch}
-                className="bg-[#0B2088] text-white p-2 rounded-full transition-colors flex-shrink-0"
+                className="bg-[#0B2088] text-white p-2 rounded-full"
               >
                 <svg
                   className="w-5 h-5"
@@ -133,33 +122,30 @@ const Collaborations = () => {
             </div>
           </div>
 
-          {/* Table Container with Horizontal Scroll */}
+          {/* Table */}
           <div className="overflow-hidden">
             <div className="overflow-x-auto pb-30">
               <table className="w-full min-w-[600px]">
-                {/* Table Header */}
                 <thead style={{ backgroundColor: "#B4BBDF" }}>
                   <tr>
-                    <th className="text-left py-4 px-6 font-semibold text-gray-800 text-sm whitespace-nowrap">
-                      #SI
+                    <th className="text-start py-4 px-6 text-sm font-semibold text-gray-800 whitespace-nowrap">
+                      {t("collaborationsPage.table.si")}
                     </th>
-                    <th className="text-left py-4 px-6 font-semibold text-gray-800 text-sm whitespace-nowrap">
-                      Company name
+                    <th className="text-start py-4 px-6 text-sm font-semibold text-gray-800 whitespace-nowrap">
+                      {t("collaborationsPage.table.companyName")}
                     </th>
-                    <th className="text-left py-4 px-6 font-semibold text-gray-800 text-sm whitespace-nowrap">
-                      Starting date
+                    <th className="text-start py-4 px-6 text-sm font-semibold text-gray-800 whitespace-nowrap">
+                      {t("collaborationsPage.table.startDate")}
                     </th>
-                    <th className="text-left py-4 px-6 font-semibold text-gray-800 text-sm whitespace-nowrap">
-                      Ending date
+                    <th className="text-start py-4 px-6 text-sm font-semibold text-gray-800 whitespace-nowrap">
+                      {t("collaborationsPage.table.endDate")}
                     </th>
-                    <th className="text-left py-4 px-6 font-semibold text-gray-800 text-sm whitespace-nowrap">
-                      Action
+                    <th className="text-start py-4 px-6 text-sm font-semibold text-gray-800 whitespace-nowrap">
+                      {t("collaborationsPage.table.action")}
                     </th>
                   </tr>
                 </thead>
-
-                {/* Table Body */}
-                <tbody className="">
+                <tbody>
                   {filteredData.map((report, index) => (
                     <tr
                       key={report.id}
@@ -177,7 +163,7 @@ const Collaborations = () => {
                       <td className="py-4 px-6 text-sm text-gray-700">
                         {report.endDate}
                       </td>
-                      <td className="py-4 px-6 text-sm text-gray-700 relative hover:cursor-pointer">
+                      <td className="py-4 px-6 text-sm text-gray-700 relative">
                         <button
                           onClick={() => toggleDropdown(index)}
                           className="focus:outline-none"
@@ -187,7 +173,6 @@ const Collaborations = () => {
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
                           >
                             <path
                               strokeLinecap="round"
@@ -197,6 +182,7 @@ const Collaborations = () => {
                             />
                           </svg>
                         </button>
+
                         {openDropdownIndex === index && (
                           <div
                             ref={dropdownRef}
@@ -206,19 +192,19 @@ const Collaborations = () => {
                               onClick={() => handleEdit(report)}
                               className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             >
-                              Edit
+                              {t("collaborationsPage.dropdown.edit")}
                             </button>
                             <button
                               onClick={() => handleDelete(report)}
                               className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             >
-                              Delete
+                              {t("collaborationsPage.dropdown.delete")}
                             </button>
                             <button
                               onClick={() => handleHold(report)}
                               className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             >
-                              Hold
+                              {t("collaborationsPage.dropdown.hold")}
                             </button>
                           </div>
                         )}
@@ -229,17 +215,17 @@ const Collaborations = () => {
               </table>
             </div>
 
-            {/* No Results Message */}
+            {/* No Results */}
             {filteredData.length === 0 && (
               <div className="text-center py-8 text-gray-500">
-                <p>No reports found matching your search.</p>
+                <p>{t("collaborationsPage.noResults")}</p>
               </div>
             )}
 
-            {/* Mobile Scroll Indicator */}
+            {/* Mobile Scroll Hint */}
             <div className="sm:hidden bg-gray-50 px-4 py-2 text-center">
               <p className="text-xs text-gray-500">
-                ← Swipe left/right to see more columns →
+                {t("collaborationsPage.mobileScrollHint")}
               </p>
             </div>
           </div>

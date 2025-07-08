@@ -1,27 +1,31 @@
+import { useTranslation } from "react-i18next";
+
 const ReusableBookingTable = ({ data, onApprove, onDeny }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="overflow-hidden">
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead className="bg-[#B4BBDF]">
             <tr>
-              <th className="text-left py-4 px-4 font-semibold text-[#1E1E1E] text-sm">
-                Customer
+              <th className="text-start py-4 px-4 font-semibold text-[#1E1E1E] text-sm">
+                {t("bookingTable.customer")}
               </th>
-              <th className="text-left py-4 px-4 font-semibold text-[#1E1E1E] text-sm">
-                Vehicles
+              <th className="text-start py-4 px-4 font-semibold text-[#1E1E1E] text-sm">
+                {t("bookingTable.vehicles")}
               </th>
-              <th className="text-left py-4 px-4 font-semibold text-[#1E1E1E] text-sm">
-                Dates
+              <th className="text-start py-4 px-4 font-semibold text-[#1E1E1E] text-sm">
+                {t("bookingTable.dates")}
               </th>
-              <th className="text-left py-4 px-4 font-semibold text-[#1E1E1E] text-sm">
-                Approved By
+              <th className="text-start py-4 px-4 font-semibold text-[#1E1E1E] text-sm">
+                {t("bookingTable.approvedBy")}
               </th>
-              <th className="text-left py-4 px-4 font-semibold text-[#1E1E1E] text-sm">
-                Amount
+              <th className="text-start py-4 px-4 font-semibold text-[#1E1E1E] text-sm">
+                {t("bookingTable.amount")}
               </th>
-              <th className="text-left py-4 px-4 font-semibold text-[#1E1E1E] text-sm">
-                Actions
+              <th className="text-start py-4 px-4 font-semibold text-[#1E1E1E] text-sm">
+                {t("bookingTable.actions")}
               </th>
             </tr>
           </thead>
@@ -53,7 +57,7 @@ const ReusableBookingTable = ({ data, onApprove, onDeny }) => {
                 </td>
                 <td className="py-4 px-4">
                   <div className="text-gray-900 text-sm flex flex-col">
-                    <span>{booking.dates.start}</span>{" "}
+                    <span>{booking.dates.start}</span>
                     <span>{booking.dates.end}</span>
                   </div>
                 </td>
@@ -75,7 +79,7 @@ const ReusableBookingTable = ({ data, onApprove, onDeny }) => {
                 <td className="py-4 px-4">
                   {booking.status === "confirmed" ? (
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                      Confirmed
+                      {t("bookingTable.confirmed")}
                     </span>
                   ) : (
                     <div className="flex gap-2">
@@ -83,13 +87,13 @@ const ReusableBookingTable = ({ data, onApprove, onDeny }) => {
                         onClick={() => onApprove(booking)}
                         className="px-3 py-1 bg-[#0B2088] text-white text-xs font-medium rounded hover:bg-[#0b2088ce] transition-colors hover:cursor-pointer"
                       >
-                        Approve
+                        {t("bookingTable.approve")}
                       </button>
                       <button
                         onClick={() => onDeny(booking)}
                         className="px-3 py-1 bg-gray-400 text-white text-xs font-medium rounded hover:bg-gray-500 transition-colors hover:cursor-pointer"
                       >
-                        Deny
+                        {t("bookingTable.deny")}
                       </button>
                     </div>
                   )}
@@ -102,7 +106,7 @@ const ReusableBookingTable = ({ data, onApprove, onDeny }) => {
 
       {data.length === 0 && (
         <div className="text-center py-8 text-gray-500">
-          No booking requests found.
+          {t("bookingTable.noBookingRequests")}
         </div>
       )}
     </div>

@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Bell, User } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const notifications = [
   {
@@ -20,27 +21,11 @@ const notifications = [
     timestamp: "5 mins ago",
     type: "request",
   },
-  {
-    id: 4,
-    message: "New Rental Company Request",
-    timestamp: "5 mins ago",
-    type: "request",
-  },
-  {
-    id: 5,
-    message: "New Rental Company Request",
-    timestamp: "5 mins ago",
-    type: "request",
-  },
-  {
-    id: 6,
-    message: "New Rental Company Request",
-    timestamp: "5 mins ago",
-    type: "request",
-  },
+  // ...
 ];
 
 export default function DashboardTop() {
+  const { t } = useTranslation();
   const [showNotifications, setShowNotifications] = useState(false);
   const bellRef = useRef(null);
 
@@ -59,9 +44,9 @@ export default function DashboardTop() {
       {/* Welcome Text */}
       <div>
         <h1 className="text-xl sm:text-2xl font-semibold text-[#0B2088] mb-1">
-          Welcome, Caringcompany
+          {t("dashboardTop.welcome", { name: "Caringcompany" })}
         </h1>
-        <p className="text-[#5C5C5C] text-sm">Have a nice day!</p>
+        <p className="text-[#5C5C5C] text-sm">{t("dashboardTop.greeting")}</p>
       </div>
 
       {/* Notification & User Info */}
@@ -83,10 +68,10 @@ export default function DashboardTop() {
             <div className="absolute right-0 mt-2 w-72 sm:w-80 bg-white shadow-lg rounded-lg z-50">
               <div className="px-4 py-3 border-b">
                 <h1 className="text-lg font-semibold text-gray-900 mb-2">
-                  Notifications
+                  {t("dashboardTop.notifications")}
                 </h1>
                 <button className="bg-[#0B2088] text-white px-3 py-1 rounded text-sm font-medium flex items-center gap-1">
-                  All
+                  {t("dashboardTop.all")}
                   <span className="bg-white text-[#0B2088] rounded-full w-5 h-5 flex items-center justify-center text-xs font-semibold">
                     {notifications.length}
                   </span>
@@ -124,7 +109,7 @@ export default function DashboardTop() {
           </div>
           <div className="text-sm">
             <p className="text-[#0B2088] font-medium">Caringcompany</p>
-            <p className="text-[#5C5C5C] text-xs">Admin</p>
+            <p className="text-[#5C5C5C] text-xs">{t("dashboardTop.admin")}</p>
           </div>
         </div>
       </div>

@@ -1,0 +1,341 @@
+{
+  "selectLanguage": "Select Language",
+  "english": "English",
+  "arabic": "Arabic",
+  "submit": "Submit",
+  "comment": "this is for setings side bar",
+  "account": "Account",
+  "security": "Security",
+  "language": "Language",
+  "terms": "Terms & Condition",
+  "privacy": "Privacy Policy",
+  "collaborations": "Collaborations",
+
+  "updateInformation": "Update Your Information",
+  "companyName": "Company Name",
+  "phoneNumber": "Phone Number",
+  "aboutCompany": "About Company",
+  "updateLogo": "Update Logo",
+  "uploadPhoto": "Upload your photo",
+  "uploadDocuments": "Upload your company document",
+  "upload": "Upload",
+  "remove": "Remove",
+  "uploaded": "Uploaded",
+  "update": "Update",
+  "services": "Services",
+  "insurance": "Insurance",
+  "ecoFriendlyOptions": "Eco-Friendly Options",
+  "driverOptions": "Driver Options",
+  "mileageOptions": "Mileage Options",
+  "roadsideAssistance": "Roadside Assistance",
+  "discountsLoyalty": "Discounts & Loyalty",
+  "specialDeals": "Special Deals",
+  "longDistanceRentals": "Long-Distance Rentals",
+  "vatCertificate": "VAT Certificate",
+  "commercialRegistration": "Commercial Registration",
+  "contractToSigned": "Contract To Signed",
+  "aboutPlaceHolder": "Type about your company",
+
+  "securityPage": {
+    "title": "Update Your Password",
+    "form": {
+      "oldPassword": "Old Password",
+      "newPassword": "Create New Password",
+      "confirmPassword": "Confirm Password",
+      "oldPlaceholder": "Enter your current password",
+      "newPlaceholder": "Enter your new password",
+      "confirmPlaceholder": "Confirm your new password"
+    },
+    "button": {
+      "update": "Update",
+      "updating": "Updating..."
+    },
+    "requirements": {
+      "title": "Password Requirements:",
+      "length": "• At least 8 characters long",
+      "different": "• Must be different from your current password",
+      "mix": "• Should contain a mix of letters, numbers, and symbols"
+    },
+    "error": {
+      "oldRequired": "Old password is required",
+      "newRequired": "New password is required",
+      "length": "Password must be at least 8 characters long",
+      "confirmRequired": "Please confirm your password",
+      "noMatch": "Passwords do not match",
+      "sameAsOld": "New password must be different from old password"
+    },
+    "success": {
+      "updated": "Password updated successfully!"
+    }
+  },
+  "termsPage": {
+    "title": "Terms & Conditions",
+    "editTitle": "Edit Terms & Conditions",
+    "noContent": "No content yet. Click Edit to add content.",
+    "editButton": "Edit",
+    "updateButton": "Update"
+  },
+  "policyPage": {
+    "title": "Privacy Policy",
+    "editTitle": "Edit Privacy Policy",
+    "noContent": "No content yet. Click Edit to add content.",
+    "editButton": "Edit",
+    "updateButton": "Update"
+  },
+  "collaborationsPage": {
+    "title": "List Of Reports",
+    "addButton": "Add",
+    "searchPlaceholder": "User Name",
+    "table": {
+      "si": "#SI",
+      "companyName": "Company name",
+      "startDate": "Starting date",
+      "endDate": "Ending date",
+      "action": "Action"
+    },
+    "dropdown": {
+      "edit": "Edit",
+      "delete": "Delete",
+      "hold": "Hold"
+    },
+    "noResults": "No reports found matching your search.",
+    "mobileScrollHint": "← Swipe left/right to see more columns →"
+  },
+  "reportsPage": {
+    "title": "List Of Reports",
+    "searchPlaceholder": "User Name",
+    "table": {
+      "si": "#SI",
+      "username": "Username",
+      "date": "Date of occurrence",
+      "details": "Details",
+      "view": "View"
+    },
+    "noResults": "No reports found matching your search.",
+    "mobileScrollHint": "← Swipe left/right to see more columns →"
+  },
+  "reportDetails": {
+    "title": "Report Details",
+    "reportedBy": "Reported by:",
+    "date": "Date:",
+    "description": "Description",
+    "pictures": "Pictures",
+    "location": "Location",
+    "coordinates": "Coordinates",
+    "openInMaps": "Open in Maps"
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "manageRentals": "Manage Rentals",
+    "vehicles": "Vehicles",
+    "bookingRequest": "Booking Request",
+    "invoicePayment": "Invoice & Payment",
+    "messages": "Messages",
+    "notifications": "Notification",
+    "settings": "Settings",
+    "reports": "Reports",
+    "logout": "Log Out"
+  },
+
+  "chart": {
+    "title": "Earnings",
+    "currency": "OMR",
+    "year": "Year"
+  },
+  "dashboardTop": {
+    "welcome": "Welcome, {{name}}",
+    "greeting": "Have a nice day!",
+    "notifications": "Notifications",
+    "all": "All",
+    "admin": "Admin"
+  },
+  "transactionTable": {
+    "title": "Recent Transactions",
+    "columns": {
+      "trId": "#TrID",
+      "userName": "User Name",
+      "userType": "User Type",
+      "amount": "Amount",
+      "date": "Date",
+      "action": "Action",
+      "view": "View"
+    }
+  },
+  "transactionDetails": {
+    "title": "Transaction Details",
+    "transactionId": "Transaction ID",
+    "date": "Date",
+    "userName": "User Name",
+    "accountNumber": "A/C number",
+    "accountHolder": "A/C holder name",
+    "amount": "Transaction amount",
+    "email": "Email",
+    "notProvided": "Not provided",
+    "download": "Download",
+    "print": "Print"
+  },
+  "rentalData": {
+    "customer": "Customer",
+    "vehicle": "Vehicles",
+    "dates": "Dates",
+    "amount": "Amount",
+    "status": "Status",
+    "daysLeft": "Days Left",
+    "actions": "Actions",
+    "viewDetails": "View Details",
+    "delete": "Delete",
+    "noResults": "No results found. Please adjust your search or date filters.",
+    "completed": "Completed",
+    "active": "Active",
+    "overdue": "Overdue",
+    "searchPlaceholder": "Type to search"
+  },
+  "vehiclesDetails": {
+    "trips": "{{count}} Trips",
+    "tripDetails": "Trip Details:",
+    "tripLocation": "Trip Location:",
+    "dropOffLocation": "Drop Off Location:",
+    "vehicleType": "Vehicle Type:",
+    "persons": "Persons:",
+    "email": "Email:",
+    "phoneNumber": "Phone Number:",
+    "bookingDate": "Booking Date:",
+    "bookingTime": "Booking Time:",
+    "tripAmount": "Trip Amount:",
+    "paymentType": "Payment Type:"
+  },
+  "vehicles": {
+    "title": "All Vehicles",
+    "searchPlaceholder": "Type to search",
+    "addNewCar": "Add New Car",
+    "rentalId": "Rental ID",
+    "vehicleName": "Vehicle Name",
+    "seats": "No. of Seats",
+    "charge": "Per Day Charge",
+    "actions": "Actions",
+    "edit": "Edit",
+    "hold": "Hold",
+    "activate": "Activate",
+    "delete": "Delete",
+    "noVehicles": "No vehicles found matching your search."
+  },
+  "addNewCar": {
+    "title": "Add New Car",
+    "subtitle": "Fill In The Details To Add A New Car To Your Rental Fleet",
+    "carModel": "Car Model",
+    "carModelPlaceholder": "ex.., Toyota Camry 2024",
+    "carFeatures": "Car Features",
+    "features": {
+      "airConditioning": "Air Conditioning",
+      "automaticTransmission": "Automatic Transmission",
+      "petrol": "Petrol",
+      "withDriver": "With Driver"
+    },
+    "uploadCarPicture": "Upload Car Picture",
+    "imageUploadedSuccess": "Image uploaded successfully!",
+    "uploadPhoto": "upload your photo",
+    "capacity": "Capacity",
+    "passengers": "Passengers",
+    "suitcases": "Suitcases",
+    "mileageLimit": "Mileage Limit",
+    "km": "KM",
+    "pricing": "Pricing",
+    "pricePerDay": "Price Per Day",
+    "discountPrice": "Discount Price (If Applicable)",
+    "dealInclude": "This Deal Include",
+    "deals": {
+      "freeCancellation": "Free Delivery",
+      "theftProtection": "Theft Protection",
+      "fairFuelPolicy": "Fair Fuel Policy",
+      "freeCollisionWaiver": "Free Collision Waiver",
+      "unlimitedMileage": "Unlimited Mileage"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "addCarRental": "Add Car Rental"
+    }
+  },
+  "bookingRequests": {
+    "title": "All Booking Requests",
+    "tabs": {
+      "company": "Company",
+      "user": "User"
+    },
+    "searchPlaceholder": "Type to search"
+  },
+  "bookingTable": {
+    "customer": "Customer",
+    "vehicles": "Vehicles",
+    "dates": "Dates",
+    "approvedBy": "Approved By",
+    "amount": "Amount",
+    "actions": "Actions",
+    "confirmed": "Confirmed",
+    "approve": "Approve",
+    "deny": "Deny",
+    "noBookingRequests": "No booking requests found."
+  },
+  "paymentDashboard": {
+    "availableBalance": "Available balance",
+    "manageMethod": "Manage method",
+    "paymentsForActiveOrders": "Payments for active orders",
+    "totalInst": "Total Inst: 28(Under processing)",
+    "dateRange": "Date Range",
+    "filterByDate": "Filter by Date",
+    "searchPlaceholder": "Type user name/vehicle name",
+    "customer": "Customer",
+    "vehicles": "Vehicles",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "amount": "Amount",
+    "noBookingsFound": "No bookings found matching your search."
+  },
+  "chat": {
+    "activeConversations": "Active Conversations",
+    "search": "Search...",
+    "messageTo": "Message to {{name}}",
+    "sendingMessage": "Sending message...",
+    "sending": "Sending...",
+    "manageMethod": "Manage method",
+    "availableBalance": "Available balance",
+    "paymentsActive": "Payments for active orders",
+    "messageOrImageError": "Message or image cannot be empty",
+    "messageSendFailed": "Failed to send message. Please try again.",
+    "imageSent": "Image sent successfully",
+    "messageSent": "Message sent successfully"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "all": "All",
+    "ago": "{{time}} ago"
+  },
+  "collaborator": {
+    "title": "Collaborating Company Details",
+    "organizationName": "Organization Name",
+    "phoneNumber": "Phone Number",
+    "sectorOfCompany": "Sector Of The Company",
+    "aboutCompany": "About Company",
+    "startingDate": "Starting Date",
+    "endingDate": "Ending Date",
+    "uploadLogo": "Update Logo",
+    "uploadPhoto": "upload your photo",
+    "png": "png",
+    "logoUploaded": "Logo uploaded!",
+    "submit": "Submit"
+  },
+  "logoutModal": {
+    "title": "Sure! Do you want to log out?",
+    "no": "No",
+    "yes": "Yes"
+  },
+  "reportsDetails": {
+    "title": "Report Details",
+    "reportedBy": "Reported by:",
+    "date": "Date:",
+    "description": "Description",
+    "pictures": "Pictures",
+    "location": "Location",
+    "openInMaps": "Open in Maps",
+    "coordinates": "Coordinates"
+  }
+}

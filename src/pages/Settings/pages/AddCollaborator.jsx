@@ -2,8 +2,11 @@
 
 import { useState, useRef } from "react";
 import { FaUpload } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const Collaborator = ({ setIsAddCollaborator }) => {
+  const { t } = useTranslation();
+
   const [formData, setFormData] = useState({
     organizationName: "",
     phoneNumber: "",
@@ -63,8 +66,8 @@ const Collaborator = ({ setIsAddCollaborator }) => {
   const handleSubmit = () => {
     console.log("Collaboration form data:", formData);
     console.log("Uploaded logo:", uploadedLogo);
-    // Here you would typically submit to your API
-    alert("Collaboration details submitted successfully!");
+    // Submit to API here
+    alert(t("collaborator.submit") + " " + t("collaborator.title"));
     setIsAddCollaborator(false);
   };
 
@@ -72,7 +75,7 @@ const Collaborator = ({ setIsAddCollaborator }) => {
     <div className="p-6 mx-auto">
       <div className="p-6">
         <h1 className="text-2xl font-bold text-[#0B2088] mb-8">
-          Collaborating Company Details
+          {t("collaborator.title")}
         </h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -81,7 +84,7 @@ const Collaborator = ({ setIsAddCollaborator }) => {
             {/* Organization Name */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Organization Name
+                {t("collaborator.organizationName")}
               </label>
               <input
                 type="text"
@@ -89,7 +92,7 @@ const Collaborator = ({ setIsAddCollaborator }) => {
                 onChange={(e) =>
                   handleInputChange("organizationName", e.target.value)
                 }
-                placeholder="Name of the org."
+                placeholder={t("collaborator.organizationName")}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50"
               />
             </div>
@@ -97,7 +100,7 @@ const Collaborator = ({ setIsAddCollaborator }) => {
             {/* Phone Number */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Phone Number
+                {t("collaborator.phoneNumber")}
               </label>
               <input
                 type="tel"
@@ -113,7 +116,7 @@ const Collaborator = ({ setIsAddCollaborator }) => {
             {/* Sector Of The Company */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Sector Of The Company
+                {t("collaborator.sectorOfCompany")}
               </label>
               <input
                 type="text"
@@ -121,7 +124,7 @@ const Collaborator = ({ setIsAddCollaborator }) => {
                 onChange={(e) =>
                   handleInputChange("sectorOfCompany", e.target.value)
                 }
-                placeholder="Jon "
+                placeholder={t("collaborator.sectorOfCompany")}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50"
               />
             </div>
@@ -129,14 +132,14 @@ const Collaborator = ({ setIsAddCollaborator }) => {
             {/* About Company */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                About Company
+                {t("collaborator.aboutCompany")}
               </label>
               <textarea
                 value={formData.aboutCompany}
                 onChange={(e) =>
                   handleInputChange("aboutCompany", e.target.value)
                 }
-                placeholder="Type about your company"
+                placeholder={t("collaborator.aboutCompany")}
                 rows={4}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none bg-gray-50"
               />
@@ -146,7 +149,7 @@ const Collaborator = ({ setIsAddCollaborator }) => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Starting Date
+                  {t("collaborator.startingDate")}
                 </label>
                 <input
                   type="date"
@@ -159,7 +162,7 @@ const Collaborator = ({ setIsAddCollaborator }) => {
               </div>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Ending Date
+                  {t("collaborator.endingDate")}
                 </label>
                 <input
                   type="date"
@@ -176,7 +179,7 @@ const Collaborator = ({ setIsAddCollaborator }) => {
           {/* Right Column - Logo Upload */}
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
-              Update Logo
+              {t("collaborator.uploadLogo")}
             </label>
             <div
               className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors ${
@@ -199,14 +202,18 @@ const Collaborator = ({ setIsAddCollaborator }) => {
                     className="w-20 h-20 object-cover rounded-lg mx-auto"
                   />
                   <p className="text-xs text-green-600 font-medium">
-                    Logo uploaded!
+                    {t("collaborator.logoUploaded")}
                   </p>
                 </div>
               ) : (
                 <div className="space-y-2">
                   <FaUpload className="w-8 h-8 text-gray-400 mx-auto" />
-                  <p className="text-sm text-gray-500">upload your photo</p>
-                  <p className="text-xs text-gray-400">png</p>
+                  <p className="text-sm text-gray-500">
+                    {t("collaborator.uploadPhoto")}
+                  </p>
+                  <p className="text-xs text-gray-400">
+                    {t("collaborator.png")}
+                  </p>
                 </div>
               )}
               <input
@@ -226,7 +233,7 @@ const Collaborator = ({ setIsAddCollaborator }) => {
             onClick={handleSubmit}
             className="w-full max-w-md bg-gradient-to-r from-[#071352] to-[#0023CF] text-white hover:cursor-pointer py-3 px-6 rounded-lg font-semibold transition-colors"
           >
-            Submit
+            {t("collaborator.submit")}
           </button>
         </div>
       </div>

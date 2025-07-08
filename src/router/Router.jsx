@@ -22,6 +22,7 @@ import SecurityPage from "../pages/Settings/pages/Security";
 import TermsCondition from "../pages/Settings/pages/TermsCondition";
 import Policy from "../pages/Settings/pages/Policy";
 import Collaborations from "../pages/Settings/pages/Collaborations";
+import LanguageSelector from "../pages/Settings/pages/Language";
 const userType = localStorage.getItem("userType");
 
 const router = createBrowserRouter([
@@ -80,6 +81,10 @@ const router = createBrowserRouter([
               {
                 path: "security",
                 element: <SecurityPage />,
+              },
+              {
+                path: "language",
+                element: <LanguageSelector />,
               },
               {
                 path: "terms",

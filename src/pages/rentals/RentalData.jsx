@@ -1,6 +1,6 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
-  Calendar,
   Search,
   MoreHorizontal,
   Clock,
@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import Modal from "../../shared/Modal";
 import VehiclesDetails from "./HelperComponent/VehiclesDetails";
-
+import i18n from "../../i18n";
 const tableData = [
   {
     id: 1,
@@ -114,12 +114,10 @@ const tableData = [
 ];
 
 export default function RentalData() {
+  const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
-  const [dateFilter, setDateFilter] = useState({
-    startDate: "",
-    endDate: "",
-  });
-  const [activeDropdown, setActiveDropdown] = useState(null); // Track the active dropdown
+  const [dateFilter, setDateFilter] = useState({ startDate: "", endDate: "" });
+  const [activeDropdown, setActiveDropdown] = useState(null);
   const [detailsItem, setDetailsItem] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -135,22 +133,23 @@ export default function RentalData() {
   const getStatusBadge = (status) => {
     const baseClass =
       "inline-flex items-center px-3 py-1 rounded-full text-sm font-medium text-white";
+    const statusText = t(`rentalData.${status.toLowerCase()}`);
     if (status === "Completed") {
       return (
         <span className={baseClass} style={{ backgroundColor: "#99AAFF" }}>
-          Completed
+          {statusText}
         </span>
       );
     } else if (status === "Overdue") {
       return (
         <span className={baseClass} style={{ backgroundColor: "#860000" }}>
-          Overdue
+          {statusText}
         </span>
       );
     } else if (status === "Active") {
       return (
         <span className={baseClass} style={{ backgroundColor: "#00782A" }}>
-          Active
+          {statusText}
         </span>
       );
     }
@@ -158,34 +157,28 @@ export default function RentalData() {
   };
 
   const getDaysLeftIcon = (status) => {
-    if (status === "Overdue") {
+    if (status === "Overdue")
       return <AlertTriangle className="w-4 h-4" style={{ color: "#860000" }} />;
-    } else if (status === "Active") {
+    if (status === "Active")
       return <CheckCircle className="w-4 h-4" style={{ color: "#00782A" }} />;
-    } else {
-      return <Clock className="w-4 h-4" style={{ color: "#C28400" }} />;
-    }
+    return <Clock className="w-4 h-4" style={{ color: "#C28400" }} />;
   };
 
-  // Parse date string to Date object
   const parseDate = (dateStr) => {
     const [datePart] = dateStr.split(", ");
     const [month, day, year] = datePart.split("/").map(Number);
     return new Date(year, month - 1, day);
   };
 
-  // Date filter handler
   const handleDateFilter = (e) => {
     const { name, value } = e.target;
     setDateFilter((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Toggle dropdown for a specific row
   const toggleDropdown = (id) => {
-    setActiveDropdown(activeDropdown === id ? null : id); // Toggle dropdown for the clicked row
+    setActiveDropdown(activeDropdown === id ? null : id);
   };
 
-  // Filter and sort data
   const filteredAndSortedData = tableData
     .filter((row) => {
       const matchesSearch =
@@ -202,7 +195,6 @@ export default function RentalData() {
         ? new Date(dateFilter.endDate)
         : null;
 
-      // Normalize dates to compare only date, month, and year
       const normalizeDate = (date) =>
         new Date(date.getFullYear(), date.getMonth(), date.getDate());
 
@@ -219,38 +211,32 @@ export default function RentalData() {
 
       return matchesSearch && matchesDate;
     })
-    .sort((a, b) => parseDate(b.dates.start) - parseDate(a.dates.start)); // Sort newest first
+    .sort((a, b) => parseDate(b.dates.start) - parseDate(a.dates.start));
 
   return (
-    <div className="w-full mx-auto py-6">
-      {/* Header Controls */}
+    <div className="w-full mx-auto py-6" dir={i18n.dir()}>
+      {/* Controls */}
       <div className="flex flex-col sm:flex-row sm:justify-end gap-4 mb-6">
         <div className="flex flex-col sm:flex-row gap-4">
-          <div className="relative">
-            {/* <Calendar className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" /> */}
-            <input
-              type="date"
-              name="startDate"
-              value={dateFilter.startDate}
-              onChange={handleDateFilter}
-              className=" w-full sm:w-48 border border-gray-300 px-3 py-2 rounded"
-            />
-          </div>
-          <div className="relative">
-            {/* <Calendar className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" /> */}
-            <input
-              type="date"
-              name="endDate"
-              value={dateFilter.endDate}
-              onChange={handleDateFilter}
-              className=" w-full sm:w-48 border border-gray-300 px-3 py-2 rounded"
-            />
-          </div>
+          <input
+            type="date"
+            name="startDate"
+            value={dateFilter.startDate}
+            onChange={handleDateFilter}
+            className="w-full sm:w-48 border border-gray-300 px-3 py-2 rounded"
+          />
+          <input
+            type="date"
+            name="endDate"
+            value={dateFilter.endDate}
+            onChange={handleDateFilter}
+            className="w-full sm:w-48 border border-gray-300 px-3 py-2 rounded"
+          />
         </div>
         <div className="relative">
-          <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
           <input
-            placeholder="Type to search"
+            placeholder={t("rentalData.searchPlaceholder")}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="pl-10 w-full sm:w-64 border border-gray-300 px-3 py-2 rounded"
@@ -258,43 +244,41 @@ export default function RentalData() {
         </div>
       </div>
 
-      {/* Table Container with Horizontal Scroll */}
+      {/* Table */}
       <div className="overflow-x-auto rounded-lg border border-gray-200 pb-20">
         {filteredAndSortedData.length > 0 ? (
-          <table className="w-full min-w-[800px]">
-            <thead style={{ backgroundColor: "#B4BBDF" }}>
+          <table className="w-full min-w-[800px] text-start">
+            <thead className="" style={{ backgroundColor: "#B4BBDF" }}>
               <tr>
                 {[
-                  "Customer",
-                  "Vehicles",
-                  "Dates",
-                  "Amount",
-                  "Status",
-                  "Days Left",
-                  "Actions",
-                ].map((heading) => (
+                  "customer",
+                  "vehicle",
+                  "dates",
+                  "amount",
+                  "status",
+                  "daysLeft",
+                  "actions",
+                ].map((key) => (
                   <th
-                    key={heading}
-                    className="px-6 py-4 text-left text-sm font-semibold whitespace-nowrap"
+                    key={key}
+                    className="px-6 py-4 text-start text-sm font-semibold whitespace-nowrap "
                     style={{ color: "#1E1E1E" }}
                   >
-                    {heading}
+                    {t(`rentalData.${key}`)}
                   </th>
                 ))}
               </tr>
             </thead>
             <tbody>
-              {filteredAndSortedData.map((row, index) => (
+              {filteredAndSortedData.map((row) => (
                 <tr
                   key={row.id}
-                  style={{
-                    backgroundColor: "#DFE1F1",
-                  }}
+                  style={{ backgroundColor: "#DFE1F1" }}
                   className="border-b border-gray-400"
                 >
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="px-6 py-4">
                     <div>
-                      <div className="font-medium" style={{ color: "#1E1E1E" }}>
+                      <div className="font-medium text-[#1E1E1E]">
                         {row.customer.name}
                       </div>
                       <div className="text-sm text-gray-500">
@@ -302,59 +286,55 @@ export default function RentalData() {
                       </div>
                     </div>
                   </td>
-                  <td
-                    className="px-6 py-4 text-sm whitespace-nowrap"
-                    style={{ color: "#1E1E1E" }}
-                  >
-                    {row.vehicle || "N/A"} {/* Handle missing vehicle */}
+                  <td className="px-6 py-4 text-sm text-[#1E1E1E]">
+                    {row.vehicle || "N/A"}
                   </td>
-                  <td
-                    className="px-6 py-4 text-sm whitespace-nowrap"
-                    style={{ color: "#1E1E1E" }}
-                  >
+                  <td className="px-6 py-4 text-sm text-[#1E1E1E]">
                     <div>{row.dates.start} -</div>
-                    <div style={{ color: "#860000" }}>{row.dates.end}</div>
+                    <div className="text-[#860000]">{row.dates.end}</div>
                   </td>
-                  <td
-                    className="px-6 py-4 text-sm font-medium whitespace-nowrap"
-                    style={{ color: "#1E1E1E" }}
-                  >
+                  <td className="px-6 py-4 text-sm font-medium text-[#1E1E1E]">
                     ${row.amount}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {getStatusBadge(row.status)}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="px-6 py-4">{getStatusBadge(row.status)}</td>
+                  <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
                       {getDaysLeftIcon(row.status)}
-                      <span className="text-sm" style={{ color: "#1E1E1E" }}>
+                      <span className="text-sm text-[#1E1E1E]">
                         {row.daysLeft}
                       </span>
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap relative">
+                  <td className="px-6 py-4 relative">
                     <button
                       onClick={() => toggleDropdown(row.id)}
-                      className="h-8 w-8 p-0 text-gray-600 hover:text-black hover:cursor-pointer"
+                      className="h-8 w-8 p-0 text-gray-600 hover:text-black"
                     >
                       <MoreHorizontal className="w-4 h-4" />
                     </button>
                     {activeDropdown === row.id && (
-                      <div className="absolute flex bg-white flex-col items-start p-2 z-10 top-[60%] right-[60%] rounded-xl shadow-lg">
-                        <div className="flex flex-col items-start relative">
-                          <button
-                            onClick={() => {
-                              openModal(row);
-                            }}
-                            className="hover:bg-gray-200 p-1 rounded transition-colors w-full text-start hover:cursor-pointer"
-                          >
-                            View Details
-                          </button>
-                          <button className="hover:bg-gray-200 p-1 rounded transition-colors w-full text-start hover:cursor-pointer text-red-500">
-                            Delete
-                          </button>
-                          <div className="w-3 h-3 bg-white absolute -top-[12px] right-0 rotate-45"></div>
-                        </div>
+                      <div
+                        className={`absolute flex flex-col w-36 bg-white items-start p-2 z-10 top-[60%] rounded-xl shadow-lg ${
+                          i18n.dir() === "rtl" ? "left-[60%]" : "right-[60%]"
+                        }`}
+                      >
+                        {}
+                        <button
+                          onClick={() => openModal(row)}
+                          className="hover:bg-gray-200 p-1 rounded w-full text-start"
+                        >
+                          {t("rentalData.viewDetails")}
+                        </button>
+                        <button className="hover:bg-gray-200 p-1 rounded w-full text-start text-red-500">
+                          {t("rentalData.delete")}
+                        </button>
+                        <div
+                          className={`w-3 h-3 bg-white absolute  ${
+                            i18n.dir() === "rtl"
+                              ? "left-3 -top-[6px]"
+                              : "right-0 -top-[12px]"
+                          } rotate-45`}
+                        />
                       </div>
                     )}
                   </td>
@@ -364,10 +344,11 @@ export default function RentalData() {
           </table>
         ) : (
           <div className="text-center py-6 text-gray-500">
-            No results found. Please adjust your search or date filters.
+            {t("rentalData.noResults")}
           </div>
         )}
       </div>
+
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         <VehiclesDetails data={detailsItem} />
       </Modal>

@@ -1,17 +1,22 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { FaUpload, FaFileAlt, FaTrash } from "react-icons/fa";
 import { useAccountReducer } from "./useAccountReducer";
+import { useTranslation } from "react-i18next";
 
 const AccountPage = () => {
   const { state, dispatch } = useAccountReducer();
+  const { t, i18n } = useTranslation();
   const logoInputRef = useRef(null);
   const fileInputRefs = {
     vat: useRef(null),
     commercial: useRef(null),
     contract: useRef(null),
   };
+  useEffect(() => {
+    document.dir = i18n.language === "ar" ? "rtl" : "ltr";
+  }, [i18n.language]);
 
   const handleInputChange = (field, value) => {
     dispatch({ type: "UPDATE_FORM_FIELD", payload: { field, value } });
@@ -87,7 +92,7 @@ const AccountPage = () => {
     <div className="p-4 mx-auto lg:p-4">
       <div className="bg-white rounded-lg shadow-sm p-4 lg:p-5 max-h-[90vh] lg:overflow-y-auto">
         <h1 className="text-xl font-bold text-gray-900 mb-4 lg:text-2xl lg:mb-5">
-          Update Your Information
+          {t("updateInformation")}
         </h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-5">
@@ -96,7 +101,7 @@ const AccountPage = () => {
             {/* Company Name */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-1">
-                Company Name
+                {t("companyName")}
               </label>
               <input
                 type="text"
@@ -104,7 +109,7 @@ const AccountPage = () => {
                 onChange={(e) =>
                   handleInputChange("companyName", e.target.value)
                 }
-                placeholder="Company name"
+                placeholder={t("companyName")}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
               />
             </div>
@@ -112,7 +117,7 @@ const AccountPage = () => {
             {/* Phone Number */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-1">
-                Phone Number
+                {t("phoneNumber")}
               </label>
               <input
                 type="tel"
@@ -128,14 +133,14 @@ const AccountPage = () => {
             {/* About Company */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-1">
-                About Company
+                {t("aboutCompany")}
               </label>
               <textarea
                 value={state.formData.aboutCompany}
                 onChange={(e) =>
                   handleInputChange("aboutCompany", e.target.value)
                 }
-                placeholder="Type about your company"
+                placeholder={t("aboutPlaceHolder")}
                 rows={3}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none text-sm"
               />
@@ -145,7 +150,7 @@ const AccountPage = () => {
           {/* Right Column - Logo Upload */}
           <div className="h-full">
             <label className="block text-sm font-semibold text-gray-700 mb-1">
-              Update Logo
+              {t("updateLogo")}
             </label>
             <div
               className={`border-2 border-dashed md:h-[89%] rounded-lg p-4 text-center cursor-pointer transition-colors flex items-center justify-center ${
@@ -168,7 +173,8 @@ const AccountPage = () => {
                     className="w-20 md:w-28 object-cover rounded-lg mx-auto"
                   />
                   <p className="text-xs text-green-600 font-medium">
-                    Logo uploaded!
+                    {t("uploaded")}{" "}
+                    {/* No key for "Logo uploaded!", keeping as is */}
                   </p>
                   <button
                     onClick={(e) => {
@@ -177,18 +183,18 @@ const AccountPage = () => {
                     }}
                     className="text-xs text-red-600 hover:text-red-700 font-medium"
                   >
-                    <FaTrash className="inline mr-1" /> Remove
+                    <FaTrash className="inline mr-1" /> {t("remove")}
                   </button>
                 </div>
               ) : (
                 <div className="space-y-1">
                   <FaUpload className="w-6 h-6 text-gray-400 mx-auto" />
-                  <p className="text-xs text-gray-500">Upload your photo</p>
+                  <p className="text-xs text-gray-500">{t("uploadPhoto")}</p>
                   <p className="text-xs text-gray-400">png, jpg</p>
                 </div>
               )}
               <input
-                ref={logoInputRef}
+                ref={fileInputRefs}
                 type="file"
                 accept="image/*"
                 onChange={handleLogoInputChange}
@@ -200,17 +206,19 @@ const AccountPage = () => {
 
         {/* Services Section */}
         <div className="mt-6 lg:mt-5">
-          <h3 className="text-lg font-semibold text-gray-900 mb-3">Services</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-3">
+            {t("services")}
+          </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full md:w-1/2">
             {[
-              { key: "insurance", label: "Insurance" },
-              { key: "ecoFriendly", label: "Eco-Friendly Options" },
-              { key: "driverOptions", label: "Driver Options" },
-              { key: "mileageOptions", label: "Mileage Options" },
-              { key: "roadsideAssistance", label: "Roadside Assistance" },
-              { key: "discountsLoyalty", label: "Discounts & Loyalty" },
-              { key: "specialDeals", label: "Special Deals" },
-              { key: "longDistanceRentals", label: "Long-Distance Rentals" },
+              { key: "insurance", label: t("insurance") },
+              { key: "ecoFriendly", label: t("ecoFriendlyOptions") },
+              { key: "driverOptions", label: t("driverOptions") },
+              { key: "mileageOptions", label: t("mileageOptions") },
+              { key: "roadsideAssistance", label: t("roadsideAssistance") },
+              { key: "discountsLoyalty", label: t("discountsLoyalty") },
+              { key: "specialDeals", label: t("specialDeals") },
+              { key: "longDistanceRentals", label: t("longDistanceRentals") },
             ].map((service) => (
               <label
                 key={service.key}
@@ -222,7 +230,7 @@ const AccountPage = () => {
                   onChange={() => handleServiceChange(service.key)}
                   className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
                 />
-                <span className="ml-2 text-gray-700 text-sm">
+                <span className="mx-2 text-gray-700 text-sm">
                   {service.label}
                 </span>
               </label>
@@ -233,13 +241,13 @@ const AccountPage = () => {
         {/* Upload Documents Section */}
         <div className="mt-6 lg:mt-5">
           <h3 className="text-lg font-semibold text-gray-900 mb-3">
-            Upload your company document
+            {t("uploadDocuments")}
           </h3>
           <div className="space-y-2 w-full md:w-1/2">
             {[
-              { key: "vat", label: "VAT Certificate" },
-              { key: "commercial", label: "Commercial Registration" },
-              { key: "contract", label: "Contract To Signed" },
+              { key: "vat", label: t("vatCertificate") },
+              { key: "commercial", label: t("commercialRegistration") },
+              { key: "contract", label: t("contractToSigned") },
             ].map((doc) => (
               <div
                 key={doc.key}
@@ -254,7 +262,7 @@ const AccountPage = () => {
                 <div className="flex items-center gap-2">
                   {state.documents[doc.key] && (
                     <span className="text-xs text-green-600 font-medium">
-                      Uploaded
+                      {t("uploaded")}
                     </span>
                   )}
                   <input
@@ -269,7 +277,7 @@ const AccountPage = () => {
                     htmlFor={`file-upload-${doc.key}`}
                     className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-xs font-medium transition-colors cursor-pointer"
                   >
-                    Upload
+                    {t("upload")}
                   </label>
                   {state.documents[doc.key] && (
                     <button
@@ -291,7 +299,7 @@ const AccountPage = () => {
             onClick={handleUpdate}
             className="w-full bg-gradient-to-r from-[#071352] to-[#0023CF] text-white py-3 px-4 rounded-lg font-semibold transition-colors hover:cursor-pointer"
           >
-            Update
+            {t("update")}
           </button>
         </div>
       </div>
