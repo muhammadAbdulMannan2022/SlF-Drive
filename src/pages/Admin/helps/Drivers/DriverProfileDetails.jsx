@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import {
   ArrowLeft,
@@ -11,10 +13,11 @@ import {
   CreditCard,
   FileText,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import Modal from "../../../../shared/Modal";
 import DocumentView from "./DocumentView";
 
-// Sample driver data - replace with API in real app
+// Sample driver data - replace with API call in a real app.
 const getDriverById = (id) => {
   const drivers = {
     1: {
@@ -27,14 +30,13 @@ const getDriverById = (id) => {
       profileImage: "/placeholder.svg?height=80&width=80",
       license: {
         dlNumber: "DL123456789",
-        licenseNumber: "License Number",
+        licenseNumber: "ABC-456-XYZ",
         expiryDate: "8/15/2026",
         yearsExperience: "5 Years",
-        drivingExperience: "Driving Experience",
       },
       documents: [
         { name: "Driver's License", type: "license" },
-        { name: "NID Card(National ID Card)", type: "nid" },
+        { name: "NID Card (National ID)", type: "nid" },
         { name: "Medical Report", type: "medical" },
       ],
     },
@@ -43,11 +45,17 @@ const getDriverById = (id) => {
 };
 
 export default function DriverDetailsPage() {
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const { id } = useParams();
   const driver = getDriverById(id);
   const [viewDocOpen, setViewDocOpen] = useState(false);
   const [currentDocToOpen, setCurrentDocToOpen] = useState(null);
+
+  // Handle layout direction based on language selection.
+  useEffect(() => {
+    document.dir = i18n.language === "ar" ? "rtl" : "ltr";
+  }, [i18n.language]);
 
   const handleApprove = () => console.log("Approving driver:", driver.name);
   const handleDeny = () => console.log("Denying driver:", driver.name);
@@ -62,12 +70,12 @@ export default function DriverDetailsPage() {
   if (!driver) {
     return (
       <div className="p-6 text-center">
-        <p className="text-gray-500">Driver not found</p>
+        <p className="text-gray-500">{t("admin.driverDetails.not_found")}</p>
         <button
           onClick={() => navigate(-1)}
           className="mt-4 px-4 py-2 bg-gray-200 rounded"
         >
-          Go Back
+          {t("admin.driverDetails.go_back")}
         </button>
       </div>
     );
@@ -75,15 +83,15 @@ export default function DriverDetailsPage() {
 
   return (
     <div className="px-5 md:px-20">
-      <div className=" mx-auto">
+      <div className="mx-auto">
         {/* Header */}
         <div className="mb-6">
           <button
             onClick={() => navigate(-1)}
             className="mb-4 text-gray-600 hover:text-gray-900 flex items-center"
           >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back
+            <ArrowLeft className="w-4 h-4 me-2" />
+            {t("admin.driverDetails.back")}
           </button>
 
           <div className="p-6 flex items-center gap-4">
@@ -91,7 +99,7 @@ export default function DriverDetailsPage() {
               <img
                 src={driver.profileImage}
                 alt={driver.name}
-                className="w-full rounded-full object-cover"
+                className="w-full h-full object-cover"
               />
             </div>
             <div>
@@ -107,10 +115,10 @@ export default function DriverDetailsPage() {
 
         {/* Grid Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-          {/* Personal Info */}
+          {/* Personal Information */}
           <div className="bg-[#DBDEEF] rounded-lg shadow p-6">
             <h2 className="text-lg font-semibold text-blue-600 mb-4">
-              Personal Information
+              {t("admin.driverDetails.personal_info")}
             </h2>
             <div className="space-y-4">
               <div className="flex items-center gap-3">
@@ -128,23 +136,27 @@ export default function DriverDetailsPage() {
             </div>
           </div>
 
-          {/* License Info */}
+          {/* License Information */}
           <div className="bg-[#DBDEEF] rounded-lg shadow p-6">
             <h2 className="text-lg font-semibold text-blue-600 mb-4">
-              License Information
+              {t("admin.driverDetails.license_info")}
             </h2>
             <div className="space-y-4">
               <div className="flex items-center gap-3">
                 <CreditCard className="w-5 h-5 text-gray-500" />
                 <div>
-                  <p className="text-sm text-gray-500">DL Number</p>
+                  <p className="text-sm text-gray-500">
+                    {t("admin.driverDetails.dl_number")}
+                  </p>
                   <p className="text-gray-700">{driver.license.dlNumber}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <FileText className="w-5 h-5 text-gray-500" />
                 <div>
-                  <p className="text-sm text-gray-500">License Number</p>
+                  <p className="text-sm text-gray-500">
+                    {t("admin.driverDetails.license_number")}
+                  </p>
                   <p className="text-gray-700">
                     {driver.license.licenseNumber}
                   </p>
@@ -153,14 +165,18 @@ export default function DriverDetailsPage() {
               <div className="flex items-center gap-3">
                 <Calendar className="w-5 h-5 text-gray-500" />
                 <div>
-                  <p className="text-sm text-gray-500">Expiry Date</p>
+                  <p className="text-sm text-gray-500">
+                    {t("admin.driverDetails.expiry_date")}
+                  </p>
                   <p className="text-gray-700">{driver.license.expiryDate}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <Calendar className="w-5 h-5 text-gray-500" />
                 <div>
-                  <p className="text-sm text-gray-500">Driving Experience</p>
+                  <p className="text-sm text-gray-500">
+                    {t("admin.driverDetails.experience")}
+                  </p>
                   <p className="text-gray-700">
                     {driver.license.yearsExperience}
                   </p>
@@ -170,10 +186,10 @@ export default function DriverDetailsPage() {
           </div>
         </div>
 
-        {/* Documents */}
+        {/* Documents / Company Info */}
         <div className="bg-[#DBDEEF] rounded-lg shadow p-6 mb-6">
           <h2 className="text-lg font-semibold text-blue-600 mb-4">
-            Company Information
+            {t("admin.driverDetails.company_info")}
           </h2>
           <div className="space-y-4">
             {driver.documents.map((doc, index) => (
@@ -188,17 +204,17 @@ export default function DriverDetailsPage() {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => handleViewDocument(doc.type)}
-                    className="px-3 py-1 text-sm text-gray-600 border border-gray-300 rounded hover:bg-gray-100 hover:cursor-pointer"
+                    className="px-3 py-1 text-sm text-gray-600 border border-gray-300 rounded hover:bg-gray-100"
                   >
-                    <Eye className="w-4 h-4 inline-block mr-1" />
-                    View
+                    <Eye className="w-4 h-4 inline-block me-1" />
+                    {t("admin.driverDetails.view")}
                   </button>
                   <button
                     onClick={() => handleDownloadDocument(doc.type)}
-                    className="px-3 py-1 text-sm text-gray-600 border border-gray-300 rounded hover:bg-gray-100 hover:cursor-pointer"
+                    className="px-3 py-1 text-sm text-gray-600 border border-gray-300 rounded hover:bg-gray-100"
                   >
-                    <Download className="w-4 h-4 inline-block mr-1" />
-                    Download
+                    <Download className="w-4 h-4 inline-block me-1" />
+                    {t("admin.driverDetails.download")}
                   </button>
                 </div>
               </div>
@@ -207,22 +223,22 @@ export default function DriverDetailsPage() {
         </div>
 
         {/* Actions */}
-        <div className=" p-6 text-center">
+        <div className="p-6 text-center">
           <p className="text-gray-600 mb-6">
-            If you approve this application please click continue
+            {t("admin.driverDetails.approve_message")}
           </p>
           <div className="flex justify-center gap-4">
             <button
               onClick={handleDeny}
-              className="px-8 py-2 border border-gray-500 text-gray-700 rounded hover:bg-gray-300 hover:cursor-pointer"
+              className="px-8 py-2 border border-gray-500 text-gray-700 rounded hover:bg-gray-300"
             >
-              Deny
+              {t("admin.driverDetails.deny")}
             </button>
             <button
               onClick={handleApprove}
-              className="px-8 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 hover:cursor-pointer"
+              className="px-8 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
             >
-              Continue
+              {t("admin.driverDetails.continue")}
             </button>
           </div>
         </div>

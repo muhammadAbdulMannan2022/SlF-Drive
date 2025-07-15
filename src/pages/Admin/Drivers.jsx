@@ -1,8 +1,8 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { IoSearch, IoEllipsisVertical } from "react-icons/io5";
 import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 
-// Sample driver data
 const drivers = [
   {
     id: 1,
@@ -41,10 +41,13 @@ const drivers = [
 ];
 
 export default function DriversPage() {
+  const { t, i18n } = useTranslation();
+  const isRTL = i18n.language === "ar";
   const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = React.useState("");
-  const [activeTab, setActiveTab] = React.useState("list");
-  const [dropdownOpen, setDropdownOpen] = React.useState(null);
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [activeTab, setActiveTab] = useState("list");
+  const [dropdownOpen, setDropdownOpen] = useState(null);
 
   const activeDrivers = drivers.filter((driver) => driver.status === "active");
   const pendingDrivers = drivers.filter(
@@ -52,9 +55,7 @@ export default function DriversPage() {
   );
 
   const getFilteredDrivers = (driverList) => {
-    if (searchTerm.trim() === "") {
-      return driverList;
-    }
+    if (searchTerm.trim() === "") return driverList;
     return driverList.filter(
       (driver) =>
         driver.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -63,15 +64,8 @@ export default function DriversPage() {
     );
   };
 
-  const handleSearch = () => {
-    console.log("Search triggered for:", searchTerm);
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
-  };
+  const handleSearch = () => console.log("Search:", searchTerm);
+  const handleKeyPress = (e) => e.key === "Enter" && handleSearch();
 
   const handleAction = (action, driver) => {
     switch (action) {
@@ -79,60 +73,64 @@ export default function DriversPage() {
         navigate(`/dashboard/drivers/${driver.id}`);
         break;
       case "approve":
-        console.log(`Approve driver ${driver.id}: ${driver.name}`);
+        console.log("Approve:", driver.name);
         break;
       case "deny":
-        console.log(`Deny driver ${driver.id}: ${driver.name}`);
+        console.log("Deny:", driver.name);
         break;
       case "delete":
-        console.log(`Delete driver ${driver.id}: ${driver.name}`);
+        console.log("Delete:", driver.name);
         break;
       case "hold":
-        console.log(`Hold driver ${driver.id}: ${driver.name}`);
+        console.log("Hold:", driver.name);
         break;
     }
     setDropdownOpen(null);
   };
 
-  const toggleDropdown = (driverId) => {
-    setDropdownOpen(dropdownOpen === driverId ? null : driverId);
+  const toggleDropdown = (id) => {
+    setDropdownOpen(dropdownOpen === id ? null : id);
   };
 
   return (
-    <div className="px-5 md:px-20 py-5 min-h-screen">
-      <div className="">
-        {/* Header with Tabs */}
+    <div
+      className="px-5 md:px-20 py-5 min-h-screen"
+      dir={isRTL ? "rtl" : "ltr"}
+    >
+      <div>
+        {/* Tabs + Search */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-4 sm:py-6 gap-4">
           <div className="grid w-full sm:w-auto grid-cols-2 rounded-md">
             <button
-              className={`px-4 py-2 text-sm font-medium hover:cursor-pointer ${
+              onClick={() => setActiveTab("list")}
+              className={`px-4 py-2 text-sm font-medium ${
                 activeTab === "list"
                   ? "bg-[#0b2080] text-white"
                   : "bg-white text-gray-700"
-              } rounded-l-md focus:outline-none`}
-              onClick={() => setActiveTab("list")}
+              }  ${isRTL ? "rounded-r-md" : "rounded-l-md"}`}
             >
-              Driver List
+              {t("admin.drivers.driverList")}
             </button>
             <button
-              className={`px-4 py-2 text-sm font-medium hover:cursor-pointer ${
+              onClick={() => setActiveTab("requests")}
+              className={`px-4 py-2 text-sm font-medium ${
                 activeTab === "requests"
                   ? "bg-[#0B2080] text-white"
                   : "bg-white text-gray-700"
-              } rounded-r-md focus:outline-none`}
-              onClick={() => setActiveTab("requests")}
+              } ${isRTL ? "rounded-l-md" : "rounded-r-md"}`}
             >
-              Driver Request
+              {t("admin.drivers.driverRequest")}
             </button>
           </div>
+
           <div className="flex items-center gap-2 w-full sm:w-auto">
             <div className="relative flex-1 sm:flex-none bg-white">
               <input
                 type="text"
-                placeholder="User Name"
+                placeholder={t("admin.drivers.userName")}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                onKeyPress={handleKeyPress}
+                onKeyDown={handleKeyPress}
                 className="w-full sm:w-64 pr-10 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#0B2088]"
               />
               <IoSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
@@ -146,38 +144,32 @@ export default function DriversPage() {
           </div>
         </div>
 
-        {/* Driver List Tab */}
+        {/* Driver List Table */}
         {activeTab === "list" && (
           <div className="overflow-x-auto pb-40">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-[#B4BBDF]">
                 <tr>
-                  <th className="w-16 px-4 py-3 text-left text-sm font-semibold text-[#1E1E1E]">
-                    #SI
+                  <th className="px-4 py-3 text-start text-sm font-semibold">
+                    {t("admin.drivers.userName")}
                   </th>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-[#1E1E1E] min-w-[120px]">
-                    User Name
+                  <th className="px-4 py-3 text-start text-sm font-semibold">
+                    {t("admin.drivers.email")}
                   </th>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-[#1E1E1E] min-w-[180px]">
-                    Email
+                  <th className="px-4 py-3 text-start text-sm font-semibold">
+                    {t("admin.drivers.phone")}
                   </th>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-[#1E1E1E] min-w-[120px]">
-                    Phone number
+                  <th className="px-4 py-3 text-start text-sm font-semibold">
+                    {t("admin.drivers.joinDate")}
                   </th>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-[#1E1E1E] min-w-[100px]">
-                    Join Date
-                  </th>
-                  <th className="w-20 px-4 py-3 text-center text-sm font-semibold text-[#1E1E1E]">
-                    Action
+                  <th className="px-4 py-3 text-center text-sm font-semibold">
+                    {t("admin.drivers.actions")}
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
-                {getFilteredDrivers(activeDrivers).map((driver, index) => (
+              <tbody>
+                {getFilteredDrivers(activeDrivers).map((driver) => (
                   <tr key={driver.id}>
-                    <td className="px-4 py-3 text-sm font-medium text-gray-900">
-                      {driver.id}
-                    </td>
                     <td className="px-4 py-3 text-sm text-gray-900">
                       {driver.name}
                     </td>
@@ -194,29 +186,33 @@ export default function DriversPage() {
                       <div className="relative">
                         <button
                           onClick={() => toggleDropdown(driver.id)}
-                          className="p-2 hover:bg-gray-100 rounded-full hover:cursor-pointer"
+                          className="p-2 hover:bg-gray-100 rounded-full"
                         >
                           <IoEllipsisVertical className="h-4 w-4 text-gray-600" />
                         </button>
                         {dropdownOpen === driver.id && (
-                          <div className="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg">
+                          <div
+                            className={`absolute z-20 ${
+                              isRTL ? "left-0" : "right-0"
+                            } mt-2 w-40 bg-white rounded-md shadow-lg`}
+                          >
                             <button
-                              className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:cursor-pointer"
                               onClick={() => handleAction("view", driver)}
+                              className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             >
-                              View Details
+                              {t("admin.drivers.viewDetails")}
                             </button>
                             <button
-                              className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 hover:cursor-pointer"
                               onClick={() => handleAction("delete", driver)}
+                              className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
                             >
-                              Delete
+                              {t("admin.drivers.delete")}
                             </button>
                             <button
-                              className="block w-full text-left px-4 py-2 text-sm text-orange-600 hover:bg-gray-100 hover:cursor-pointer"
                               onClick={() => handleAction("hold", driver)}
+                              className="block w-full text-left px-4 py-2 text-sm text-orange-600 hover:bg-gray-100"
                             >
-                              Hold
+                              {t("admin.drivers.hold")}
                             </button>
                           </div>
                         )}
@@ -229,28 +225,28 @@ export default function DriversPage() {
           </div>
         )}
 
-        {/* Driver Request Tab */}
+        {/* Requests Tab */}
         {activeTab === "requests" && (
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-[#B4BBDF]">
                 <tr>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-[#1E1E1E] min-w-[150px]">
-                    Driver Name
+                  <th className="px-4 py-3 text-start text-sm font-semibold">
+                    {t("admin.drivers.userName")}
                   </th>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-[#1E1E1E] min-w-[200px]">
-                    Driver Email
+                  <th className="px-4 py-3 text-start text-sm font-semibold">
+                    {t("admin.drivers.email")}
                   </th>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-[#1E1E1E] min-w-[120px]">
-                    Submitted
+                  <th className="px-4 py-3 text-start text-sm font-semibold">
+                    {t("admin.drivers.submitted")}
                   </th>
-                  <th className="px-4 py-3 text-center text-sm font-semibold text-[#1E1E1E] min-w-[150px]">
-                    Actions
+                  <th className="px-4 py-3 text-center text-sm font-semibold">
+                    {t("admin.drivers.actions")}
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
-                {getFilteredDrivers(pendingDrivers).map((driver, index) => (
+              <tbody>
+                {getFilteredDrivers(pendingDrivers).map((driver) => (
                   <tr key={driver.id}>
                     <td className="px-4 py-3 text-sm text-gray-900">
                       {driver.name}
@@ -261,19 +257,19 @@ export default function DriversPage() {
                     <td className="px-4 py-3 text-sm text-gray-600">
                       {driver.submittedDate}
                     </td>
-                    <td className="px-4 py-3 text-center">
+                    <td className="px-4 py-3 text-start">
                       <div className="flex justify-center gap-2">
                         <button
                           onClick={() => handleAction("approve", driver)}
-                          className="bg-[#0B2088] text-white px-4 py-1 rounded-md hover:cursor-pointer"
+                          className="bg-[#0B2088] text-white px-4 py-1 rounded-md"
                         >
-                          Approve
+                          {t("admin.drivers.approve")}
                         </button>
                         <button
                           onClick={() => handleAction("deny", driver)}
-                          className="border border-gray-300 text-gray-700 hover:bg-gray-50 px-4 py-1 rounded-md hover:cursor-pointer"
+                          className="border border-gray-300 text-gray-700 hover:bg-gray-50 px-4 py-1 rounded-md"
                         >
-                          Deny
+                          {t("admin.drivers.deny")}
                         </button>
                       </div>
                     </td>
@@ -284,20 +280,18 @@ export default function DriversPage() {
           </div>
         )}
 
-        {/* Empty state */}
+        {/* Empty State */}
         {((activeTab === "list" &&
           getFilteredDrivers(activeDrivers).length === 0) ||
           (activeTab === "requests" &&
             getFilteredDrivers(pendingDrivers).length === 0)) && (
           <div className="text-center py-12">
-            <p className="text-gray-500">
-              No drivers found matching your search.
-            </p>
+            <p className="text-gray-500">{t("admin.drivers.noDrivers")}</p>
             <button
-              className="mt-4 px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100"
               onClick={() => setSearchTerm("")}
+              className="mt-4 px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100"
             >
-              Clear Search
+              {t("admin.drivers.clearSearch")}
             </button>
           </div>
         )}

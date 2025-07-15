@@ -27,6 +27,8 @@ import Earnings from "../pages/Admin/Earnings";
 import UsersPage from "../pages/Admin/Users";
 import DriversPage from "../pages/Admin/Drivers";
 import DriverDetailsPage from "../pages/Admin/helps/Drivers/DriverProfileDetails";
+import RentalCompany from "../pages/Admin/RentalCompany";
+import Subscribtions from "../pages/Admin/Subscribtion";
 const userType = localStorage.getItem("userType");
 
 const router = createBrowserRouter([
@@ -119,6 +121,14 @@ const router = createBrowserRouter([
           {
             path: "drivers/:id",
             element: <DriverDetailsPage />,
+          },
+          {
+            path: "rental-company",
+            element: <RentalCompany />,
+          },
+          {
+            path: "subscription",
+            element: <Subscribtions />,
           },
         ],
       },

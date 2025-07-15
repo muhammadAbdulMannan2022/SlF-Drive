@@ -337,5 +337,154 @@
     "location": "الموقع",
     "openInMaps": "افتح في الخرائط",
     "coordinates": "الإحداثيات"
+  },
+  "admin": {
+    "sidebar": {
+      "dashboard": "لوحة التحكم",
+      "earnings": "الأرباح",
+      "users": "المستخدمون",
+      "drivers": "السائقون",
+      "rentalCompany": "شركة التأجير",
+      "messages": "الرسائل",
+      "notifications": "الإشعارات",
+      "subscription": "الاشتراك",
+      "reports": "التقارير",
+      "settings": "الإعدادات",
+      "logout": "تسجيل الخروج"
+    },
+    "dashboard": {
+      "cards": {
+        "totalEarnings": "إجمالي الأرباح (يونيو)",
+        "totalVehicles": "إجمالي المركبات",
+        "availableVehicles": "المركبات المتاحة",
+        "upcomingTrips": "الرحلات القادمة"
+      }
+    },
+    "users": {
+      "title": "قائمة المستخدمين",
+      "searchPlaceholder": "اسم المستخدم",
+      "table": {
+        "si": "الرقم",
+        "name": "اسم المستخدم",
+        "email": "البريد الإلكتروني",
+        "phone": "رقم الهاتف",
+        "joinDate": "تاريخ الانضمام",
+        "details": "تفاصيل"
+      },
+      "dropdown": {
+        "view": "عرض التفاصيل",
+        "delete": "حذف",
+        "hold": "تعليق"
+      },
+      "empty": {
+        "noResult": "لم يتم العثور على مستخدمين يطابقون بحثك.",
+        "clear": "مسح البحث"
+      },
+      "results": "تم العثور على {{count}} مستخدم مطابق لـ \"{{term}}\""
+    },
+    "drivers": {
+      "driverList": "قائمة السائقين",
+      "driverRequest": "طلبات السائقين",
+      "userName": "اسم المستخدم",
+      "email": "البريد الإلكتروني",
+      "phone": "رقم الهاتف",
+      "joinDate": "تاريخ الانضمام",
+      "submitted": "تاريخ التقديم",
+      "actions": "الإجراءات",
+      "approve": "موافقة",
+      "deny": "رفض",
+      "viewDetails": "عرض التفاصيل",
+      "delete": "حذف",
+      "hold": "تعليق",
+      "noDrivers": "لم يتم العثور على سائقين مطابقين لبحثك.",
+      "clearSearch": "مسح البحث"
+    },
+    "driverDetails": {
+      "back": "رجوع",
+      "status": "الحالة",
+      "personal_info": "المعلومات الشخصية",
+      "email": "البريد الإلكتروني",
+      "phone": "الهاتف",
+      "address": "العنوان",
+      "license_info": "معلومات الرخصة",
+      "dl_number": "رقم الرخصة",
+      "license_number": "رقم الرخصة",
+      "expiry_date": "تاريخ الانتهاء",
+      "experience": "الخبرة في القيادة",
+      "documents": "المستندات",
+      "view": "عرض",
+      "download": "تنزيل",
+      "company_info": "معلومات الشركة",
+      "approve_message": "إذا كنت توافق على هذا الطلب، الرجاء الضغط على متابعة",
+      "deny": "رفض",
+      "continue": "متابعة",
+      "not_found": "لم يتم العثور على السائق",
+      "go_back": "الرجوع"
+    },
+    "rentalCompany": {
+      "driverList": "قائمة السائقين",
+      "driverRequest": "طلبات السائقين",
+      "userName": "اسم المستخدم",
+      "email": "البريد الإلكتروني",
+      "phone": "رقم الهاتف",
+      "joinDate": "تاريخ الانضمام",
+      "submitted": "تاريخ التقديم",
+      "actions": "الإجراءات",
+      "viewDetails": "عرض التفاصيل",
+      "delete": "حذف",
+      "hold": "تعليق",
+      "approve": "قبول",
+      "deny": "رفض",
+      "noDriversFound": "لم يتم العثور على سائقين يطابقون بحثك.",
+      "clearSearch": "مسح البحث",
+      "action": "الإجراء"
+    },
+    "subscription": {
+      "tabs": {
+        "users": "المستخدمون المشتركون",
+        "plans": "خطط الاشتراك"
+      },
+      "searchPlaceholder": "اسم المستخدم",
+      "searchButton": "بحث",
+      "contractualButton": "رسوم العملاء التعاقديين",
+      "addPlanButton": "+ إضافة خطة اشتراك",
+      "serviceFeeButton": "إعداد رسوم الخدمة",
+      "filters": {
+        "all": "الكل",
+        "monthly": "شهري",
+        "yearly": "سنوي"
+      },
+      "userTable": {
+        "name": "الاسم",
+        "owner": "المالك",
+        "plan": "الخطة",
+        "status": "الحالة",
+        "amount": "المبلغ",
+        "actions": "الإجراءات"
+      },
+      "planTable": {
+        "name": "اسم الخطة",
+        "type": "النوع",
+        "cars": "عدد السيارات",
+        "status": "الحالة",
+        "amount": "المبلغ",
+        "actions": "الإجراءات"
+      },
+      "status": {
+        "active": "نشط",
+        "inactive": "غير نشط"
+      },
+      "actions": {
+        "view": "عرض التفاصيل",
+        "delete": "حذف",
+        "hold": "تعليق",
+        "edit": "تعديل"
+      },
+      "empty": {
+        "users": "لم يتم العثور على مستخدمين مطابقين لبحثك.",
+        "plans": "لم يتم العثور على خطط مطابقة لبحثك.",
+        "clear": "مسح البحث"
+      }
+    }
   }
 }

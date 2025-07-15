@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import Modal from "../../shared/Modal";
 import { UserDetailsModal } from "./helps/UserDetails";
+import { useTranslation } from "react-i18next";
 
-// Sample user data
 const users = [
   {
     id: 1,
@@ -94,13 +94,19 @@ const users = [
 ];
 
 export default function UsersPage() {
+  const { t, i18n } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredUsers, setFilteredUsers] = useState(users);
   const [dropdownOpen, setDropdownOpen] = useState(null);
   const [isDetails, setIsDetails] = useState(false);
   const [seclectedUser, setSeclectedUser] = useState(null);
 
-  // Real-time search functionality
+  // Set layout direction
+  useEffect(() => {
+    document.dir = i18n.language === "ar" ? "rtl" : "ltr";
+  }, [i18n.language]);
+
+  // Search logic
   useEffect(() => {
     if (searchTerm.trim() === "") {
       setFilteredUsers(users);
@@ -115,14 +121,10 @@ export default function UsersPage() {
     }
   }, [searchTerm]);
 
-  const handleSearch = () => {
-    console.log("Search triggered for:", searchTerm);
-  };
+  const handleSearch = () => console.log("Search for:", searchTerm);
 
   const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
+    if (e.key === "Enter") handleSearch();
   };
 
   const handleAction = (action, user) => {
@@ -132,10 +134,10 @@ export default function UsersPage() {
         setSeclectedUser(user);
         break;
       case "delete":
-        console.log(`Delete user ${user.id}: ${user.name}`);
+        console.log(`Delete user ${user.id}`);
         break;
       case "hold":
-        console.log(`Hold user ${user.id}: ${user.id}`);
+        console.log(`Hold user ${user.id}`);
         break;
     }
     setDropdownOpen(null);
@@ -147,167 +149,163 @@ export default function UsersPage() {
 
   return (
     <div className="px-5 md:px-20 min-h-screen">
-      <div className="">
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 sm:p-6 border-b gap-4">
-          <h1 className="text-xl font-semibold text-gray-900">User List</h1>
-          <div className="flex items-center gap-2 w-full sm:w-auto">
-            <div className="relative flex-1 sm:flex-none bg-white">
-              <input
-                type="text"
-                placeholder="User Name"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                onKeyPress={handleKeyPress}
-                className="w-full sm:w-64 pr-10 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#0B2088]"
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 sm:p-6 border-b gap-4">
+        <h1 className="text-xl font-semibold text-gray-900">
+          {t("admin.users.title")}
+        </h1>
+        <div className="flex items-center gap-2 w-full sm:w-auto">
+          <div className="relative flex-1 sm:flex-none bg-white">
+            <input
+              type="text"
+              placeholder={t("admin.users.searchPlaceholder")}
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyPress={handleKeyPress}
+              className="w-full sm:w-64 pr-10 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#0B2088] text-start"
+              dir="auto"
+            />
+            <svg
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-[#1E1E1E]"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
               />
-              <svg
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-[#1E1E1E]"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                ></path>
-              </svg>
-            </div>
-            <button
-              onClick={handleSearch}
-              className="bg-[#0B2088] text-white p-3 rounded-full flex items-center hover:cursor-pointer"
-            >
-              <FaSearch className="h-4 w-4" />
-            </button>
+            </svg>
           </div>
+          <button
+            onClick={handleSearch}
+            className="bg-[#0B2088] text-white p-3 rounded-full flex items-center"
+          >
+            <FaSearch className="h-4 w-4" />
+          </button>
         </div>
-
-        {/* Table Container */}
-        <div className="overflow-x-auto">
-          <table className="min-w-full">
-            <thead className="bg-[#B4BBDF]">
-              <tr>
-                <th className="w-16 px-4 py-3 text-left text-sm font-semibold text-[#1E1E1E]">
-                  #SI
-                </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-[#1E1E1E] min-w-[120px]">
-                  User Name
-                </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-[#1E1E1E] min-w-[180px]">
-                  Email
-                </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-[#1E1E1E] min-w-[120px]">
-                  Phone number
-                </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-[#1E1E1E] min-w-[100px]">
-                  Join Date
-                </th>
-                <th className="w-20 px-4 py-3 text-center text-sm font-semibold text-[#1E1E1E]">
-                  Details
-                </th>
-              </tr>
-            </thead>
-            <tbody className="">
-              {filteredUsers.map((user, index) => (
-                <tr key={user.id}>
-                  <td className="px-4 py-3 text-sm font-medium text-gray-900">
-                    {user.id}
-                  </td>
-                  <td className="px-4 py-3 text-sm text-gray-900">
-                    {user.name}
-                  </td>
-                  <td className="px-4 py-3 text-sm text-gray-600">
-                    {user.email}
-                  </td>
-                  <td className="px-4 py-3 text-sm text-gray-600">
-                    {user.phone}
-                  </td>
-                  <td className="px-4 py-3 text-sm text-gray-600">
-                    {user.joinDate}
-                  </td>
-                  <td className="px-4 py-3 text-center hover:cursor-pointer">
-                    <div className="relative">
-                      <button
-                        onClick={() => toggleDropdown(user.id)}
-                        className="p-2 hover:bg-gray-100 rounded-full hover:cursor-pointer"
-                      >
-                        <svg
-                          className="h-4 w-4 text-gray-600"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
-                          ></path>
-                        </svg>
-                      </button>
-                      {dropdownOpen === user.id && (
-                        <div className="absolute right-0 mt-2 w-40 bg-white border rounded-md shadow-lg z-10">
-                          <button
-                            className="block w-full text-left px-4 py-2 text-sm text-[#1E1E1E] hover:bg-gray-100 hover:cursor-pointer"
-                            onClick={() => handleAction("view", user)}
-                          >
-                            View Details
-                          </button>
-                          <button
-                            className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 hover:cursor-pointer"
-                            onClick={() =>
-                              handleAction("delete", user.id, user.name)
-                            }
-                          >
-                            Delete
-                          </button>
-                          <button
-                            className="block w-full text-left px-4 py-2 text-sm text-orange-600 hover:bg-gray-100 hover:cursor-pointer"
-                            onClick={() =>
-                              handleAction("hold", user.id, user.name)
-                            }
-                          >
-                            Hold
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Empty state */}
-        {filteredUsers.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-gray-500">
-              No users found matching your search.
-            </p>
-            <button
-              className="mt-4 px-4 py-2 border border-gray-300 rounded-md text-[#1E1E1E] hover:bg-gray-100"
-              onClick={() => setSearchTerm("")}
-            >
-              Clear Search
-            </button>
-          </div>
-        )}
-
-        {/* Results count */}
-        {searchTerm && filteredUsers.length > 0 && (
-          <div className="px-4 sm:px-6 py-3 border-t bg-gray-50">
-            <p className="text-sm text-gray-600">
-              Found {filteredUsers.length} user
-              {filteredUsers.length !== 1 ? "s" : ""} matching "{searchTerm}"
-            </p>
-          </div>
-        )}
       </div>
+
+      {/* Table */}
+      <div className="overflow-x-auto">
+        <table className="min-w-full">
+          <thead className="bg-[#B4BBDF]">
+            <tr>
+              <th className="px-4 py-3 text-sm font-semibold text-start">
+                {t("admin.users.table.si")}
+              </th>
+              <th className="px-4 py-3 text-sm font-semibold text-start min-w-[120px]">
+                {t("admin.users.table.name")}
+              </th>
+              <th className="px-4 py-3 text-sm font-semibold text-start min-w-[180px]">
+                {t("admin.users.table.email")}
+              </th>
+              <th className="px-4 py-3 text-sm font-semibold text-start min-w-[120px]">
+                {t("admin.users.table.phone")}
+              </th>
+              <th className="px-4 py-3 text-sm font-semibold text-start min-w-[100px]">
+                {t("admin.users.table.joinDate")}
+              </th>
+              <th className="px-4 py-3 text-sm font-semibold text-center">
+                {t("admin.users.table.details")}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredUsers.map((user) => (
+              <tr key={user.id}>
+                <td className="px-4 py-3 text-sm">{user.id}</td>
+                <td className="px-4 py-3 text-sm">{user.name}</td>
+                <td className="px-4 py-3 text-sm text-gray-600">
+                  {user.email}
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600">
+                  {user.phone}
+                </td>
+                <td className="px-4 py-3 text-sm text-gray-600">
+                  {user.joinDate}
+                </td>
+                <td className="px-4 py-3 text-center">
+                  <div className="relative">
+                    <button
+                      onClick={() => toggleDropdown(user.id)}
+                      className="p-2 hover:bg-gray-100 rounded-full"
+                    >
+                      <svg
+                        className="h-4 w-4 text-gray-600"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M12 5v.01M12 12v.01M12 19v.01"
+                        />
+                      </svg>
+                    </button>
+                    {dropdownOpen === user.id && (
+                      <div
+                        className={`absolute ${
+                          i18n.language === "ar" ? "left-0" : "right-0"
+                        } mt-2 w-40 bg-white border rounded-md shadow-lg z-10`}
+                      >
+                        <button
+                          onClick={() => handleAction("view", user)}
+                          className="block w-full text-start px-4 py-2 text-sm text-[#1E1E1E] hover:bg-gray-100"
+                        >
+                          {t("admin.users.dropdown.view")}
+                        </button>
+                        <button
+                          onClick={() => handleAction("delete", user)}
+                          className="block w-full text-start px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+                        >
+                          {t("admin.users.dropdown.delete")}
+                        </button>
+                        <button
+                          onClick={() => handleAction("hold", user)}
+                          className="block w-full text-start px-4 py-2 text-sm text-orange-600 hover:bg-gray-100"
+                        >
+                          {t("admin.users.dropdown.hold")}
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* No results */}
+      {filteredUsers.length === 0 && (
+        <div className="text-center py-12">
+          <p className="text-gray-500">{t("admin.users.empty.noResult")}</p>
+          <button
+            className="mt-4 px-4 py-2 border border-gray-300 rounded-md text-[#1E1E1E] hover:bg-gray-100"
+            onClick={() => setSearchTerm("")}
+          >
+            {t("admin.users.empty.clear")}
+          </button>
+        </div>
+      )}
+
+      {/* Found count */}
+      {searchTerm && filteredUsers.length > 0 && (
+        <div className="px-4 sm:px-6 py-3 border-t bg-gray-50">
+          <p className="text-sm text-gray-600">
+            {t("admin.users.results", {
+              count: filteredUsers.length,
+              term: searchTerm,
+            })}
+          </p>
+        </div>
+      )}
+
       <Modal
         isOpen={isDetails}
         onClose={() => {

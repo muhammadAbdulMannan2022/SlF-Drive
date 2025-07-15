@@ -337,5 +337,154 @@
     "location": "Location",
     "openInMaps": "Open in Maps",
     "coordinates": "Coordinates"
+  },
+  "admin": {
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "earnings": "Earnings",
+      "users": "Users",
+      "drivers": "Drivers",
+      "rentalCompany": "Rental Company",
+      "messages": "Messages",
+      "notifications": "Notification",
+      "subscription": "Subscription",
+      "reports": "Reports",
+      "settings": "Settings",
+      "logout": "Log Out"
+    },
+    "dashboard": {
+      "cards": {
+        "totalEarnings": "Total Earnings (Jun)",
+        "totalVehicles": "Total vehicles",
+        "availableVehicles": "Available Vehicles",
+        "upcomingTrips": "Upcoming Trips"
+      }
+    },
+    "users": {
+      "title": "User List",
+      "searchPlaceholder": "User Name",
+      "table": {
+        "si": "#SI",
+        "name": "User Name",
+        "email": "Email",
+        "phone": "Phone number",
+        "joinDate": "Join Date",
+        "details": "Details"
+      },
+      "dropdown": {
+        "view": "View Details",
+        "delete": "Delete",
+        "hold": "Hold"
+      },
+      "empty": {
+        "noResult": "No users found matching your search.",
+        "clear": "Clear Search"
+      },
+      "results": "Found {{count}} user(s) matching \"{{term}}\""
+    },
+    "drivers": {
+      "driverList": "Driver List",
+      "driverRequest": "Driver Request",
+      "userName": "User Name",
+      "email": "Email",
+      "phone": "Phone number",
+      "joinDate": "Join Date",
+      "submitted": "Submitted",
+      "actions": "Actions",
+      "approve": "Approve",
+      "deny": "Deny",
+      "viewDetails": "View Details",
+      "delete": "Delete",
+      "hold": "Hold",
+      "noDrivers": "No drivers found matching your search.",
+      "clearSearch": "Clear Search"
+    },
+    "driverDetails": {
+      "back": "Back",
+      "status": "Status",
+      "personal_info": "Personal Information",
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address",
+      "license_info": "License Information",
+      "dl_number": "DL Number",
+      "license_number": "License Number",
+      "expiry_date": "Expiry Date",
+      "experience": "Driving Experience",
+      "documents": "Documents",
+      "view": "View",
+      "download": "Download",
+      "company_info": "Company Information",
+      "approve_message": "If you approve this application please click continue",
+      "deny": "Deny",
+      "continue": "Continue",
+      "not_found": "Driver not found",
+      "go_back": "Go Back"
+    },
+    "rentalCompany": {
+      "driverList": "Driver List",
+      "driverRequest": "Driver Request",
+      "userName": "User Name",
+      "email": "Email",
+      "phone": "Phone number",
+      "joinDate": "Join Date",
+      "submitted": "Submitted",
+      "actions": "Actions",
+      "viewDetails": "View Details",
+      "delete": "Delete",
+      "hold": "Hold",
+      "approve": "Approve",
+      "deny": "Deny",
+      "noDriversFound": "No drivers found matching your search.",
+      "clearSearch": "Clear Search",
+      "action": "Action"
+    },
+    "subscription": {
+      "tabs": {
+        "users": "Subscribed Users",
+        "plans": "Subscription Plans"
+      },
+      "searchPlaceholder": "User Name",
+      "searchButton": "Search",
+      "contractualButton": "Contractual Customers Charge",
+      "addPlanButton": "+ Add Subscription Plan",
+      "serviceFeeButton": "Service Fee Setup",
+      "filters": {
+        "all": "All",
+        "monthly": "Monthly",
+        "yearly": "Yearly"
+      },
+      "userTable": {
+        "name": "Name",
+        "owner": "Owner",
+        "plan": "Plan",
+        "status": "Status",
+        "amount": "Amount",
+        "actions": "Actions"
+      },
+      "planTable": {
+        "name": "Plan Name",
+        "type": "Type",
+        "cars": "Cars",
+        "status": "Status",
+        "amount": "Amount",
+        "actions": "Actions"
+      },
+      "status": {
+        "active": "Active",
+        "inactive": "Inactive"
+      },
+      "actions": {
+        "view": "View Details",
+        "delete": "Delete",
+        "hold": "Hold",
+        "edit": "Edit"
+      },
+      "empty": {
+        "users": "No users found matching your search.",
+        "plans": "No plans found matching your search.",
+        "clear": "Clear Search"
+      }
+    }
   }
 }

@@ -18,7 +18,7 @@ export default function Modal({ isOpen, onClose, children }) {
       onClick={handleOverlayClick}
     >
       <div
-        className="relative w-fit max-w-7xl max-h-[90%] p-6 bg-white rounded-2xl shadow-lg"
+        className="relative w-fit max-w-7xl max-h-[90%] p-6 bg-[#e7e9f5] rounded-2xl shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}

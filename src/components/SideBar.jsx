@@ -2,88 +2,92 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router";
 import {
   FaMoneyBillWave,
-  FaCog,
   FaSignOutAlt,
   FaCarAlt,
   FaCarSide,
   FaCrown,
 } from "react-icons/fa";
-import { FiLayout } from "react-icons/fi";
-import { PiUsersDuotone } from "react-icons/pi";
-import { CarTaxiFront, X, Bell, Crown, FileText } from "lucide-react"; // Added missing icons
-import { LuMessageSquareMore } from "react-icons/lu";
-import LogoutModal from "../shared/Logout";
-import Modal from "../shared/Modal";
 import { RiLayout3Fill, RiMessage2Fill } from "react-icons/ri";
 import { HiUsers } from "react-icons/hi";
 import { BsBellFill } from "react-icons/bs";
 import { AiFillFileText } from "react-icons/ai";
 import { IoSettingsSharp } from "react-icons/io5";
+import { X } from "lucide-react";
+import LogoutModal from "../shared/Logout";
+import Modal from "../shared/Modal";
+import { useTranslation } from "react-i18next";
 
 function SideBar({ setSidebarOpen }) {
+  const { t } = useTranslation();
   const location = useLocation();
   const [isLogoutActive, setIsLogOutActive] = useState(false);
 
-  // Updated menu items to match the first sidebar
   const menuItems = [
     {
-      title: "Dashboard",
+      title: t("admin.sidebar.dashboard"),
       url: "/dashboard",
       icon: RiLayout3Fill,
     },
     {
-      title: "Earnings",
+      title: t("admin.sidebar.earnings"),
       url: "/dashboard/earnings",
       icon: FaMoneyBillWave,
     },
     {
-      title: "Users",
+      title: t("admin.sidebar.users"),
       url: "/dashboard/users",
       icon: HiUsers,
     },
     {
-      title: "Drivers",
+      title: t("admin.sidebar.drivers"),
       url: "/dashboard/drivers",
       icon: FaCarAlt,
     },
     {
-      title: "Rental Company",
+      title: t("admin.sidebar.rentalCompany"),
       url: "/dashboard/rental-company",
       icon: FaCarSide,
     },
     {
-      title: "Messages",
+      title: t("admin.sidebar.messages"),
       url: "/dashboard/messages",
       icon: RiMessage2Fill,
     },
     {
-      title: "Notification",
+      title: t("admin.sidebar.notifications"),
       url: "/dashboard/notifications",
-      icon: BsBellFill, // Using Bell from lucide-react instead of BellRing
+      icon: BsBellFill,
     },
     {
-      title: "Subscription",
+      title: t("admin.sidebar.subscription"),
       url: "/dashboard/subscription",
       icon: FaCrown,
     },
     {
-      title: "Reports",
+      title: t("admin.sidebar.reports"),
       url: "/dashboard/reports",
       icon: AiFillFileText,
     },
     {
-      title: "Settings",
-      url: "/dashboard/settings",
+      title: t("admin.sidebar.settings"),
+      url: "/dashboard/settings/account",
       icon: IoSettingsSharp,
     },
   ];
 
-  // Updated isActive to match the first sidebar's logic
   const isActive = (url) => {
+    // Exact match for dashboard
     if (url === "/dashboard") {
       return location.pathname === url;
     }
-    return location.pathname.startsWith(url);
+    // For settings, check if the pathname starts with /dashboard/settings
+    if (url === "/dashboard/settings") {
+      return location.pathname.startsWith(url);
+    }
+    // For other routes, check if the pathname starts with the URL
+    return (
+      location.pathname.startsWith(url) && location.pathname !== "/dashboard"
+    );
   };
 
   return (
@@ -102,7 +106,7 @@ function SideBar({ setSidebarOpen }) {
           <nav className="space-y-3">
             {menuItems.map((item) => (
               <Link
-                key={item.title}
+                key={item.url}
                 to={item.url}
                 className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${
                   isActive(item.url)
@@ -110,7 +114,7 @@ function SideBar({ setSidebarOpen }) {
                     : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
                 }`}
               >
-                <item.icon className="text-xl mr-3" /> {item.title}
+                <item.icon className="text-xl mx-3" /> {item.title}
               </Link>
             ))}
           </nav>
@@ -120,7 +124,8 @@ function SideBar({ setSidebarOpen }) {
             onClick={() => setIsLogOutActive(true)}
             className="flex hover:cursor-pointer items-center p-2.5 rounded-lg w-full bg-gradient-to-r from-red-600 to-red-800 text-white hover:from-red-700 hover:to-red-900 transition-all duration-200 mt-6"
           >
-            <FaSignOutAlt className="text-xl mr-3" /> Log Out
+            <FaSignOutAlt className="text-xl mx-3" />{" "}
+            {t("admin.sidebar.logout")}
           </button>
         </div>
         <Modal isOpen={isLogoutActive} onClose={() => setIsLogOutActive(false)}>
