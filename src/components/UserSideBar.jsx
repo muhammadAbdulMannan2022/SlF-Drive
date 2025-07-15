@@ -7,6 +7,7 @@ import {
   FaSignOutAlt,
   FaFileInvoiceDollar,
   FaBell,
+  FaHandshake,
 } from "react-icons/fa";
 import { X } from "lucide-react";
 import Modal from "../shared/Modal";
@@ -77,6 +78,16 @@ function UserSideBar({ setSidebarOpen }) {
               }`}
             >
               <FaCar className="text-xl mx-3" /> {t("sidebar.vehicles")}
+            </Link>
+            <Link
+              to="/dashboard/collaborations"
+              className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${
+                isActive("/dashboard/collaborations")
+                  ? "bg-gradient-to-r from-[#071352] to-[#0023CF] text-white"
+                  : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
+              }`}
+            >
+              <FaHandshake className="text-xl mx-3" /> {t("collaborations")}
             </Link>
             <Link
               to="/dashboard/booking-request"

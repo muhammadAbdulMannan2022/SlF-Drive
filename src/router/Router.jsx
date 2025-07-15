@@ -23,6 +23,10 @@ import TermsCondition from "../pages/Settings/pages/TermsCondition";
 import Policy from "../pages/Settings/pages/Policy";
 import Collaborations from "../pages/Settings/pages/Collaborations";
 import LanguageSelector from "../pages/Settings/pages/Language";
+import Earnings from "../pages/Admin/Earnings";
+import UsersPage from "../pages/Admin/Users";
+import DriversPage from "../pages/Admin/Drivers";
+import DriverDetailsPage from "../pages/Admin/helps/Drivers/DriverProfileDetails";
 const userType = localStorage.getItem("userType");
 
 const router = createBrowserRouter([
@@ -71,6 +75,10 @@ const router = createBrowserRouter([
             element: <Reports />,
           },
           {
+            path: "collaborations",
+            element: <Collaborations />,
+          },
+          {
             path: "settings",
             element: <SettingsLayout />,
             children: [
@@ -94,11 +102,23 @@ const router = createBrowserRouter([
                 path: "privacy",
                 element: <Policy />,
               },
-              {
-                path: "collaborations",
-                element: <Collaborations />,
-              },
             ],
+          },
+          {
+            path: "earnings",
+            element: <Earnings />,
+          },
+          {
+            path: "users",
+            element: <UsersPage />,
+          },
+          {
+            path: "drivers",
+            element: <DriversPage />,
+          },
+          {
+            path: "drivers/:id",
+            element: <DriverDetailsPage />,
           },
         ],
       },

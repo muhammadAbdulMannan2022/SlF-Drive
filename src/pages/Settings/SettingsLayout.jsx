@@ -58,12 +58,6 @@ const SettingsLayout = () => {
       icon: FaUserShield,
       path: "privacy",
     },
-    {
-      id: "Collaborations",
-      label: t("collaborations"),
-      icon: FaHandshake,
-      path: "collaborations",
-    },
   ];
 
   const handleSectionChange = (item) => {
