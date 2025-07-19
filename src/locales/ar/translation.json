@@ -8,7 +8,8 @@
   "language": "اللغة",
   "terms": "الشروط والأحكام",
   "privacy": "سياسة الخصوصية",
-  "manageOfferCard": "إدارة بطاقة العرض",
+  "manageOfferCard": "إدارة العروض الجديد",
+  "companyId": "معرف الشركة",
   "collaborations": "التعاون",
   "updateInformation": "تحديث معلوماتك",
   "companyName": "اسم الشركة",
@@ -514,6 +515,6 @@
   "manageOffer": {
     "allOfferCard": "كل بطاقات العرض",
     "addNewCard": "إضافة بطاقة جديدة",
-    "createdOfferCard": "بطاقات العرض التي تم إنشاؤها"
+    "createdOfferCard": "إدارة العروض الجديد"
   }
 }

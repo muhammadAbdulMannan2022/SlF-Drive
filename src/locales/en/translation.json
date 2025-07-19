@@ -9,7 +9,8 @@
   "language": "Language",
   "terms": "Terms & Condition",
   "privacy": "Privacy Policy",
-  "manageOfferCard": "Manage Offer Card",
+  "manageOfferCard": "New Offer Management",
+  "companyId": "Company ID",
   "collaborations": "Collaborations",
   "updateInformation": "Update Your Information",
   "companyName": "Company Name",
@@ -515,6 +516,6 @@
   "manageOffer": {
     "allOfferCard": "All Offer Card",
     "addNewCard": "Add New Card",
-    "createdOfferCard": "Created Offer Card"
+    "createdOfferCard": "New Offer Management"
   }
 }

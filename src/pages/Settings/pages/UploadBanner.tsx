@@ -58,8 +58,8 @@ export default function UploadBanner() {
                     onDragLeave={handleDragLeave}
                     onDrop={handleDrop}
                     className={`relative border-2 border-dashed rounded-lg p-6 text-center transition-colors ${isDragOver
-                            ? "border-[#0B2088] bg-blue-50"
-                            : "border-gray-300 hover:border-gray-400"
+                        ? "border-[#0B2088] bg-blue-50"
+                        : "border-gray-300 hover:border-gray-400"
                         }`}
                 >
                     {!selectedFile ? (
@@ -103,13 +103,18 @@ export default function UploadBanner() {
                         </div>
                     )}
                 </div>
+                <input
+                    type="text"
+                    placeholder={t("companyId")}
+                    className="w-full mt-6 py-3 px-4 rounded-lg font-medium text-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-[#0B2088]"
+                />
 
                 <button
                     onClick={handleUpload}
                     disabled={!selectedFile}
                     className={`w-full mt-6 py-3 px-4 rounded-lg font-medium text-white transition-colors ${selectedFile
-                            ? "bg-[#0B2088] hover:bg-[#0a1c7a]"
-                            : "bg-gray-300 cursor-not-allowed"
+                        ? "bg-[#0B2088] hover:bg-[#0a1c7a]"
+                        : "bg-gray-300 cursor-not-allowed"
                         }`}
                 >
                     {t("uploadBanner.uploadFile")}
