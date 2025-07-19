@@ -48,14 +48,24 @@ function Dashboard() {
     console.log("Year changed to:", year);
     // Handle year change logic here
   };
+  const switchUser = (year) => {
+    const currentUser = localStorage.getItem("userType")
+    if (currentUser === "user") {
+      localStorage.setItem("userType", "admin")
+    }
+  };
+
+
   return (
     <div className="bg-[#E8E9F3] h-full">
       <div className="px-5 md:px-10 lg:px-20 py-4">
+
         <div className="flex justify-between gap-4 flex-col md:flex-row items-stretch">
           {overView.map((item, id) => (
             <CardDashboard key={id} item={item} />
           ))}
         </div>
+
         <div className="mt-6">
           <EarningsChart
             title={t("chart.title")}
@@ -72,6 +82,10 @@ function Dashboard() {
         </div>
         <div>
           <DataTableDashboard />
+          <div className="mt-4">
+            <button onClick={switchUser} className="text-xl bg-yellow-300 border p-2 rounded-md hover:cursor-pointer">switch</button>
+            <p>this is to switch the user so you can see both (just in dev) after switch give it a refresh</p>
+          </div>
         </div>
       </div>
     </div>

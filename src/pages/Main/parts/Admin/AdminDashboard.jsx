@@ -57,6 +57,12 @@ export default function AdminDashboard() {
   const handleYearChange = (year) => {
     console.log("Year changed to:", year);
   };
+  const switchUser = (year) => {
+    const currentUser = localStorage.getItem("userType")
+    if (currentUser === "admin") {
+      localStorage.setItem("userType", "user")
+    }
+  };
 
   return (
     <div className="bg-[#E8E9F3] h-full">
@@ -82,6 +88,13 @@ export default function AdminDashboard() {
         </div>
         <div>
           <DataTableDashboard />
+        </div>
+        <div>
+          <DataTableDashboard />
+          <div className="mt-4">
+            <button onClick={switchUser} className="text-xl bg-yellow-300 border p-2 rounded-md hover:cursor-pointer">switch</button>
+            <p>this is to switch the user so you can see both (just in dev) after switch give it a refresh</p>
+          </div>
         </div>
       </div>
     </div>
