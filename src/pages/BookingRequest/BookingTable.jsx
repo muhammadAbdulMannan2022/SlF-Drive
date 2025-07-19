@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 
-const ReusableBookingTable = ({ data, onApprove, onDeny }) => {
+const ReusableBookingTable = ({ data, onApprove, onDeny, isuser }) => {
   const { t } = useTranslation();
 
   return (
@@ -18,15 +18,21 @@ const ReusableBookingTable = ({ data, onApprove, onDeny }) => {
               <th className="text-start py-4 px-4 font-semibold text-[#1E1E1E] text-sm">
                 {t("bookingTable.dates")}
               </th>
-              <th className="text-start py-4 px-4 font-semibold text-[#1E1E1E] text-sm">
-                {t("bookingTable.approvedBy")}
-              </th>
+              {
+                isuser !== "User" && <th className="text-start py-4 px-4 font-semibold text-[#1E1E1E] text-sm">
+                  {t("bookingTable.approvedBy")}
+                </th>
+              }
+
               <th className="text-start py-4 px-4 font-semibold text-[#1E1E1E] text-sm">
                 {t("bookingTable.amount")}
               </th>
-              <th className="text-start py-4 px-4 font-semibold text-[#1E1E1E] text-sm">
-                {t("bookingTable.actions")}
-              </th>
+              {
+                isuser !== "User" && <th className="text-start py-4 px-4 font-semibold text-[#1E1E1E] text-sm">
+                  {t("bookingTable.actions")}
+                </th>
+              }
+
             </tr>
           </thead>
           <tbody>
@@ -61,22 +67,24 @@ const ReusableBookingTable = ({ data, onApprove, onDeny }) => {
                     <span>{booking.dates.end}</span>
                   </div>
                 </td>
-                <td className="py-4 px-4">
-                  <div>
-                    <div className="font-medium text-gray-900 text-sm">
-                      {booking.approvedBy.name}
+                {
+                  isuser !== "User" && <td className="py-4 px-4">
+                    <div>
+                      <div className="font-medium text-gray-900 text-sm">
+                        {booking.approvedBy.name}
+                      </div>
+                      <div className="text-gray-600 text-xs">
+                        {booking.approvedBy.role}
+                      </div>
                     </div>
-                    <div className="text-gray-600 text-xs">
-                      {booking.approvedBy.role}
-                    </div>
-                  </div>
-                </td>
+                  </td>
+                }
                 <td className="py-4 px-4">
                   <span className="font-medium text-gray-900 text-sm">
                     {booking.amount}
                   </span>
                 </td>
-                <td className="py-4 px-4">
+                {isuser !== "User" && <td className="py-4 px-4">
                   {booking.status === "confirmed" ? (
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
                       {t("bookingTable.confirmed")}
@@ -97,7 +105,7 @@ const ReusableBookingTable = ({ data, onApprove, onDeny }) => {
                       </button>
                     </div>
                   )}
-                </td>
+                </td>}
               </tr>
             ))}
           </tbody>

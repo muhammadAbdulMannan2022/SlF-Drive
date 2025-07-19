@@ -72,8 +72,8 @@ const Collaborator = ({ setIsAddCollaborator }) => {
   };
 
   return (
-    <div className="p-6 mx-auto">
-      <div className="p-6">
+    <div className="px-5 md:px-20 mx-auto">
+      <div className="">
         <h1 className="text-2xl font-bold text-[#0B2088] mb-8">
           {t("collaborator.title")}
         </h1>
@@ -174,6 +174,18 @@ const Collaborator = ({ setIsAddCollaborator }) => {
                 />
               </div>
             </div>
+            {/* contractr */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                {t("collaborator.sectorOfCompany")}
+              </label>
+              <input
+                type="file"
+
+                placeholder="contract"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50"
+              />
+            </div>
           </div>
 
           {/* Right Column - Logo Upload */}
@@ -182,13 +194,12 @@ const Collaborator = ({ setIsAddCollaborator }) => {
               {t("collaborator.uploadLogo")}
             </label>
             <div
-              className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors ${
-                isDragOver
+              className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors ${isDragOver
                   ? "border-blue-500 bg-blue-50"
                   : uploadedLogo
-                  ? "border-green-500 bg-green-50"
-                  : "border-gray-300 bg-gray-50"
-              }`}
+                    ? "border-green-500 bg-green-50"
+                    : "border-gray-300 bg-gray-50"
+                }`}
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}

@@ -3,14 +3,12 @@
   "english": "الإنجليزية",
   "arabic": "العربية",
   "submit": "إرسال",
-
   "account": "الحساب",
   "security": "الأمان",
   "language": "اللغة",
   "terms": "الشروط والأحكام",
   "privacy": "سياسة الخصوصية",
   "collaborations": "التعاون",
-
   "updateInformation": "تحديث معلوماتك",
   "companyName": "اسم الشركة",
   "phoneNumber": "رقم الهاتف",
@@ -81,7 +79,6 @@
     "editButton": "تحرير",
     "updateButton": "تحديث"
   },
-
   "collaborationsPage": {
     "title": "قائمة التقارير",
     "addButton": "إضافة",
@@ -96,7 +93,8 @@
     "dropdown": {
       "edit": "تعديل",
       "delete": "حذف",
-      "hold": "تعليق"
+      "hold": "تعليق",
+      "addAuthorizedPerson": "إضافة أشخاص مخولين"
     },
     "noResults": "لم يتم العثور على تقارير تطابق بحثك.",
     "mobileScrollHint": "← مرر لليسار/اليمين لرؤية المزيد من الأعمدة →"
@@ -124,7 +122,6 @@
     "coordinates": "الإحداثيات",
     "openInMaps": "افتح في الخرائط"
   },
-
   "sidebar": {
     "dashboard": "لوحة القيادة",
     "manageRentals": "إدارة الإيجارات",
@@ -486,5 +483,24 @@
         "clear": "مسح البحث"
       }
     }
+  },
+  "authorizedPerson": {
+    "title": "نموذج التفويض",
+    "subtitle": "يرجى تعبئة جميع المعلومات المطلوبة لإضافة شخص مخول جديد",
+    "fullName": "الاسم الكامل *",
+    "company": "الشركة *",
+    "position": "المنصب *",
+    "email": "البريد الإلكتروني *",
+    "phone": "رقم الهاتف *",
+    "placeholder": {
+      "fullName": "أدخل الاسم الكامل",
+      "company": "أدخل اسم الشركة",
+      "position": "أدخل المنصب",
+      "email": "أدخل البريد الإلكتروني",
+      "phone": "أدخل رقم الهاتف"
+    },
+    "submit": "إضافة شخص مخول",
+    "note": "جميع الحقول المشار إليها بعلامة * مطلوبة",
+    "success": "تمت إضافة الشخص المخول بنجاح!"
   }
 }

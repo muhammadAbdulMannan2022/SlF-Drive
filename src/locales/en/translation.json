@@ -10,7 +10,6 @@
   "terms": "Terms & Condition",
   "privacy": "Privacy Policy",
   "collaborations": "Collaborations",
-
   "updateInformation": "Update Your Information",
   "companyName": "Company Name",
   "phoneNumber": "Phone Number",
@@ -35,7 +34,6 @@
   "commercialRegistration": "Commercial Registration",
   "contractToSigned": "Contract To Signed",
   "aboutPlaceHolder": "Type about your company",
-
   "securityPage": {
     "title": "Update Your Password",
     "form": {
@@ -96,7 +94,8 @@
     "dropdown": {
       "edit": "Edit",
       "delete": "Delete",
-      "hold": "Hold"
+      "hold": "Hold",
+      "addAuthorizedPerson": "Add Authorized People"
     },
     "noResults": "No reports found matching your search.",
     "mobileScrollHint": "← Swipe left/right to see more columns →"
@@ -136,7 +135,6 @@
     "reports": "Reports",
     "logout": "Log Out"
   },
-
   "chart": {
     "title": "Earnings",
     "currency": "OMR",
@@ -486,5 +484,24 @@
         "clear": "Clear Search"
       }
     }
+  },
+  "authorizedPerson": {
+    "title": "Authorization Form",
+    "subtitle": "Fill in all the required information to add a new authorized person",
+    "fullName": "Full Name *",
+    "company": "Company *",
+    "position": "Position *",
+    "email": "Email Address *",
+    "phone": "Phone Number *",
+    "placeholder": {
+      "fullName": "Enter full name",
+      "company": "Enter company name",
+      "position": "Enter position",
+      "email": "Enter email address",
+      "phone": "Enter phone number"
+    },
+    "submit": "Add Authorized Person",
+    "note": "All fields marked with * are required",
+    "success": "Authorized person added successfully!"
   }
 }

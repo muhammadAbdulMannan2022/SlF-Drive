@@ -97,21 +97,19 @@ const BookingRequestsPage = () => {
           <div className="flex space-x-4 sm:space-x-6 md:space-x-8">
             <button
               onClick={() => setActiveTab("Company")}
-              className={`pb-2 text-base sm:text-lg md:text-xl font-semibold border-b-2 transition-colors ${
-                activeTab === "Company"
+              className={`pb-2 text-base sm:text-lg md:text-xl font-semibold border-b-2 transition-colors ${activeTab === "Company"
                   ? "text-blue-600 border-blue-600"
                   : "text-gray-500 border-transparent hover:text-gray-700"
-              }`}
+                }`}
             >
               {t("bookingRequests.tabs.company")}
             </button>
             <button
               onClick={() => setActiveTab("User")}
-              className={`pb-2 text-base sm:text-lg md:text-xl font-semibold border-b-2 transition-colors ${
-                activeTab === "User"
+              className={`pb-2 text-base sm:text-lg md:text-xl font-semibold border-b-2 transition-colors ${activeTab === "User"
                   ? "text-blue-600 border-blue-600"
                   : "text-gray-500 border-transparent hover:text-gray-700"
-              }`}
+                }`}
             >
               {t("bookingRequests.tabs.user")}
             </button>
@@ -135,6 +133,7 @@ const BookingRequestsPage = () => {
           data={filteredData}
           onApprove={handleApprove}
           onDeny={handleDeny}
+          isuser={activeTab}
         />
       </div>
     </div>

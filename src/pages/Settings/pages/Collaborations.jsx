@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import Collaborator from "./AddCollaborator";
 import { FaPlus } from "react-icons/fa";
+import Modal from "../../../shared/Modal";
+import AddAuthorizedPerson from "../../Admin/AuthPeople/AuthPeople";
 
 const Collaborations = () => {
   const { t } = useTranslation();
@@ -11,6 +13,8 @@ const Collaborations = () => {
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
   const dropdownRef = useRef(null);
   const [isAddCollaborator, setIsAddCollaborator] = useState(false);
+  const [showAuthorizedPersonForm, setShowAuthorizedPersonForm] = useState(false);
+
 
   const reportsData = [
     {
@@ -67,13 +71,16 @@ const Collaborations = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
+  const addauthPeople = () => {
+    setShowAuthorizedPersonForm(true)
+    setOpenDropdownIndex(null)
+  }
   return (
     <div className="pt-5">
       {isAddCollaborator ? (
         <Collaborator setIsAddCollaborator={setIsAddCollaborator} />
       ) : (
-        <div className="w-full px-5 mx-auto">
+        <div className="w-full px-5 md:px-20 mx-auto">
           {/* Header */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
             <h1 className="text-2xl font-bold text-gray-900">
@@ -194,20 +201,33 @@ const Collaborations = () => {
                             >
                               {t("collaborationsPage.dropdown.edit")}
                             </button>
+
                             <button
                               onClick={() => handleDelete(report)}
                               className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             >
                               {t("collaborationsPage.dropdown.delete")}
                             </button>
+
                             <button
                               onClick={() => handleHold(report)}
                               className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             >
                               {t("collaborationsPage.dropdown.hold")}
                             </button>
+
+                            {/* ✅ New option: Add Authorized People */}
+                            <button
+                              onClick={() => {
+                                addauthPeople()
+                              }}
+                              className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            >
+                              {t("collaborationsPage.dropdown.addAuthorizedPerson")}
+                            </button>
                           </div>
                         )}
+
                       </td>
                     </tr>
                   ))}
@@ -229,6 +249,9 @@ const Collaborations = () => {
               </p>
             </div>
           </div>
+          <Modal isOpen={showAuthorizedPersonForm} onClose={() => setShowAuthorizedPersonForm(false)}>
+            <AddAuthorizedPerson />
+          </Modal>
         </div>
       )}
     </div>

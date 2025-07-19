@@ -43,6 +43,14 @@ const Dashboard = () => {
       status: "Active",
       amount: "$299",
     },
+    {
+      id: 2,
+      name: "Starter",
+      type: "Yearly",
+      cars: "1-10 Cars",
+      status: "Active",
+      amount: "$299",
+    },
     // ... other plan data
   ];
 
@@ -82,15 +90,13 @@ const Dashboard = () => {
         break;
       case "delete":
         console.log(
-          `Delete ${activeTab === "subscribedUsers" ? "user" : "plan"} ${
-            item.id
+          `Delete ${activeTab === "subscribedUsers" ? "user" : "plan"} ${item.id
           }: ${item.name}`
         );
         break;
       case "hold":
         console.log(
-          `Hold ${activeTab === "subscribedUsers" ? "user" : "plan"} ${
-            item.id
+          `Hold ${activeTab === "subscribedUsers" ? "user" : "plan"} ${item.id
           }: ${item.name}`
         );
         break;
@@ -100,8 +106,7 @@ const Dashboard = () => {
         break;
       default:
         console.log(
-          `${action} ${activeTab === "subscribedUsers" ? "user" : "plan"} ${
-            item.id
+          `${action} ${activeTab === "subscribedUsers" ? "user" : "plan"} ${item.id
           }: ${item.name}`
         );
     }
@@ -121,11 +126,10 @@ const Dashboard = () => {
           role="tablist"
         >
           <button
-            className={`px-4 py-2 text-sm font-medium hover:cursor-pointer focus:outline-none ${
-              activeTab === "subscribedUsers"
+            className={`px-4 py-2 text-sm font-medium hover:cursor-pointer focus:outline-none ${activeTab === "subscribedUsers"
                 ? "bg-[#0B2080] text-white"
                 : "bg-white text-gray-700"
-            } ${isRTL ? "rounded-r-md" : "rounded-l-md"}`}
+              } ${isRTL ? "rounded-r-md" : "rounded-l-md"}`}
             onClick={() => setActiveTab("subscribedUsers")}
             role="tab"
             aria-selected={activeTab === "subscribedUsers"}
@@ -133,11 +137,10 @@ const Dashboard = () => {
             {t("admin.subscription.tabs.users")}
           </button>
           <button
-            className={`px-4 py-2 text-sm font-medium hover:cursor-pointer focus:outline-none ${
-              activeTab === "subscriptionPlans"
+            className={`px-4 py-2 text-sm font-medium hover:cursor-pointer focus:outline-none ${activeTab === "subscriptionPlans"
                 ? "bg-[#0B2080] text-white"
                 : "bg-white text-gray-700"
-            } ${isRTL ? "rounded-l-md" : "rounded-r-md"}`}
+              } ${isRTL ? "rounded-l-md" : "rounded-r-md"}`}
             onClick={() => setActiveTab("subscriptionPlans")}
             role="tab"
             aria-selected={activeTab === "subscriptionPlans"}
@@ -206,11 +209,10 @@ const Dashboard = () => {
             {["All", "Monthly", "Yearly"].map((type) => (
               <button
                 key={type}
-                className={`px-4 py-2 rounded hover:cursor-pointer ${
-                  planBillingType === type
+                className={`px-4 py-2 rounded hover:cursor-pointer ${planBillingType === type
                     ? "bg-[#0B2080] text-white"
                     : "bg-white text-gray-700"
-                }`}
+                  }`}
                 onClick={() => setPlanBillingType(type)}
               >
                 {t(`admin.subscription.filters.${type.toLowerCase()}`)}
@@ -223,11 +225,10 @@ const Dashboard = () => {
             role="tablist"
           >
             <button
-              className={`px-4 py-2 text-sm font-medium hover:cursor-pointer focus:outline-none ${
-                activeTab === "subscribedUsers"
+              className={`px-4 py-2 text-sm font-medium hover:cursor-pointer focus:outline-none ${activeTab === "subscribedUsers"
                   ? "bg-[#0B2080] text-white"
                   : "bg-white text-gray-700"
-              } ${isRTL ? "rounded-r-md" : "rounded-l-md"}`}
+                } ${isRTL ? "rounded-r-md" : "rounded-l-md"}`}
               onClick={() => setActiveTab("subscribedUsers")}
               role="tab"
               aria-selected={activeTab === "subscribedUsers"}
@@ -235,11 +236,10 @@ const Dashboard = () => {
               {t("admin.subscription.tabs.users")}
             </button>
             <button
-              className={`px-4 py-2 text-sm font-medium hover:cursor-pointer focus:outline-none ${
-                activeTab === "subscriptionPlans"
+              className={`px-4 py-2 text-sm font-medium hover:cursor-pointer focus:outline-none ${activeTab === "subscriptionPlans"
                   ? "bg-[#0B2080] text-white"
                   : "bg-white text-gray-700"
-              } ${isRTL ? "rounded-l-md" : "rounded-r-md"}`}
+                } ${isRTL ? "rounded-l-md" : "rounded-r-md"}`}
               onClick={() => setActiveTab("subscriptionPlans")}
               role="tab"
               aria-selected={activeTab === "subscriptionPlans"}
@@ -296,11 +296,10 @@ const Dashboard = () => {
                   </td>
                   <td className="px-4 py-3 text-sm text-gray-600">
                     <span
-                      className={`px-2 py-1 rounded ${
-                        user.status === t("admin.subscription.status.active")
+                      className={`px-2 py-1 rounded ${user.status === t("admin.subscription.status.active")
                           ? "bg-green-500 text-white"
                           : "bg-red-500 text-white"
-                      }`}
+                        }`}
                     >
                       {user.status}
                     </span>
@@ -324,9 +323,8 @@ const Dashboard = () => {
                       </button>
                       {dropdownOpen === user.id && (
                         <div
-                          className={`absolute z-20 mt-2 w-40 bg-white rounded-md shadow-lg ${
-                            isRTL ? "left-0" : "right-0"
-                          }`}
+                          className={`absolute z-20 mt-2 w-40 bg-white rounded-md shadow-lg ${isRTL ? "left-0" : "right-0"
+                            }`}
                           role="menu"
                         >
                           <button
@@ -404,11 +402,10 @@ const Dashboard = () => {
                   </td>
                   <td className="px-4 py-3 text-sm text-gray-600">
                     <span
-                      className={`px-2 py-1 rounded ${
-                        plan.status === t("admin.subscription.status.active")
+                      className={`px-2 py-1 rounded ${plan.status === t("admin.subscription.status.active")
                           ? "bg-green-500 text-white"
                           : "bg-red-500 text-white"
-                      }`}
+                        }`}
                     >
                       {plan.status}
                     </span>
@@ -432,9 +429,8 @@ const Dashboard = () => {
                       </button>
                       {dropdownOpen === plan.id && (
                         <div
-                          className={`absolute z-20 mt-2 w-40 bg-white rounded-md shadow-lg ${
-                            isRTL ? "left-0" : "right-0"
-                          }`}
+                          className={`absolute z-20 mt-2 w-40 bg-white rounded-md shadow-lg ${isRTL ? "left-0" : "right-0"
+                            }`}
                           role="menu"
                         >
                           <button
@@ -477,26 +473,25 @@ const Dashboard = () => {
         getFilteredUsers(subscribedUsers).length === 0) ||
         (activeTab === "subscriptionPlans" &&
           getFilteredPlans(subscriptionPlans).length === 0)) && (
-        <div className="text-center py-12">
-          <p className="text-gray-500">
-            {t(
-              `admin.subscription.empty.${
-                activeTab === "subscribedUsers" ? "users" : "plans"
-              }`
-            )}
-          </p>
-          <button
-            className="mt-4 px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100"
-            onClick={() =>
-              activeTab === "subscribedUsers"
-                ? setUserSearchTerm("")
-                : setPlanBillingType("All")
-            }
-          >
-            {t("admin.subscription.empty.clear")}
-          </button>
-        </div>
-      )}
+          <div className="text-center py-12">
+            <p className="text-gray-500">
+              {t(
+                `admin.subscription.empty.${activeTab === "subscribedUsers" ? "users" : "plans"
+                }`
+              )}
+            </p>
+            <button
+              className="mt-4 px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100"
+              onClick={() =>
+                activeTab === "subscribedUsers"
+                  ? setUserSearchTerm("")
+                  : setPlanBillingType("All")
+              }
+            >
+              {t("admin.subscription.empty.clear")}
+            </button>
+          </div>
+        )}
 
       {/* Modals */}
       <Modal
