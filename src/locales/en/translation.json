@@ -9,6 +9,7 @@
   "language": "Language",
   "terms": "Terms & Condition",
   "privacy": "Privacy Policy",
+  "manageOfferCard": "Manage Offer Card",
   "collaborations": "Collaborations",
   "updateInformation": "Update Your Information",
   "companyName": "Company Name",
@@ -503,5 +504,17 @@
     "submit": "Add Authorized Person",
     "note": "All fields marked with * are required",
     "success": "Authorized person added successfully!"
+  },
+  "uploadBanner": {
+    "dragOrBrowse": "Drag & drop a file or",
+    "browse": "Browse",
+    "supportedFormats": "Supported formats: PNG, JPEG (recommended: 335x127 pixels)",
+    "uploadFile": "UPLOAD FILE",
+    "removeImage": "Remove image"
+  },
+  "manageOffer": {
+    "allOfferCard": "All Offer Card",
+    "addNewCard": "Add New Card",
+    "createdOfferCard": "Created Offer Card"
   }
 }

@@ -12,6 +12,7 @@ import {
   FaBars,
   FaTimes,
 } from "react-icons/fa";
+import { MdLocalOffer } from "react-icons/md";
 import { Outlet, useLocation, useNavigate } from "react-router";
 
 const SettingsLayout = () => {
@@ -20,13 +21,15 @@ const SettingsLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const userType = localStorage.getItem("userType");
 
-  // Set text direction based on language (LTR or RTL)
+  const isRTL = i18n.dir() === "rtl";
+
+  // Set text direction
   useEffect(() => {
-    document.dir = i18n.language === "ar" ? "rtl" : "ltr";
+    document.dir = isRTL ? "rtl" : "ltr";
   }, [i18n.language]);
 
-  // Define translated navigation items
   const navigationItems = [
     {
       id: "Account",
@@ -58,7 +61,13 @@ const SettingsLayout = () => {
       icon: FaUserShield,
       path: "privacy",
     },
-  ];
+    userType === "admin" && {
+      id: "ManageOfferCard",
+      label: t("manageOfferCard"),
+      icon: MdLocalOffer,
+      path: "manage-offer-card",
+    },
+  ].filter(Boolean);
 
   const handleSectionChange = (item) => {
     setActiveSection(item.id);
@@ -68,7 +77,7 @@ const SettingsLayout = () => {
 
   return (
     <div className="flex h-full bg-gray-100">
-      {/* Mobile Menu Overlay */}
+      {/* Overlay */}
       {isSidebarOpen && (
         <div
           className="fixed inset-0 z-40 lg:hidden"
@@ -78,12 +87,21 @@ const SettingsLayout = () => {
 
       {/* Sidebar */}
       <div
-        className={`${
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } fixed lg:relative lg:translate-x-0 transition-transform duration-300 ease-in-out z-50 lg:z-0 w-64 h-fit py-10 flex flex-col`}
+        className={`
+          fixed lg:relative 
+          ${isSidebarOpen
+            ? "translate-x-0"
+            : isRTL
+              ? "translate-x-full"
+              : "-translate-x-full"
+          }
+          ${isRTL ? "right-0" : "left-0"}
+          lg:translate-x-0 transition-transform duration-300 ease-in-out 
+          z-50 lg:z-0 w-64 h-fit py-10 flex flex-col
+        `}
         style={{ backgroundColor: "#B4BBDF" }}
       >
-        {/* Mobile Close Button */}
+        {/* Close button (mobile) */}
         <div className="lg:hidden flex justify-end p-4">
           <button
             onClick={() => setIsSidebarOpen(false)}
@@ -93,7 +111,7 @@ const SettingsLayout = () => {
           </button>
         </div>
 
-        {/* Navigation Items */}
+        {/* Nav Items */}
         <nav className="flex-1 px-4 pb-4">
           <div className="space-y-2">
             {navigationItems.map((item) => {
@@ -104,11 +122,13 @@ const SettingsLayout = () => {
                 <button
                   key={item.id}
                   onClick={() => handleSectionChange(item)}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left hover:cursor-pointer transition-colors ${
-                    isActive
+                  className={`
+                    w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors
+                    ${isActive
                       ? "bg-gradient-to-r from-[#071352] to-[#0023CF] text-white shadow-md"
                       : "text-[#1E1E1E] hover:bg-[#abb2d4] hover:bg-opacity-20"
-                  }`}
+                    }
+                  `}
                 >
                   <IconComponent className="w-5 h-5 flex-shrink-0" />
                   <span className="font-medium text-sm">{item.label}</span>
@@ -132,10 +152,10 @@ const SettingsLayout = () => {
           <h1 className="font-semibold text-gray-900">
             {t(activeSection.toLowerCase())}
           </h1>
-          <div className="w-6"></div> {/* Spacer for centering */}
+          <div className="w-6"></div> {/* Spacer */}
         </div>
 
-        {/* Content Area */}
+        {/* Outlet */}
         <div className="flex-1 overflow-y-auto">
           <Outlet />
         </div>

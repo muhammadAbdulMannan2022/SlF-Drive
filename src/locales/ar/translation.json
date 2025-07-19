@@ -8,6 +8,7 @@
   "language": "اللغة",
   "terms": "الشروط والأحكام",
   "privacy": "سياسة الخصوصية",
+  "manageOfferCard": "إدارة بطاقة العرض",
   "collaborations": "التعاون",
   "updateInformation": "تحديث معلوماتك",
   "companyName": "اسم الشركة",
@@ -502,5 +503,17 @@
     "submit": "إضافة شخص مخول",
     "note": "جميع الحقول المشار إليها بعلامة * مطلوبة",
     "success": "تمت إضافة الشخص المخول بنجاح!"
+  },
+  "uploadBanner": {
+    "dragOrBrowse": "اسحب وأسقط ملفًا أو",
+    "browse": "تصفح",
+    "supportedFormats": "التنسيقات المدعومة: PNG, JPEG (مقترح: 335x127 بكسل)",
+    "uploadFile": "رفع الملف",
+    "removeImage": "إزالة الصورة"
+  },
+  "manageOffer": {
+    "allOfferCard": "كل بطاقات العرض",
+    "addNewCard": "إضافة بطاقة جديدة",
+    "createdOfferCard": "بطاقات العرض التي تم إنشاؤها"
   }
 }

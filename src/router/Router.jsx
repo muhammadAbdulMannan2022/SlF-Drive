@@ -29,6 +29,7 @@ import DriversPage from "../pages/Admin/Drivers";
 import DriverDetailsPage from "../pages/Admin/helps/Drivers/DriverProfileDetails";
 import RentalCompany from "../pages/Admin/RentalCompany";
 import Subscribtions from "../pages/Admin/Subscribtion";
+import ManageOffer from "../pages/Settings/pages/manageOfferCard";
 const userType = localStorage.getItem("userType");
 
 const router = createBrowserRouter([
@@ -104,6 +105,10 @@ const router = createBrowserRouter([
                 path: "privacy",
                 element: <Policy />,
               },
+              {
+                path: "manage-offer-card",
+                element: <ManageOffer />
+              }
             ],
           },
           {
