@@ -8,6 +8,8 @@ const drivers = [
     id: 1,
     name: "Jubayer Ahmad",
     email: "ahmad@jubayer@gmail.com",
+    age: 30,
+    licenseExpiry: "2026-06-15",
     phone: "12345678",
     joinDate: "16 Jun 2025",
     status: "active",
@@ -17,6 +19,8 @@ const drivers = [
     id: 2,
     name: "Enrique",
     email: "abc@gmail.com",
+    age: 28,
+    licenseExpiry: "2025-12-31",
     phone: "87654321",
     joinDate: "15 Jun 2025",
     status: "active",
@@ -25,6 +29,8 @@ const drivers = [
     id: 3,
     name: "John",
     email: "john@gmail.com",
+    age: 35,
+    licenseExpiry: "2025-11-20",
     phone: "11223344",
     joinDate: "14 Jun 2025",
     status: "pending",
@@ -34,6 +40,8 @@ const drivers = [
     id: 4,
     name: "Sarah",
     email: "sarah@gmail.com",
+    age: 27,
+    licenseExpiry: "2026-03-10",
     phone: "44332211",
     joinDate: "13 Jun 2025",
     status: "active",
@@ -103,21 +111,19 @@ export default function DriversPage() {
           <div className="grid w-full sm:w-auto grid-cols-2 rounded-md">
             <button
               onClick={() => setActiveTab("list")}
-              className={`px-4 py-2 text-sm font-medium ${
-                activeTab === "list"
-                  ? "bg-[#0b2080] text-white"
-                  : "bg-white text-gray-700"
-              }  ${isRTL ? "rounded-r-md" : "rounded-l-md"}`}
+              className={`px-4 py-2 text-sm hover:cursor-pointer font-medium ${activeTab === "list"
+                ? "bg-[#0b2080] text-white"
+                : "bg-white text-gray-700"
+                }  ${isRTL ? "rounded-r-md" : "rounded-l-md"}`}
             >
               {t("admin.drivers.driverList")}
             </button>
             <button
               onClick={() => setActiveTab("requests")}
-              className={`px-4 py-2 text-sm font-medium ${
-                activeTab === "requests"
-                  ? "bg-[#0B2080] text-white"
-                  : "bg-white text-gray-700"
-              } ${isRTL ? "rounded-l-md" : "rounded-r-md"}`}
+              className={`px-4 py-2 text-sm hover:cursor-pointer font-medium ${activeTab === "requests"
+                ? "bg-[#0B2080] text-white"
+                : "bg-white text-gray-700"
+                } ${isRTL ? "rounded-l-md" : "rounded-r-md"}`}
             >
               {t("admin.drivers.driverRequest")}
             </button>
@@ -157,6 +163,12 @@ export default function DriversPage() {
                     {t("admin.drivers.email")}
                   </th>
                   <th className="px-4 py-3 text-start text-sm font-semibold">
+                    {t("admin.drivers.age")}
+                  </th>
+                  <th className="px-4 py-3 text-start text-sm font-semibold">
+                    {t("admin.drivers.licenseExpiry")}
+                  </th>
+                  <th className="px-4 py-3 text-start text-sm font-semibold">
                     {t("admin.drivers.phone")}
                   </th>
                   <th className="px-4 py-3 text-start text-sm font-semibold">
@@ -177,6 +189,12 @@ export default function DriversPage() {
                       {driver.email}
                     </td>
                     <td className="px-4 py-3 text-sm text-gray-600">
+                      {driver.age}
+                    </td>
+                    <td className="px-4 py-3 text-sm text-gray-600">
+                      {driver.licenseExpiry}
+                    </td>
+                    <td className="px-4 py-3 text-sm text-gray-600">
                       {driver.phone}
                     </td>
                     <td className="px-4 py-3 text-sm text-gray-600">
@@ -192,9 +210,8 @@ export default function DriversPage() {
                         </button>
                         {dropdownOpen === driver.id && (
                           <div
-                            className={`absolute z-20 ${
-                              isRTL ? "left-0" : "right-0"
-                            } mt-2 w-40 bg-white rounded-md shadow-lg`}
+                            className={`absolute z-20 ${isRTL ? "left-0" : "right-0"
+                              } mt-2 w-40 bg-white rounded-md shadow-lg`}
                           >
                             <button
                               onClick={() => handleAction("view", driver)}
@@ -238,6 +255,12 @@ export default function DriversPage() {
                     {t("admin.drivers.email")}
                   </th>
                   <th className="px-4 py-3 text-start text-sm font-semibold">
+                    {t("admin.drivers.age")}
+                  </th>
+                  <th className="px-4 py-3 text-start text-sm font-semibold">
+                    {t("admin.drivers.licenseExpiry")}
+                  </th>
+                  <th className="px-4 py-3 text-start text-sm font-semibold">
                     {t("admin.drivers.submitted")}
                   </th>
                   <th className="px-4 py-3 text-center text-sm font-semibold">
@@ -253,6 +276,12 @@ export default function DriversPage() {
                     </td>
                     <td className="px-4 py-3 text-sm text-gray-600">
                       {driver.email}
+                    </td>
+                    <td className="px-4 py-3 text-sm text-gray-600">
+                      {driver.age}
+                    </td>
+                    <td className="px-4 py-3 text-sm text-gray-600">
+                      {driver.licenseExpiry}
                     </td>
                     <td className="px-4 py-3 text-sm text-gray-600">
                       {driver.submittedDate}
@@ -285,16 +314,16 @@ export default function DriversPage() {
           getFilteredDrivers(activeDrivers).length === 0) ||
           (activeTab === "requests" &&
             getFilteredDrivers(pendingDrivers).length === 0)) && (
-          <div className="text-center py-12">
-            <p className="text-gray-500">{t("admin.drivers.noDrivers")}</p>
-            <button
-              onClick={() => setSearchTerm("")}
-              className="mt-4 px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100"
-            >
-              {t("admin.drivers.clearSearch")}
-            </button>
-          </div>
-        )}
+            <div className="text-center py-12">
+              <p className="text-gray-500">{t("admin.drivers.noDrivers")}</p>
+              <button
+                onClick={() => setSearchTerm("")}
+                className="mt-4 px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100"
+              >
+                {t("admin.drivers.clearSearch")}
+              </button>
+            </div>
+          )}
       </div>
     </div>
   );

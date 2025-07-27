@@ -397,7 +397,9 @@
       "delete": "Delete",
       "hold": "Hold",
       "noDrivers": "No drivers found matching your search.",
-      "clearSearch": "Clear Search"
+      "clearSearch": "Clear Search",
+      "age": "Age",
+      "licenseExpiry": "License Expiry"
     },
     "driverDetails": {
       "back": "Back",

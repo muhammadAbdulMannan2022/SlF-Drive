@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CardDashboard from "../../../../components/CardDashboard";
 import EarningsChart from "../../../../components/DashboardChact";
 import DataTableDashboard from "../../../../components/DataTableDashboard";
@@ -48,14 +48,14 @@ function Dashboard() {
     console.log("Year changed to:", year);
     // Handle year change logic here
   };
-  const switchUser = (year) => {
+  const switchUser = () => {
     const currentUser = localStorage.getItem("userType")
     if (currentUser === "user") {
       localStorage.setItem("userType", "admin")
+    } else {
+      localStorage.setItem("userType", "user")
     }
   };
-
-
   return (
     <div className="bg-[#E8E9F3] h-full">
       <div className="px-5 md:px-10 lg:px-20 py-4">

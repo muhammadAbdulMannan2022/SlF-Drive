@@ -396,7 +396,9 @@
       "delete": "حذف",
       "hold": "تعليق",
       "noDrivers": "لم يتم العثور على سائقين مطابقين لبحثك.",
-      "clearSearch": "مسح البحث"
+      "clearSearch": "مسح البحث",
+      "age": "عمر",
+      "licenseExpiry": "انتهاء الترخيص"
     },
     "driverDetails": {
       "back": "رجوع",
