@@ -225,6 +225,8 @@
     "carModel": "Car Model",
     "carModelPlaceholder": "ex.., Toyota Camry 2024",
     "carFeatures": "Car Features",
+    "location": "Location",
+    "locationPlaceholder": "Car location ....",
     "features": {
       "airConditioning": "Air Conditioning",
       "automaticTransmission": "Automatic Transmission",

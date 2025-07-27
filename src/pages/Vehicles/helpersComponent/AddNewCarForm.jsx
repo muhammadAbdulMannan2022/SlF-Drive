@@ -73,7 +73,7 @@ const AddNewCarForm = ({ setIsModalOpen, id }) => {
   };
 
   return (
-    <div className="w-full max-w-7xl h-[90vh] mx-auto overflow-hidden">
+    <div className="w-full max-w-7xl h-[80vh] mx-auto overflow-hidden">
       <div className="h-full overflow-y-auto">
         <div className="bg-white rounded-lg md:p-4 md:m-4">
           {/* Header */}
@@ -85,6 +85,22 @@ const AddNewCarForm = ({ setIsModalOpen, id }) => {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Location */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                {t("addNewCar.location")}
+              </label>
+              <input
+                type="text"
+                placeholder={t("addNewCar.locationPlaceholder")}
+                value={state.formData.location}
+                onChange={(e) =>
+                  handleInputChange(null, "location", e.target.value)
+                }
+                className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-gray-500 text-sm"
+              />
+            </div>
+
             {/* Car Model */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -149,13 +165,12 @@ const AddNewCarForm = ({ setIsModalOpen, id }) => {
                   {t("addNewCar.uploadCarPicture")}
                 </label>
                 <div
-                  className={`border-2 border-dashed rounded-lg p-4 text-center cursor-pointer transition-colors ${
-                    state.isDragOver
-                      ? "border-blue-500 bg-blue-50"
-                      : state.uploadedImage
+                  className={`border-2 border-dashed rounded-lg p-4 text-center cursor-pointer transition-colors ${state.isDragOver
+                    ? "border-blue-500 bg-blue-50"
+                    : state.uploadedImage
                       ? "border-green-500 bg-green-50"
                       : "border-gray-300 bg-gray-50"
-                  }`}
+                    }`}
                   onDragOver={handleDragOver}
                   onDragLeave={handleDragLeave}
                   onDrop={handleDrop}

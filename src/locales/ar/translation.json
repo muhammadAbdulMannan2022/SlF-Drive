@@ -224,6 +224,8 @@
     "carModel": "موديل السيارة",
     "carModelPlaceholder": "مثال: تويوتا كامري 2024",
     "carFeatures": "ميزات السيارة",
+    "location": "الموقع",
+    "locationPlaceholder": "مكان السيارة....",
     "features": {
       "airConditioning": "تكييف هواء",
       "automaticTransmission": "ناقل حركة أوتوماتيكي",
