@@ -93,6 +93,7 @@
       "action": "الإجراء"
     },
     "dropdown": {
+      "view": "منظر",
       "edit": "تعديل",
       "delete": "حذف",
       "hold": "تعليق",
@@ -520,5 +521,37 @@
     "allOfferCard": "كل بطاقات العرض",
     "addNewCard": "إضافة بطاقة جديدة",
     "createdOfferCard": "إدارة العروض الجديد"
+  },
+  "collaboratorDetails": {
+    "title": "تفاصيل المتعاون",
+    "subtitle": "عرض وإدارة معلومات المتعاون",
+    "backButton": "رجوع",
+    "contactInformation": "معلومات الاتصال",
+    "email": "البريد الإلكتروني",
+    "phone": "الهاتف",
+    "address": "العنوان",
+    "additionalDetails": "تفاصيل إضافية",
+    "primaryContact": "جهة الاتصال الأساسية",
+    "joinDate": "تاريخ الانضمام",
+    "description": "الوصف",
+    "authorizedUsers": "المستخدمون المصرح لهم",
+    "activeProjects": "المشاريع النشطة",
+    "authorizedPeople": "الأشخاص المصرح لهم",
+    "searchPlaceholder": "البحث عن الأشخاص...",
+    "filterButton": "تصفية",
+    "tableHeaders": {
+      "name": "الاسم",
+      "role": "الدور",
+      "department": "القسم",
+      "contact": "الاتصال",
+      "status": "الحالة",
+      "lastAccess": "آخر وصول",
+      "actions": "الإجراءات"
+    },
+    "noData": "لا توجد بيانات",
+    "actions": {
+      "holdAccess": "تعليق الوصول",
+      "removeAccess": "إزالة الوصول"
+    }
   }
 }

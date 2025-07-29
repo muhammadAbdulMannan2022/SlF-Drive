@@ -30,6 +30,7 @@ import DriverDetailsPage from "../pages/Admin/helps/Drivers/DriverProfileDetails
 import RentalCompany from "../pages/Admin/RentalCompany";
 import Subscribtions from "../pages/Admin/Subscribtion";
 import ManageOffer from "../pages/Settings/pages/manageOfferCard";
+import CollaboratorDetails from "../components/CollaboratorDetails";
 const userType = localStorage.getItem("userType");
 
 const router = createBrowserRouter([
@@ -80,6 +81,10 @@ const router = createBrowserRouter([
           {
             path: "collaborations",
             element: <Collaborations />,
+          },
+          {
+            path: "collaborations/:id",
+            element: <CollaboratorDetails />
           },
           {
             path: "settings",

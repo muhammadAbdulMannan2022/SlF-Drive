@@ -94,6 +94,7 @@
       "action": "Action"
     },
     "dropdown": {
+      "view": "View",
       "edit": "Edit",
       "delete": "Delete",
       "hold": "Hold",
@@ -521,5 +522,37 @@
     "allOfferCard": "All Offer Card",
     "addNewCard": "Add New Card",
     "createdOfferCard": "New Offer Management"
+  },
+  "collaboratorDetails": {
+    "title": "Collaborator Details",
+    "subtitle": "View and manage collaborator information",
+    "backButton": "Back",
+    "contactInformation": "Contact Information",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "additionalDetails": "Additional Details",
+    "primaryContact": "Primary Contact",
+    "joinDate": "Join Date",
+    "description": "Description",
+    "authorizedUsers": "Authorized Users",
+    "activeProjects": "Active Projects",
+    "authorizedPeople": "Authorized People",
+    "searchPlaceholder": "Search people...",
+    "filterButton": "Filter",
+    "tableHeaders": {
+      "name": "Name",
+      "role": "Role",
+      "department": "Department",
+      "contact": "Contact",
+      "status": "Status",
+      "lastAccess": "Last Access",
+      "actions": "Actions"
+    },
+    "noData": "No Data Found",
+    "actions": {
+      "holdAccess": "Hold Access",
+      "removeAccess": "Remove Access"
+    }
   }
 }

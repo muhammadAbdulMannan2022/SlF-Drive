@@ -6,6 +6,7 @@ import Collaborator from "./AddCollaborator";
 import { FaPlus } from "react-icons/fa";
 import Modal from "../../../shared/Modal";
 import AddAuthorizedPerson from "../../Admin/AuthPeople/AuthPeople";
+import { useNavigate } from "react-router";
 
 const Collaborations = () => {
   const { t } = useTranslation();
@@ -13,6 +14,7 @@ const Collaborations = () => {
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
   const dropdownRef = useRef(null);
   const [isAddCollaborator, setIsAddCollaborator] = useState(false);
+  const navigate = useNavigate()
   const [showAuthorizedPersonForm, setShowAuthorizedPersonForm] = useState(false);
 
 
@@ -131,7 +133,7 @@ const Collaborations = () => {
 
           {/* Table */}
           <div className="overflow-hidden">
-            <div className="overflow-x-auto pb-30">
+            <div className="overflow-x-auto" style={{ paddingBottom: "15rem" }}>
               <table className="w-full min-w-[600px]">
                 <thead style={{ backgroundColor: "#B4BBDF" }}>
                   <tr>
@@ -173,7 +175,7 @@ const Collaborations = () => {
                       <td className="py-4 px-6 text-sm text-gray-700 relative">
                         <button
                           onClick={() => toggleDropdown(index)}
-                          className="focus:outline-none"
+                          className="focus:outline-none hover:cursor-pointer"
                         >
                           <svg
                             className="w-5 h-5 text-gray-600 hover:text-gray-800"
@@ -196,22 +198,28 @@ const Collaborations = () => {
                             className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-10"
                           >
                             <button
+                              onClick={() => { navigate(`/dashboard/collaborations/${report.id}`) }}
+                              className="block w-full hover:cursor-pointer text-start px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            >
+                              {t("collaborationsPage.dropdown.view")}
+                            </button>
+                            <button
                               onClick={() => handleEdit(report)}
-                              className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                              className="block w-full hover:cursor-pointer text-start px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             >
                               {t("collaborationsPage.dropdown.edit")}
                             </button>
 
                             <button
                               onClick={() => handleDelete(report)}
-                              className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                              className="block w-full hover:cursor-pointer text-start px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             >
                               {t("collaborationsPage.dropdown.delete")}
                             </button>
 
                             <button
                               onClick={() => handleHold(report)}
-                              className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                              className="block w-full hover:cursor-pointer text-start px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             >
                               {t("collaborationsPage.dropdown.hold")}
                             </button>
@@ -221,7 +229,7 @@ const Collaborations = () => {
                               onClick={() => {
                                 addauthPeople()
                               }}
-                              className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                              className="block w-full text-start px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             >
                               {t("collaborationsPage.dropdown.addAuthorizedPerson")}
                             </button>

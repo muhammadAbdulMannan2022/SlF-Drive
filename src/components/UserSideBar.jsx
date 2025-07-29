@@ -26,6 +26,9 @@ function UserSideBar({ setSidebarOpen }) {
     if (path === "/dashboard/settings") {
       return location.pathname.startsWith("/dashboard/settings/");
     }
+    if (path === "/dashboard/collaborations") {
+      return location.pathname.startsWith("/dashboard/collaborations");
+    }
     return location.pathname === path;
   };
   useEffect(() => {
@@ -49,106 +52,96 @@ function UserSideBar({ setSidebarOpen }) {
           <nav className="space-y-3">
             <Link
               to="/dashboard"
-              className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${
-                isActive("/dashboard")
+              className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${isActive("/dashboard")
                   ? "bg-gradient-to-r from-[#071352] to-[#0023CF] text-white"
                   : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
-              }`}
+                }`}
             >
               <RiLayout3Fill className="text-xl mx-3 " />{" "}
               {t("sidebar.dashboard")}
             </Link>
             <Link
               to="/dashboard/manage-rentals"
-              className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${
-                isActive("/dashboard/manage-rentals")
+              className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${isActive("/dashboard/manage-rentals")
                   ? "bg-gradient-to-r from-[#071352] to-[#0023CF] text-white"
                   : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
-              }`}
+                }`}
             >
               <FaCalendarAlt className="text-xl mx-3" />{" "}
               {t("sidebar.manageRentals")}
             </Link>
             <Link
               to="/dashboard/vehicles"
-              className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${
-                isActive("/dashboard/vehicles")
+              className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${isActive("/dashboard/vehicles")
                   ? "bg-gradient-to-r from-[#071352] to-[#0023CF] text-white"
                   : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
-              }`}
+                }`}
             >
               <FaCar className="text-xl mx-3" /> {t("sidebar.vehicles")}
             </Link>
             <Link
               to="/dashboard/collaborations"
-              className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${
-                isActive("/dashboard/collaborations")
+              className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${isActive("/dashboard/collaborations")
                   ? "bg-gradient-to-r from-[#071352] to-[#0023CF] text-white"
                   : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
-              }`}
+                }`}
             >
               <FaHandshake className="text-xl mx-3" /> {t("collaborations")}
             </Link>
             <Link
               to="/dashboard/booking-request"
-              className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${
-                isActive("/dashboard/booking-request")
+              className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${isActive("/dashboard/booking-request")
                   ? "bg-gradient-to-r from-[#071352] to-[#0023CF] text-white"
                   : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
-              }`}
+                }`}
             >
               <BsCalendar2CheckFill className="text-xl mx-3" />{" "}
               {t("sidebar.bookingRequest")}
             </Link>
             <Link
               to="/dashboard/invoice-payment"
-              className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${
-                isActive("/dashboard/invoice-payment")
+              className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${isActive("/dashboard/invoice-payment")
                   ? "bg-gradient-to-r from-[#071352] to-[#0023CF] text-white"
                   : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
-              }`}
+                }`}
             >
               <FaFileInvoiceDollar className="text-xl mx-3" />{" "}
               {t("sidebar.invoicePayment")}
             </Link>
             <Link
               to="/dashboard/messages"
-              className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${
-                isActive("/dashboard/messages")
+              className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${isActive("/dashboard/messages")
                   ? "bg-gradient-to-r from-[#071352] to-[#0023CF] text-white"
                   : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
-              }`}
+                }`}
             >
               <RiMessage2Fill className="text-xl mx-3" />{" "}
               {t("sidebar.messages")}
             </Link>
             <Link
               to="/dashboard/notifications"
-              className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${
-                isActive("/dashboard/notifications")
+              className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${isActive("/dashboard/notifications")
                   ? "bg-gradient-to-r from-[#071352] to-[#0023CF] text-white"
                   : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
-              }`}
+                }`}
             >
               <FaBell className="text-xl mx-3" /> {t("sidebar.notifications")}
             </Link>
             <Link
               to="/dashboard/settings/account"
-              className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${
-                isActive("/dashboard/settings")
+              className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${isActive("/dashboard/settings")
                   ? "bg-gradient-to-r from-[#071352] to-[#0023CF] text-white"
                   : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
-              }`}
+                }`}
             >
               <FaCog className="text-xl mx-3" /> {t("sidebar.settings")}
             </Link>
             <Link
               to="/dashboard/reports"
-              className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${
-                isActive("/dashboard/reports")
+              className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${isActive("/dashboard/reports")
                   ? "bg-gradient-to-r from-[#071352] to-[#0023CF] text-white"
                   : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
-              }`}
+                }`}
             >
               <IoIosPaper className="text-xl mx-3" /> {t("sidebar.reports")}
             </Link>
