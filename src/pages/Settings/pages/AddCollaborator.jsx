@@ -177,7 +177,7 @@ const Collaborator = ({ setIsAddCollaborator }) => {
             {/* contractr */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                {t("collaborator.sectorOfCompany")}
+                {t("attachment")}
               </label>
               <input
                 type="file"
@@ -195,10 +195,10 @@ const Collaborator = ({ setIsAddCollaborator }) => {
             </label>
             <div
               className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors ${isDragOver
-                  ? "border-blue-500 bg-blue-50"
-                  : uploadedLogo
-                    ? "border-green-500 bg-green-50"
-                    : "border-gray-300 bg-gray-50"
+                ? "border-blue-500 bg-blue-50"
+                : uploadedLogo
+                  ? "border-green-500 bg-green-50"
+                  : "border-gray-300 bg-gray-50"
                 }`}
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}

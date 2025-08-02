@@ -554,5 +554,6 @@
       "holdAccess": "Hold Access",
       "removeAccess": "Remove Access"
     }
-  }
+  },
+  "attachment": "Attachment"
 }
