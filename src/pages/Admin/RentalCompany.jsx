@@ -55,15 +55,15 @@ export default function RentalCompany() {
     searchTerm.trim() === ""
       ? list
       : list.filter((d) =>
-          [d.name, d.email, d.phone].some((val) =>
-            val?.toLowerCase().includes(searchTerm.toLowerCase())
-          )
-        );
+        [d.name, d.email, d.phone].some((val) =>
+          val?.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      );
 
   const handleAction = (type, driver) => {
     switch (type) {
       case "view":
-        navigate(`/dashboard/drivers/${driver.id}`);
+        navigate(`/dashboard/rental-company/${driver.id}`);
         break;
       case "approve":
       case "deny":
@@ -88,23 +88,20 @@ export default function RentalCompany() {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-4 py-2 text-sm font-medium focus:outline-none hover:cursor-pointer ${
-                activeTab === tab
-                  ? "bg-[#0B2080] text-white"
-                  : "bg-white text-gray-700"
-              } ${
-                i18n.language === "ar"
+              className={`px-4 py-2 text-sm font-medium focus:outline-none hover:cursor-pointer ${activeTab === tab
+                ? "bg-[#0B2080] text-white"
+                : "bg-white text-gray-700"
+                } ${i18n.language === "ar"
                   ? tab === "list"
                     ? "rounded-r-md"
                     : "rounded-l-md"
                   : tab === "list"
-                  ? "rounded-l-md"
-                  : "rounded-r-md"
-              }`}
+                    ? "rounded-l-md"
+                    : "rounded-r-md"
+                }`}
             >
               {t(
-                `admin.rentalCompany.${
-                  tab === "list" ? "driverList" : "driverRequest"
+                `admin.rentalCompany.${tab === "list" ? "driverList" : "driverRequest"
                 }`
               )}
             </button>
@@ -122,9 +119,8 @@ export default function RentalCompany() {
               className="w-full sm:w-64 pr-10 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#0B2088]"
             />
             <IoSearch
-              className={`absolute top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 ${
-                isRTL ? "left-3" : "right-3"
-              }`}
+              className={`absolute top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 ${isRTL ? "left-3" : "right-3"
+                }`}
             />
           </div>
           <button
@@ -164,7 +160,7 @@ export default function RentalCompany() {
                       {t("admin.rentalCompany.joinDate")}
                     </th>
                   )}
-                  <th className="px-4 py-3 text-start text-center text-sm font-semibold text-[#1E1E1E]">
+                  <th className="px-4 py-3 text-start text-sm font-semibold text-[#1E1E1E]">
                     {t("admin.rentalCompany.actions")}
                   </th>
                 </tr>
@@ -204,25 +200,22 @@ export default function RentalCompany() {
                           </button>
                           {dropdownOpen === driver.id && (
                             <div
-                              className={`absolute mt-2 w-40 bg-white rounded-md shadow-lg z-20 ${
-                                isRTL ? "left-0" : "right-0"
-                              }`}
+                              className={`absolute mt-2 w-40 bg-white rounded-md shadow-lg z-20 ${isRTL ? "left-0" : "right-0"
+                                }`}
                             >
                               {["view", "delete", "hold"].map((type) => (
                                 <button
                                   key={type}
                                   onClick={() => handleAction(type, driver)}
-                                  className={`block w-full text-left px-4 py-2 text-sm ${
-                                    type === "delete"
-                                      ? "text-red-600"
-                                      : type === "hold"
+                                  className={`block w-full text-left px-4 py-2 text-sm ${type === "delete"
+                                    ? "text-red-600"
+                                    : type === "hold"
                                       ? "text-orange-600"
                                       : "text-gray-700"
-                                  } hover:bg-gray-100`}
+                                    } hover:bg-gray-100`}
                                 >
                                   {t(
-                                    `admin.rentalCompany.${
-                                      type === "view" ? "viewDetails" : type
+                                    `admin.rentalCompany.${type === "view" ? "viewDetails" : type
                                     }`
                                   )}
                                 </button>
@@ -260,18 +253,18 @@ export default function RentalCompany() {
         ? getFilteredDrivers(activeDrivers)
         : getFilteredDrivers(pendingDrivers)
       ).length === 0 && (
-        <div className="text-center py-12">
-          <p className="text-gray-500">
-            {t("admin.rentalCompany.noDriversFound")}
-          </p>
-          <button
-            className="mt-4 px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100"
-            onClick={() => setSearchTerm("")}
-          >
-            {t("admin.rentalCompany.clearSearch")}
-          </button>
-        </div>
-      )}
+          <div className="text-center py-12">
+            <p className="text-gray-500">
+              {t("admin.rentalCompany.noDriversFound")}
+            </p>
+            <button
+              className="mt-4 px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100"
+              onClick={() => setSearchTerm("")}
+            >
+              {t("admin.rentalCompany.clearSearch")}
+            </button>
+          </div>
+        )}
     </div>
   );
 }

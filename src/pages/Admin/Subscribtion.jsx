@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import Modal from "../../shared/Modal";
 import AddContractualCustomers from "./SubPopUps/AddContractualCustomers";
 import AddPlan from "./SubPopUps/AddPlan";
+import AddServiceFee from "./SubPopUps/AddServiceFee";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ const Dashboard = () => {
 
   const [isContractualActive, setIsContractualActive] = useState(false);
   const [isAddOneActive, setIsAddOneActive] = useState(false);
+  const [serviceFeeModal, setServiceFeeModal] = useState(false)
 
   const subscribedUsers = [
     {
@@ -127,8 +129,8 @@ const Dashboard = () => {
         >
           <button
             className={`px-4 py-2 text-sm font-medium hover:cursor-pointer focus:outline-none ${activeTab === "subscribedUsers"
-                ? "bg-[#0B2080] text-white"
-                : "bg-white text-gray-700"
+              ? "bg-[#0B2080] text-white"
+              : "bg-white text-gray-700"
               } ${isRTL ? "rounded-r-md" : "rounded-l-md"}`}
             onClick={() => setActiveTab("subscribedUsers")}
             role="tab"
@@ -138,8 +140,8 @@ const Dashboard = () => {
           </button>
           <button
             className={`px-4 py-2 text-sm font-medium hover:cursor-pointer focus:outline-none ${activeTab === "subscriptionPlans"
-                ? "bg-[#0B2080] text-white"
-                : "bg-white text-gray-700"
+              ? "bg-[#0B2080] text-white"
+              : "bg-white text-gray-700"
               } ${isRTL ? "rounded-l-md" : "rounded-r-md"}`}
             onClick={() => setActiveTab("subscriptionPlans")}
             role="tab"
@@ -180,6 +182,7 @@ const Dashboard = () => {
             onClick={() => {
               setIsContractualActive(true);
               setIsAddOneActive(false);
+              setServiceFeeModal(false)
             }}
             className="px-4 py-2 bg-white text-gray-700 rounded-md hover:cursor-pointer"
           >
@@ -190,12 +193,18 @@ const Dashboard = () => {
               onClick={() => {
                 setIsAddOneActive(true);
                 setIsContractualActive(false);
+                setServiceFeeModal(false)
+
               }}
               className="px-4 py-2 bg-[#0B2080] text-white rounded-md hover:cursor-pointer"
             >
               {t("admin.subscription.addPlanButton")}
             </button>
-            <button className="px-4 py-2 bg-[#0B2080] text-white rounded-md hover:cursor-pointer">
+            <button onClick={() => {
+              setIsAddOneActive(false)
+              setIsContractualActive(false)
+              setServiceFeeModal(true)
+            }} className="px-4 py-2 bg-[#0B2080] text-white rounded-md hover:cursor-pointer">
               {t("admin.subscription.serviceFeeButton")}
             </button>
           </div>
@@ -210,8 +219,8 @@ const Dashboard = () => {
               <button
                 key={type}
                 className={`px-4 py-2 rounded hover:cursor-pointer ${planBillingType === type
-                    ? "bg-[#0B2080] text-white"
-                    : "bg-white text-gray-700"
+                  ? "bg-[#0B2080] text-white"
+                  : "bg-white text-gray-700"
                   }`}
                 onClick={() => setPlanBillingType(type)}
               >
@@ -226,8 +235,8 @@ const Dashboard = () => {
           >
             <button
               className={`px-4 py-2 text-sm font-medium hover:cursor-pointer focus:outline-none ${activeTab === "subscribedUsers"
-                  ? "bg-[#0B2080] text-white"
-                  : "bg-white text-gray-700"
+                ? "bg-[#0B2080] text-white"
+                : "bg-white text-gray-700"
                 } ${isRTL ? "rounded-r-md" : "rounded-l-md"}`}
               onClick={() => setActiveTab("subscribedUsers")}
               role="tab"
@@ -237,8 +246,8 @@ const Dashboard = () => {
             </button>
             <button
               className={`px-4 py-2 text-sm font-medium hover:cursor-pointer focus:outline-none ${activeTab === "subscriptionPlans"
-                  ? "bg-[#0B2080] text-white"
-                  : "bg-white text-gray-700"
+                ? "bg-[#0B2080] text-white"
+                : "bg-white text-gray-700"
                 } ${isRTL ? "rounded-l-md" : "rounded-r-md"}`}
               onClick={() => setActiveTab("subscriptionPlans")}
               role="tab"
@@ -297,8 +306,8 @@ const Dashboard = () => {
                   <td className="px-4 py-3 text-sm text-gray-600">
                     <span
                       className={`px-2 py-1 rounded ${user.status === t("admin.subscription.status.active")
-                          ? "bg-green-500 text-white"
-                          : "bg-red-500 text-white"
+                        ? "bg-green-500 text-white"
+                        : "bg-red-500 text-white"
                         }`}
                     >
                       {user.status}
@@ -403,8 +412,8 @@ const Dashboard = () => {
                   <td className="px-4 py-3 text-sm text-gray-600">
                     <span
                       className={`px-2 py-1 rounded ${plan.status === t("admin.subscription.status.active")
-                          ? "bg-green-500 text-white"
-                          : "bg-red-500 text-white"
+                        ? "bg-green-500 text-white"
+                        : "bg-red-500 text-white"
                         }`}
                     >
                       {plan.status}
@@ -504,6 +513,9 @@ const Dashboard = () => {
       </Modal>
       <Modal isOpen={isAddOneActive} onClose={() => setIsAddOneActive(false)}>
         <AddPlan />
+      </Modal>
+      <Modal isOpen={serviceFeeModal} onClose={() => setServiceFeeModal(false)}>
+        <AddServiceFee />
       </Modal>
     </div>
   );

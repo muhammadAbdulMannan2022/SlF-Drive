@@ -554,5 +554,37 @@
       "removeAccess": "إزالة الوصول"
     }
   },
-  "attachment": "مرفق"
+  "attachment": "مرفق",
+  "addServiceFee": {
+    "title": "إعداد رسوم الخدمة",
+    "driverLabel": "السائق",
+    "driverChargingLabel": "نسبة التحصيل",
+    "companyLabel": "شركة التأجير",
+    "companyChargingLabel": "نسبة التحصيل",
+    "placeholder": "أدخل هنا",
+    "submit": "إرسال"
+  },
+  "addPlan": {
+    "title": "إنشاء خطة جديدة",
+    "planName": "اسم الخطة",
+    "price": "السعر",
+    "discount": "الخصم(٪)",
+    "additionalCharges": "الرسوم الإضافية",
+    "addFeature": "+ إضافة ميزة",
+    "createButton": "إنشاء الخطة",
+    "defaultPlanName": "أساسي",
+    "defaultPrice": "١٩٩",
+    "defaultDiscount": "٥٠",
+    "defaultFeatures": [
+      "حتى 2000 مكالمة صوتية بالذكاء الاصطناعي شهريًا",
+      "دعم ذو أولوية",
+      "أدخل هنا"
+    ]
+  },
+  "addContractualCustomers": {
+    "title": "إضافة العملاء التعاقديين",
+    "chargingPercentage": "نسبة التحصيل",
+    "placeholder": "أدخل هنا",
+    "submit": "إرسال"
+  }
 }

@@ -137,6 +137,11 @@ const router = createBrowserRouter([
             element: <RentalCompany />,
           },
           {
+            path: "rental-company/:id",
+            element: <DriverDetailsPage />
+          },
+
+          {
             path: "subscription",
             element: <Subscribtions />,
           },

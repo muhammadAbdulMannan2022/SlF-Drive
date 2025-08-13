@@ -555,5 +555,37 @@
       "removeAccess": "Remove Access"
     }
   },
-  "attachment": "Attachment"
+  "attachment": "Attachment",
+  "addServiceFee": {
+    "title": "Service Fee Set Up",
+    "driverLabel": "Driver",
+    "driverChargingLabel": "Charging Percentage",
+    "companyLabel": "Rental Company",
+    "companyChargingLabel": "Charging Percentage",
+    "placeholder": "Enter here",
+    "submit": "Submit"
+  },
+  "addPlan": {
+    "title": "Create New Plan",
+    "planName": "Plan Name",
+    "price": "Price",
+    "discount": "Discount(%)",
+    "additionalCharges": "Additional Charges",
+    "addFeature": "+ Add Feature",
+    "createButton": "Create Plan",
+    "defaultPlanName": "Basic",
+    "defaultPrice": "199",
+    "defaultDiscount": "50",
+    "defaultFeatures": [
+      "Up To 2,000 AI Voice Calls/Month",
+      "Priority Support",
+      "Enter Here"
+    ]
+  },
+  "addContractualCustomers": {
+    "title": "Add Contractual Customers",
+    "chargingPercentage": "Charging Percentage",
+    "placeholder": "Enter here",
+    "submit": "Submit"
+  }
 }
