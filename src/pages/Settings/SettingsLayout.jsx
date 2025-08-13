@@ -86,57 +86,59 @@ const SettingsLayout = () => {
       )}
 
       {/* Sidebar */}
-      <div
-        className={`
+      <div className="h-full" style={{ backgroundColor: "#dbdeef" }}>
+        <div
+          className={`
           fixed lg:relative 
           ${isSidebarOpen
-            ? "translate-x-0"
-            : isRTL
-              ? "translate-x-full"
-              : "-translate-x-full"
-          }
+              ? "translate-x-0"
+              : isRTL
+                ? "translate-x-full"
+                : "-translate-x-full"
+            }
           ${isRTL ? "right-0" : "left-0"}
           lg:translate-x-0 transition-transform duration-300 ease-in-out 
           z-50 lg:z-0 w-64 h-fit py-10 flex flex-col
         `}
-        style={{ backgroundColor: "#B4BBDF" }}
-      >
-        {/* Close button (mobile) */}
-        <div className="lg:hidden flex justify-end p-4">
-          <button
-            onClick={() => setIsSidebarOpen(false)}
-            className="text-gray-700 hover:text-gray-900 transition-colors"
-          >
-            <FaTimes className="w-6 h-6" />
-          </button>
-        </div>
+          style={{ backgroundColor: "#dbdeef" }}
+        >
+          {/* Close button (mobile) */}
+          <div className="lg:hidden flex justify-end p-4">
+            <button
+              onClick={() => setIsSidebarOpen(false)}
+              className="text-gray-700 hover:text-gray-900 transition-colors"
+            >
+              <FaTimes className="w-6 h-6" />
+            </button>
+          </div>
 
-        {/* Nav Items */}
-        <nav className="flex-1 px-4 pb-4">
-          <div className="space-y-2">
-            {navigationItems.map((item) => {
-              const IconComponent = item.icon;
-              const isActive = location.pathname.includes(item.path);
+          {/* Nav Items */}
+          <nav className="flex-1 px-4 pb-4" >
+            <div className="space-y-2">
+              {navigationItems.map((item) => {
+                const IconComponent = item.icon;
+                const isActive = location.pathname.includes(item.path);
 
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => handleSectionChange(item)}
-                  className={`
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => handleSectionChange(item)}
+                    className={`
                     w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors
                     ${isActive
-                      ? "bg-gradient-to-r from-[#071352] to-[#0023CF] text-white shadow-md"
-                      : "text-[#1E1E1E] hover:bg-[#abb2d4] hover:bg-opacity-20"
-                    }
+                        ? "bg-gradient-to-r from-[#071352] to-[#0023CF] text-white shadow-md"
+                        : "text-[#1E1E1E] hover:bg-[#abb2d4] hover:bg-opacity-20"
+                      }
                   `}
-                >
-                  <IconComponent className="w-5 h-5 flex-shrink-0" />
-                  <span className="font-medium text-sm">{item.label}</span>
-                </button>
-              );
-            })}
-          </div>
-        </nav>
+                  >
+                    <IconComponent className="w-5 h-5 flex-shrink-0" />
+                    <span className="font-medium text-sm">{item.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </nav>
+        </div>
       </div>
 
       {/* Main Content */}

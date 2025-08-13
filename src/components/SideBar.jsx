@@ -108,11 +108,10 @@ function SideBar({ setSidebarOpen }) {
               <Link
                 key={item.url}
                 to={item.url}
-                className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${
-                  isActive(item.url)
+                className={`flex items-center p-2.5 rounded-lg transition-all duration-200 ${isActive(item.url)
                     ? "bg-gradient-to-r from-[#071352] to-[#0023CF] text-white"
                     : "text-[#1E1E1E] hover:bg-gray-200 hover:text-gray-900"
-                }`}
+                  }`}
               >
                 <item.icon className="text-xl mx-3" /> {item.title}
               </Link>

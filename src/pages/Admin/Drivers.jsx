@@ -14,6 +14,7 @@ const drivers = [
     joinDate: "16 Jun 2025",
     status: "active",
     submittedDate: "2025-01-20",
+    income: 4500, // Added income field
   },
   {
     id: 2,
@@ -24,6 +25,7 @@ const drivers = [
     phone: "87654321",
     joinDate: "15 Jun 2025",
     status: "active",
+    income: 3800, // Added income field
   },
   {
     id: 3,
@@ -35,6 +37,7 @@ const drivers = [
     joinDate: "14 Jun 2025",
     status: "pending",
     submittedDate: "2025-01-19",
+    income: 0, // Pending drivers may have no income yet
   },
   {
     id: 4,
@@ -45,6 +48,7 @@ const drivers = [
     phone: "44332211",
     joinDate: "13 Jun 2025",
     status: "active",
+    income: 4200, // Added income field
   },
 ];
 
@@ -112,8 +116,8 @@ export default function DriversPage() {
             <button
               onClick={() => setActiveTab("list")}
               className={`px-4 py-2 text-sm hover:cursor-pointer font-medium ${activeTab === "list"
-                ? "bg-[#0b2080] text-white"
-                : "bg-white text-gray-700"
+                  ? "bg-[#0b2080] text-white"
+                  : "bg-white text-gray-700"
                 }  ${isRTL ? "rounded-r-md" : "rounded-l-md"}`}
             >
               {t("admin.drivers.driverList")}
@@ -121,8 +125,8 @@ export default function DriversPage() {
             <button
               onClick={() => setActiveTab("requests")}
               className={`px-4 py-2 text-sm hover:cursor-pointer font-medium ${activeTab === "requests"
-                ? "bg-[#0B2080] text-white"
-                : "bg-white text-gray-700"
+                  ? "bg-[#0B2080] text-white"
+                  : "bg-white text-gray-700"
                 } ${isRTL ? "rounded-l-md" : "rounded-r-md"}`}
             >
               {t("admin.drivers.driverRequest")}
@@ -174,6 +178,9 @@ export default function DriversPage() {
                   <th className="px-4 py-3 text-start text-sm font-semibold">
                     {t("admin.drivers.joinDate")}
                   </th>
+                  <th className="px-4 py-3 text-start text-sm font-semibold">
+                    {t("admin.drivers.income")} {/* Added income header */}
+                  </th>
                   <th className="px-4 py-3 text-center text-sm font-semibold">
                     {t("admin.drivers.actions")}
                   </th>
@@ -199,6 +206,9 @@ export default function DriversPage() {
                     </td>
                     <td className="px-4 py-3 text-sm text-gray-600">
                       {driver.joinDate}
+                    </td>
+                    <td className="px-4 py-3 text-sm text-gray-600">
+                      ${driver.income.toLocaleString()} {/* Added income display */}
                     </td>
                     <td className="px-4 py-3 text-center">
                       <div className="relative">
@@ -263,6 +273,9 @@ export default function DriversPage() {
                   <th className="px-4 py-3 text-start text-sm font-semibold">
                     {t("admin.drivers.submitted")}
                   </th>
+                  <th className="px-4 py-3 text-start text-sm font-semibold">
+                    {t("admin.drivers.income")} {/* Added income header */}
+                  </th>
                   <th className="px-4 py-3 text-center text-sm font-semibold">
                     {t("admin.drivers.actions")}
                   </th>
@@ -285,6 +298,9 @@ export default function DriversPage() {
                     </td>
                     <td className="px-4 py-3 text-sm text-gray-600">
                       {driver.submittedDate}
+                    </td>
+                    <td className="px-4 py-3 text-sm text-gray-600">
+                      ${driver.income.toLocaleString()} {/* Added income display */}
                     </td>
                     <td className="px-4 py-3 text-start">
                       <div className="flex justify-center gap-2">

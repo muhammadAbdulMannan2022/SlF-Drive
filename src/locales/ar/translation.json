@@ -401,7 +401,8 @@
       "noDrivers": "لم يتم العثور على سائقين مطابقين لبحثك.",
       "clearSearch": "مسح البحث",
       "age": "عمر",
-      "licenseExpiry": "انتهاء الترخيص"
+      "licenseExpiry": "انتهاء الترخيص",
+      "income": "دخل"
     },
     "driverDetails": {
       "back": "رجوع",
@@ -441,7 +442,8 @@
       "deny": "رفض",
       "noDriversFound": "لم يتم العثور على سائقين يطابقون بحثك.",
       "clearSearch": "مسح البحث",
-      "action": "الإجراء"
+      "action": "الإجراء",
+      "income": "دخل"
     },
     "subscription": {
       "tabs": {

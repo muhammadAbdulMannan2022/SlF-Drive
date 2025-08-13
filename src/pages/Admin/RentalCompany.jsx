@@ -12,6 +12,7 @@ const drivers = [
     joinDate: "16 Jun 2025",
     status: "active",
     submittedDate: "2025-01-20",
+    income: 4500, // Added income field
   },
   {
     id: 2,
@@ -20,6 +21,7 @@ const drivers = [
     phone: "87654321",
     joinDate: "15 Jun 2025",
     status: "active",
+    income: 3800, // Added income field
   },
   {
     id: 3,
@@ -29,6 +31,7 @@ const drivers = [
     joinDate: "14 Jun 2025",
     status: "pending",
     submittedDate: "2025-01-19",
+    income: 0, // Pending driver with no income
   },
   {
     id: 4,
@@ -37,6 +40,7 @@ const drivers = [
     phone: "44332211",
     joinDate: "13 Jun 2025",
     status: "active",
+    income: 4200, // Added income field
   },
 ];
 
@@ -55,7 +59,7 @@ export default function RentalCompany() {
     searchTerm.trim() === ""
       ? list
       : list.filter((d) =>
-        [d.name, d.email, d.phone].some((val) =>
+        [d.name, d.email, d.phone, d.income.toString()].some((val) =>
           val?.toLowerCase().includes(searchTerm.toLowerCase())
         )
       );
@@ -89,8 +93,8 @@ export default function RentalCompany() {
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={`px-4 py-2 text-sm font-medium focus:outline-none hover:cursor-pointer ${activeTab === tab
-                ? "bg-[#0B2080] text-white"
-                : "bg-white text-gray-700"
+                  ? "bg-[#0B2080] text-white"
+                  : "bg-white text-gray-700"
                 } ${i18n.language === "ar"
                   ? tab === "list"
                     ? "rounded-r-md"
@@ -160,6 +164,9 @@ export default function RentalCompany() {
                       {t("admin.rentalCompany.joinDate")}
                     </th>
                   )}
+                  <th className="px-4 py-3 text-start text-sm font-semibold text-[#1E1E1E] min-w-[100px]">
+                    {t("admin.rentalCompany.income")} {/* Added income header */}
+                  </th>
                   <th className="px-4 py-3 text-start text-sm font-semibold text-[#1E1E1E]">
                     {t("admin.rentalCompany.actions")}
                   </th>
@@ -189,6 +196,9 @@ export default function RentalCompany() {
                         {driver.joinDate}
                       </td>
                     )}
+                    <td className="px-4 py-3 text-sm text-gray-600">
+                      ${driver.income.toLocaleString()} {/* Added income display */}
+                    </td>
                     <td className="px-4 py-3 text-center">
                       {tab === "list" ? (
                         <div className="relative">
@@ -208,10 +218,10 @@ export default function RentalCompany() {
                                   key={type}
                                   onClick={() => handleAction(type, driver)}
                                   className={`block w-full text-left px-4 py-2 text-sm ${type === "delete"
-                                    ? "text-red-600"
-                                    : type === "hold"
-                                      ? "text-orange-600"
-                                      : "text-gray-700"
+                                      ? "text-red-600"
+                                      : type === "hold"
+                                        ? "text-orange-600"
+                                        : "text-gray-700"
                                     } hover:bg-gray-100`}
                                 >
                                   {t(

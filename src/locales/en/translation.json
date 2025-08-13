@@ -402,7 +402,8 @@
       "noDrivers": "No drivers found matching your search.",
       "clearSearch": "Clear Search",
       "age": "Age",
-      "licenseExpiry": "License Expiry"
+      "licenseExpiry": "License Expiry",
+      "income": "Income"
     },
     "driverDetails": {
       "back": "Back",
@@ -442,7 +443,8 @@
       "deny": "Deny",
       "noDriversFound": "No drivers found matching your search.",
       "clearSearch": "Clear Search",
-      "action": "Action"
+      "action": "Action",
+      "income": "Income"
     },
     "subscription": {
       "tabs": {
