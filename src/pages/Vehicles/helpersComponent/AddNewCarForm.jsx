@@ -71,6 +71,45 @@ const AddNewCarForm = ({ setIsModalOpen, id }) => {
     console.log("Form cancelled");
     setIsModalOpen(false);
   };
+  const locations = [
+    "jafnayn",
+    "alKhoud",
+    "alKhuwair",
+    "alMaabilah",
+    "alMawaleh",
+    "alMouj",
+    "alBustan",
+    "alHail",
+    "alSifah",
+    "alWuttayah",
+    "amerat",
+    "ansab",
+    "azaiba",
+    "barrAlJissah",
+    "bosher",
+    "darsait",
+    "ghala",
+    "ghubrah",
+    "halban",
+    "hamriya",
+    "madentSultan",
+    "qaboos",
+    "manumah",
+    "misfah",
+    "muscatHills",
+    "muttrah",
+    "qantab",
+    "quriyat",
+    "qurm",
+    "rusail",
+    "ruwi",
+    "seeb",
+    "sidab",
+    "wadiAlKabir",
+    "yenkit",
+    "yiti"
+  ];
+
 
   return (
     <div className="w-full max-w-7xl h-[80vh] mx-auto overflow-hidden">
@@ -90,15 +129,18 @@ const AddNewCarForm = ({ setIsModalOpen, id }) => {
               <label className="block text-sm font-semibold text-gray-700 mb-2">
                 {t("addNewCar.location")}
               </label>
-              <input
-                type="text"
-                placeholder={t("addNewCar.locationPlaceholder")}
+              <select
                 value={state.formData.location}
-                onChange={(e) =>
-                  handleInputChange(null, "location", e.target.value)
-                }
-                className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-gray-500 text-sm"
-              />
+                onChange={(e) => handleInputChange(null, "location", e.target.value)}
+                className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 text-sm"
+              >
+                <option value="">{t("addNewCar.locationPlaceholder")}</option>
+                {locations.map((loc) => (
+                  <option key={loc} value={loc}>
+                    {t(`addNewCar.locations.${loc}`)}
+                  </option>
+                ))}
+              </select>
             </div>
 
             {/* Car Model */}
